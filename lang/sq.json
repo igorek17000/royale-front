@@ -1,0 +1,15 @@
+{
+  "menu": {
+    "home": "Kreu",
+    "bonus": "Bonus",
+    "faq": "Pyetje",
+    "buttons": {
+      "register": "Regjistrohu",
+      "login": "Login"
+    }
+  },
+  "login": {
+    "title": "Casino Royale",
+    "login": "Logohuni ne llogarine tuaj!"
+  }
+}

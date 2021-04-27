@@ -1,7 +1,5 @@
 <template>
-  <div class="dark:bg-primary">
-    <nuxt />
-  </div>
+  <nuxt />
 </template>
 
 <script>

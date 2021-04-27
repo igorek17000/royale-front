@@ -1,0 +1,15 @@
+{
+  "menu": {
+    "home": "Home",
+    "bonus": "Bonus",
+    "faq": "FAQs",
+    "buttons": {
+      "register": "Registrati",
+      "login": "Login"
+    }
+  },
+  "login": {
+    "title": "Casino Royale",
+    "login": "Accedi al tuo account"
+  }
+}

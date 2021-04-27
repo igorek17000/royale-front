@@ -1,53 +1,69 @@
 <template>
-  <section class="section">
-    <div class="columns is-mobile">
-      <card
-        title="Free"
-        icon="github"
-      >
-        Open source on <a href="https://github.com/buefy/buefy">
-          GitHub
-        </a>
-      </card>
+  <div>
+    <Nav :menu="menu" @open-login="openLoginModal" />
 
-      <card
-        title="Responsive"
-        icon="cellphone-link"
-      >
-        <b class="has-text-grey">
-          Every
-        </b> component is responsive
-      </card>
-
-      <card
-        title="Modern"
-        icon="alert-decagram"
-      >
-        Built with <a href="https://vuejs.org/">
-          Vue.js
-        </a> and <a href="http://bulma.io/">
-          Bulma
-        </a>
-      </card>
-
-      <card
-        title="Lightweight"
-        icon="arrange-bring-to-front"
-      >
-        No other internal dependency
-      </card>
-    </div>
-  </section>
+    <transition
+      enter-active-class="transition ease-out duration-100"
+      enter-class="transform opacity-0 scale-95"
+      enter-to-class="transform opacity-100 scale-100"
+      leave-active-class="transition ease-in duration-75"
+      leave-class="transform opacity-100 scale-100"
+      leave-to-class="transform opacity-0 scale-95"
+    >
+      <login v-if="loginModal" @close-login="closeLoginModal" />
+    </transition>
+    <div v-if="loginModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+  </div>
 </template>
 
 <script>
-import Card from '~/components/Card'
-
+import { mapState } from 'vuex'
+import Login from '~/components/Modals/Login.vue'
+import Nav from '../components/Header/Nav.vue'
 export default {
-  name: 'HomePage',
-
+  name: 'Homepage',
+  middleware: 'auth',
+  auth: 'guest',
+  layout: 'home',
   components: {
-    Card
-  }
+    Nav,
+    Login,
+  },
+  data() {
+    return {
+      loginModal: false,
+    }
+  },
+  methods: {
+    openLoginModal() {
+      this.loginModal = true
+    },
+    closeLoginModal() {
+      this.loginModal = false
+    },
+  },
+  computed: mapState(['menu']),
+  created() {
+    let getData = {
+      data: [
+        {
+          name: `${this.$t('menu.home')}`,
+          url: '/',
+        },
+        {
+          name: `${this.$t('menu.bonus')}`,
+          url: '/bonus',
+        },
+        {
+          name: `${this.$t('menu.faq')}`,
+          url: '/faq',
+        },
+      ],
+    }
+    this.$store.dispatch('loadSidebar', getData)
+  },
 }
 </script>
+
+<style>
+</style>

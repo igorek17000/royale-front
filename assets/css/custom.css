@@ -1,0 +1,19 @@
+.items-baseline > .nuxt-link-exact-active {
+  border-bottom: 2px solid #d91139;
+  color: #d91139;
+}
+.mobile-menu > .nuxt-link-exact-active {
+  border-bottom: 2px solid #d91139;
+  color: #d91139;
+  --tw-bg-opacity: 1;
+  background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+}
+.error-server {
+  color: #d91139;
+  font-size: 1.15rem;
+  text-align: center;
+  background: #d9113969;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
