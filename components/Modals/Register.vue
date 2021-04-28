@@ -11,7 +11,9 @@
         <div
           class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t"
         >
-          <h3 class="text-xl md:text-3xl font-semibold text-white">Login</h3>
+          <h3 class="text-xl md:text-3xl font-semibold text-white">
+            {{ $t('register.title') }}
+          </h3>
           <button
             class="p-1 ml-auto bg-transparent border-0 text-black float-right text-xl md:text-3xl leading-none font-semibold outline-none focus:outline-none"
             @click="closeModal()"
@@ -34,18 +36,29 @@
               </div>
               <form @submit="onSubmit">
                 <div>
-                  <label class="block text-gray-200">Email Address</label>
+                  <label class="block text-gray-200">Username</label>
                   <input
-                    type="email"
-                    v-model="user.identifier"
-                    placeholder="Enter Email Address"
+                    type="text"
+                    v-model="user.username"
+                    placeholder="Enter your username"
                     class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                     autofocus
                     autocomplete
                     required
                   />
                 </div>
-
+                <div class="mt-4">
+                  <label class="block text-gray-200">Email</label>
+                  <input
+                    type="email"
+                    v-model="user.email"
+                    placeholder="Enter your email"
+                    autofocus
+                    autocomplete
+                    class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                    required
+                  />
+                </div>
                 <div class="mt-4">
                   <label class="block text-gray-200">Password</label>
                   <input
@@ -70,7 +83,7 @@
                   type="submit"
                   class="w-full block bg-custom-red hover:bg-custom-redh focus:bg-custom-redh text-white font-semibold rounded-lg px-4 py-3 mt-6"
                 >
-                  Log In
+                  {{ $t('register.submit') }}
                 </button>
               </form>
 
@@ -133,7 +146,8 @@ export default {
   data() {
     return {
       user: {
-        identifier: '',
+        username: '',
+        email: '',
         password: '',
       },
       error_server: false,
@@ -143,17 +157,27 @@ export default {
     async onSubmit(evt) {
       evt.preventDefault()
       try {
-        await this.$auth.loginWith('local', {
-          data: this.user,
-        })
-
-        this.$router.push('/casino')
+        await this.$axios
+          .post('/auth/local/register', this.user)
+          .then((response) => {
+            const { user } = response.data
+            this.$auth
+              .loginWith('local', {
+                data: {
+                  identifier: user.email,
+                  password: this.user.password,
+                },
+              })
+              .then(() => {
+                this.$router.push('/casino')
+              })
+          })
       } catch (err) {
         this.error_server = true
       }
     },
     closeModal() {
-      this.$emit('close-login')
+      this.$emit('close-register')
     },
   },
 }

@@ -25,6 +25,7 @@
         <div class="ml-10 hidden md:flex items-center">
           <button
             class="rounded-lg bg-custom-red text-white px-4 py-3 font-semibold text-md leading-tight shadow-md hover:bg-custom-redh ml-4"
+            @click="openRegister"
           >
             {{ $t('menu.buttons.register') }}
           </button>
@@ -95,6 +96,9 @@ export default {
     },
     openLogin() {
       this.$emit('open-login')
+    },
+    openRegister() {
+      this.$emit('open-register')
     },
   },
   props: ['menu'],

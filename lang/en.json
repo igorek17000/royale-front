@@ -11,5 +11,9 @@
   "login": {
     "title": "Casino Royale",
     "login": "Log in to your account"
+  },
+  "register": {
+    "title": "Create a new account",
+    "submit": "Register"
   }
 }
