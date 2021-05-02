@@ -1,19 +1,12 @@
 const state = () => ({
-  menu: [],
-  menuDashboard: [],
+  gamelist: [],
 })
 
 const getters = {}
 
 const mutations = {
-  SET_SIDEBAR(state, getData) {
-    state.menu = getData
-  },
-  SET_MENU(state, getData) {
-    state.menuDashboard = getData
-  },
-  user(state, user) {
-    state.auth.user = user
+  SET_GAMELIST(state, getData) {
+    state.gamelist = getData
   },
 }
 
@@ -26,7 +19,7 @@ const actions = {
   //     commit('user', user)
   //   }
   // },
-  loadSidebar({ commit }, state) {
+  async loadGamelist({ commit }, state) {
     // await this.$axios
     //   .get(`/${state.url}?page=${state.page}`, {
     //     headers: {
@@ -36,11 +29,8 @@ const actions = {
     //   })
     //   .then((r) => r.data.data)
     // .then((getData) => {
-    commit('SET_SIDEBAR', state)
+    commit('SET_GAMELIST', state)
     // })
-  },
-  loadMenu({ commit }, state) {
-    commit('SET_MENU', state)
   },
 }
 

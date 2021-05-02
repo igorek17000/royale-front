@@ -5,18 +5,16 @@
     <Sidebar />
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <Menu :menus="menuDashboard" />
-      <section class="hero-welcome text-center text-gray-200 text-3xl my-4">
-        <h2>Welcome {{ this.$auth.user.username }} to Casino Royale</h2>
-        <h4>Select a game that you want to play!</h4>
-      </section>
-      <div class="container mx-auto flex">
-        <game-cards
-          title="Age of gods"
-          image="https://images.unsplash.com/photo-1600054800747-be294a6a0d26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80"
-          desc="lorem iplus play now"
-          category="slots"
-          url="casino-slots"
-        />
+      <div class="flex-grow flex overflow-x-hidden">
+        <casino-sidebar title="Slots" />
+        <div class="flex-grow dark:bg-primary overflow-y-auto">
+          <div
+            class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-primary dark:text-white dark:border-gray-800 sticky top-0"
+          >
+            <player />
+          </div>
+          <div class="sm:p-7 p-4">Game goes here</div>
+        </div>
       </div>
     </div>
   </div>
@@ -25,11 +23,12 @@
 <script>
 import Sidebar from '~/components/Dashboard/Sidebar.vue'
 import Menu from '~/components/Dashboard/Menu.vue'
-import GameCards from '../../components/Dashboard/Casino/GameCards.vue'
+import CasinoSidebar from '../../../components/Dashboard/Casino/CasinoSidebar.vue'
+import Player from '../../../components/Dashboard/Player.vue'
 export default {
-  components: { Sidebar, Menu, GameCards },
+  components: { Sidebar, Menu, CasinoSidebar, Player },
   middleware: 'auth',
-  name: 'Casino',
+  name: 'Slots',
   created() {
     let getMenu = {
       data: [

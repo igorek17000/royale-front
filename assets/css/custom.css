@@ -1,8 +1,8 @@
-.items-baseline > .nuxt-link-exact-active {
+.items-baseline > .nuxt-link-active {
   border-bottom: 2px solid #d91139;
   color: #d91139;
 }
-.mobile-menu > .nuxt-link-exact-active {
+.mobile-menu > .nuxt-link-active {
   border-bottom: 2px solid #d91139;
   color: #d91139;
   --tw-bg-opacity: 1;
@@ -16,4 +16,14 @@
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 10px;
+}
+.dashboard-menu .nuxt-link-active {
+  --tw-text-opacity: 1;
+  color: rgba(217, 17, 57, var(--tw-text-opacity));
+  border-bottom: 2px solid #d91139;
+}
+.sidebar-icons .nuxt-link-active {
+  --tw-text-opacity: 1;
+  color: rgba(217, 17, 57, var(--tw-text-opacity));
+  /* border-bottom: 1px solid #d91139; */
 }

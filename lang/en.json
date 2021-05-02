@@ -8,6 +8,14 @@
       "login": "Login"
     }
   },
+  "dashboard": {
+    "menu": {
+      "casino": "Casino",
+      "poker": "Poker",
+      "bet": "Bet",
+      "exchange": "Exchange"
+    }
+  },
   "login": {
     "title": "Casino Royale",
     "login": "Log in to your account"

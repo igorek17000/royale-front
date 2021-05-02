@@ -111,7 +111,7 @@ export default {
         redirect: {
           login: '/',
           logout: '/',
-          callback: '/',
+          callback: '/casino',
           home: '/casino',
         },
         watchLoggedIn: true,
