@@ -35,7 +35,7 @@
         >
           <a
             href="#"
-            class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 uppercase"
             role="menuitem"
             v-for="locale in $i18n.locales"
             :key="locale.code"

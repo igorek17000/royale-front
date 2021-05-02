@@ -31,7 +31,7 @@ import Login from '~/components/Modals/Login.vue'
 import Register from '~/components/Modals/Register.vue'
 import Nav from '../components/Header/Nav.vue'
 export default {
-  name: 'Homepage',
+  name: 'home',
   middleware: 'auth',
   auth: 'guest',
   layout: 'home',

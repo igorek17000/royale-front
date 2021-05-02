@@ -105,13 +105,13 @@ export default {
         },
         endpoints: {
           login: { url: '/auth/local', method: 'post' },
-          logout: { url: '/api/auth/logout', method: 'post' },
+          logout: false,
           user: { url: '/users/me', method: 'get' },
         },
         redirect: {
-          login: '/',
-          logout: '/',
-          callback: '/casino',
+          login: '/login',
+          logout: '/logout',
+          callback: '/login',
           home: '/casino',
         },
         watchLoggedIn: true,
