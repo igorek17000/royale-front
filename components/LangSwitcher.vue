@@ -25,7 +25,7 @@
     >
       <div
         v-show="isOpenLang"
-        class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg"
+        class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg z-50"
       >
         <div
           class="py-1 rounded-md bg-white shadow-xs"

@@ -32,8 +32,7 @@ import Register from '~/components/Modals/Register.vue'
 import Nav from '../components/Header/Nav.vue'
 export default {
   name: 'home',
-  middleware: 'auth',
-  auth: 'guest',
+  middleware: 'guest',
   layout: 'home',
   components: {
     Nav,

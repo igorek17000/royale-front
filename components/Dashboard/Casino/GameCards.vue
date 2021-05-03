@@ -1,6 +1,6 @@
 <template>
   <div class="w-full md:w-1/4">
-    <nuxt-link :to="localePath({ name: `'${url}'` })">
+    <nuxt-link :to="localePath({ name: `${url}` })">
       <div class="bg-white rounded-lg shadow-lg">
         <img :src="image" :alt="title" class="rounded-t-lg" />
         <div class="p-2 relative">
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  props: ['category', 'desc', 'title', 'image'],
+  props: ['category', 'desc', 'title', 'image', 'url'],
 }
 </script>
 
