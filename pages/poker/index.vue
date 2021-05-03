@@ -11,11 +11,11 @@
       </section>
       <div class="container mx-auto flex">
         <game-cards
-          title="Age of gods"
+          title="Poker"
           image="https://images.unsplash.com/photo-1600054800747-be294a6a0d26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80"
           desc="lorem iplus play now"
-          category="slots"
-          url="casino-slots"
+          category="poker"
+          url="poker-house"
         />
       </div>
     </div>

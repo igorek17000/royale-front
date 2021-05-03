@@ -6,14 +6,16 @@
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <Menu :menus="menuDashboard" />
       <div class="flex-grow flex overflow-x-hidden">
-        <casino-sidebar title="Slots" />
+        <casino-sidebar title="Roulete" />
         <div class="flex-grow dark:bg-primary overflow-y-auto">
           <div
             class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-primary dark:text-white dark:border-gray-800 sticky top-0"
           >
             <player />
           </div>
-          <div class="sm:p-7 p-4">Game goes here</div>
+          <div class="sm:p-7 p-4">
+            <Poker />
+          </div>
         </div>
       </div>
     </div>
@@ -25,10 +27,11 @@ import Sidebar from '~/components/Dashboard/Sidebar.vue'
 import Menu from '~/components/Dashboard/Menu.vue'
 import CasinoSidebar from '../../../components/Dashboard/Casino/CasinoSidebar.vue'
 import Player from '../../../components/Dashboard/Player.vue'
+import Poker from '../../../components/Games/Poker/index'
 export default {
-  components: { Sidebar, Menu, CasinoSidebar, Player },
+  components: { Sidebar, Menu, CasinoSidebar, Player, Poker },
   middleware: 'auth',
-  name: 'Slots',
+  name: 'Roulete',
   created() {
     let getMenu = {
       data: [

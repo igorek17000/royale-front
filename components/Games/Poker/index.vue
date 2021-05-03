@@ -1,5 +1,5 @@
 <template>
-  <div>furits game</div>
+  <div>poker game here</div>
 </template>
 
 <script>

@@ -13,7 +13,9 @@
           >
             <player />
           </div>
-          <div class="sm:p-7 p-4">Game goes here</div>
+          <div class="sm:p-7 p-4">
+            <fruits />
+          </div>
         </div>
       </div>
     </div>
@@ -25,8 +27,9 @@ import Sidebar from '~/components/Dashboard/Sidebar.vue'
 import Menu from '~/components/Dashboard/Menu.vue'
 import CasinoSidebar from '../../../components/Dashboard/Casino/CasinoSidebar.vue'
 import Player from '../../../components/Dashboard/Player.vue'
+import Fruits from '../../../components/Games/Slots/Fruits.vue'
 export default {
-  components: { Sidebar, Menu, CasinoSidebar, Player },
+  components: { Sidebar, Menu, CasinoSidebar, Player, Fruits },
   middleware: 'auth',
   name: 'Slots',
   created() {
