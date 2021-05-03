@@ -14,7 +14,9 @@
             <player />
           </div>
           <div class="sm:p-7 p-4">
-            <fruits />
+            <client-only placeholder="loading">
+              <fruits />
+            </client-only>
           </div>
         </div>
       </div>
