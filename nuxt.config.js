@@ -109,9 +109,9 @@ export default {
           user: { url: '/users/me', method: 'get' },
         },
         redirect: {
-          login: '/login',
+          login: '/',
           logout: '/logout',
-          callback: '/login',
+          callback: '/',
           home: '/casino',
         },
         watchLoggedIn: true,

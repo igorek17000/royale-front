@@ -7,6 +7,7 @@
         id="lang-menu"
         aria-label="lang menu"
         aria-haspopup="true"
+        @blur="hideLang"
       >
         <img
           class="h-8 w-8 ml-2 mr-1"
@@ -70,6 +71,9 @@ export default {
       this.$i18n.setLocaleCookie(locale)
       this.$router.push(this.switchLocalePath(locale))
       this.isOpenLang = !this.isOpenLang
+    },
+    hideLang() {
+      this.isOpenLang = false
     },
   },
 }
