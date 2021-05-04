@@ -2,9 +2,21 @@
   <div
     class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-screen flex overflow-hidden text-sm"
   >
-    <Sidebar />
+    <Sidebar>
+      <nuxt-link
+        class="h-10 w-12 dark:text-gray-500 flex items-center justify-center"
+        :to="localePath({ name: 'casino-slots' })"
+      >
+        <SlotIcon class="fill-current h-10" />
+      </nuxt-link>
+      <nuxt-link
+        class="h-10 w-12 dark:text-gray-500 flex items-center justify-center"
+        :to="localePath({ name: 'casino-roulette' })"
+      >
+        <roulette class="h-10 fill-current" />
+      </nuxt-link>
+    </Sidebar>
     <div class="flex-grow overflow-hidden h-full flex flex-col">
-      <Menu :menus="menuDashboard" />
       <div class="flex-grow flex overflow-x-hidden">
         <casino-sidebar title="Roulete" />
         <div class="flex-grow dark:bg-primary overflow-y-auto">
@@ -22,44 +34,13 @@
 
 <script>
 import Sidebar from '~/components/Dashboard/Sidebar.vue'
-import Menu from '~/components/Dashboard/Menu.vue'
 import CasinoSidebar from '../../../components/Dashboard/Casino/CasinoSidebar.vue'
 import Player from '../../../components/Dashboard/Player.vue'
+import Roulette from '~/components/Icons/Roulette.vue'
+import SlotIcon from '~/components/Icons/SlotIcon.vue'
 export default {
-  components: { Sidebar, Menu, CasinoSidebar, Player },
+  components: { Sidebar, CasinoSidebar, Player, Roulette, SlotIcon },
   middleware: 'auth',
   name: 'Roulete',
-  created() {
-    let getMenu = {
-      data: [
-        {
-          name: `${this.$t('dashboard.menu.casino')}`,
-          url: '/casino',
-          disabled: false,
-        },
-        {
-          name: `${this.$t('dashboard.menu.poker')}`,
-          url: '/poker',
-          disabled: false,
-        },
-        {
-          name: `${this.$t('dashboard.menu.bet')}`,
-          url: '/bet',
-          disabled: true,
-        },
-        {
-          name: `${this.$t('dashboard.menu.exchange')}`,
-          url: '/exchange',
-          disabled: true,
-        },
-      ],
-    }
-    this.$store.dispatch('loadMenu', getMenu)
-  },
-  computed: {
-    menuDashboard() {
-      return this.$store.state.menuDashboard
-    },
-  },
 }
 </script>

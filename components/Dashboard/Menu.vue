@@ -1,7 +1,14 @@
 <template>
   <div
-    class="h-16 lg:flex w-full border-b border-gray-200 dark:border-gray-800 hidden px-10"
+    class="h-16 lg:flex w-full border-b border-gray-200 dark:border-gray-800 hidden pr-10"
   >
+    <div
+      class="h-auto w-20 flex items-center justify-center mr-5 border-r border-secondary"
+    >
+      <nuxt-link :to="localePath({ name: 'casino' })">
+        <img class="h-14 w-14" src="~/assets/logo.png" alt="Logo" />
+      </nuxt-link>
+    </div>
     <div class="flex h-full text-gray-600 dark:text-gray-400 dashboard-menu">
       <nuxt-link
         class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8"
@@ -119,7 +126,11 @@ export default {
       this.openProfile = false
     },
   },
-  props: ['menus'],
+  computed: {
+    menus() {
+      return this.$store.state.menuDashboard
+    },
+  },
 }
 </script>
 
