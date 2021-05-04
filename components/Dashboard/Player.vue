@@ -3,11 +3,7 @@
     <div
       class="flex items-center text-3xl text-gray-900 dark:text-white capitalize"
     >
-      <img
-        src="https://assets.codepen.io/344846/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1582611188&width=512"
-        class="w-12 mr-4 rounded-full"
-        alt="profile"
-      />
+      <img :src="userImage" class="w-12 mr-4 rounded-full h-12" alt="profile" />
       {{ this.$auth.user.username }}
     </div>
     <div class="ml-auto sm:flex hidden items-center justify-end">
@@ -24,7 +20,15 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      userImage:
+        `http://localhost:1337${this.$auth.user.avatar.formats.thumbnail.url}` ||
+        '../../avatar.png',
+    }
+  },
+}
 </script>
 
 <style>
