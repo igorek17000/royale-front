@@ -20,13 +20,17 @@
         <h4>Select a game that you want to play!</h4>
       </section>
       <div class="container mx-auto flex">
-        <game-cards
-          title="Age of gods"
-          image="https://images.unsplash.com/photo-1600054800747-be294a6a0d26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80"
-          desc="lorem iplus play now"
-          category="slots"
-          url="casino-slots"
-        />
+        <div class="w-full md:w-1/5" v-for="game in gamelist" :key="game.id">
+          <game-cards
+            :title="game.title"
+            :image="baseURL + game.image.formats.medium.url"
+            :desc="game.desc"
+            :category="game.category"
+            :url="game.url"
+            :min_bet="game.min_bet"
+            :max_bet="game.max_bet"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -42,5 +46,20 @@ export default {
   components: { Sidebar, Menu, GameCards, SlotIcon, Roulette },
   middleware: 'auth',
   name: 'Casino',
+  data() {
+    return {
+      baseURL: 'http://localhost:1337',
+    }
+  },
+  computed: {
+    gamelist() {
+      return this.$store.state.casino.gamelist
+    },
+  },
+  async asyncData({ store, $axios }) {
+    let response = await $axios.get('/games')
+    let gameList = response.data
+    await store.commit('casino/SET_GAME_LIST', gameList)
+  },
 }
 </script>

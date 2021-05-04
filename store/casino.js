@@ -5,20 +5,12 @@ const state = () => ({
 const getters = {}
 
 const mutations = {
-  SET_GAMELIST(state, getData) {
-    state.gamelist = getData
+  SET_GAME_LIST(state, gameList) {
+    state.gamelist = gameList
   },
 }
 
 const actions = {
-  // nuxtServerInit({ commit }, { $gates, $auth }) {
-  //   const user = $auth.user
-  //   if (user) {
-  //     $gates.setRoles(user.role)
-  //     $gates.setPermissions(user.permissions)
-  //     commit('user', user)
-  //   }
-  // },
   async loadGamelist({ commit }, state) {
     // await this.$axios
     //   .get(`/${state.url}?page=${state.page}`, {

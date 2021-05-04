@@ -1,29 +1,49 @@
 <template>
-  <div class="w-full md:w-1/4">
-    <nuxt-link :to="localePath({ name: `${url}` })">
-      <div class="bg-white rounded-lg shadow-lg">
-        <img :src="image" :alt="title" class="rounded-t-lg" />
-        <div class="p-2 relative">
-          <h2 class="font-bold mb-2 text-2xl text-purple-800">
-            {{ title }}
-          </h2>
-          <p class="text-purple-700 mb-2">
-            {{ desc }}
-          </p>
-          <a
-            href="#"
-            class="absolute top-1/2 right-4 p-2 rounded-sm text-sm bg-custom-red text-white uppercase"
-            >{{ category }}</a
-          >
+  <div class="rounded-lg shadow-lg mx-3 cursor-pointer" @click="openLink(url)">
+    <div class="h-48 w-full">
+      <img
+        :src="image"
+        :alt="title"
+        class="rounded-t-lg h-full w-full object-cover"
+      />
+    </div>
+    <div class="py-4 px-2 relative bg-secondary bg-opacity-50 rounded-b-lg">
+      <h2 class="font-bold mb-2 text-xl text-white">
+        {{ title }}
+      </h2>
+      <p class="text-white mb-2">
+        {{ desc }}
+      </p>
+      <a
+        href="#"
+        class="absolute top-4 right-4 px-2 py-1 rounded-sm text-xs bg-custom-red text-white uppercase"
+        >{{ category }}</a
+      >
+      <hr class="bg-gray-400 bg-opacity-50" />
+      <div class="flex justify-between mt-2">
+        <div
+          class="px-2 py-1 rounded-sm text-sm font-bold bg-yellow-500 text-white w-12"
+        >
+          $ {{ min_bet }}
+        </div>
+        <div
+          class="px-2 py-1 rounded-sm text-sm font-bold bg-green-600 text-white w-12"
+        >
+          $ {{ max_bet }}
         </div>
       </div>
-    </nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['category', 'desc', 'title', 'image', 'url'],
+  methods: {
+    openLink(url) {
+      this.$router.push(this.localePath({ name: `${url}` }))
+    },
+  },
+  props: ['category', 'desc', 'title', 'image', 'url', 'min_bet', 'max_bet'],
 }
 </script>
 

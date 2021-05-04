@@ -38,9 +38,9 @@
 
 <script>
 import Sidebar from '~/components/Dashboard/Sidebar.vue'
-import CasinoSidebar from '../../../components/Dashboard/Casino/CasinoSidebar.vue'
-import Player from '../../../components/Dashboard/Player.vue'
-import Fruits from '../../../components/Games/Slots/Fruits.vue'
+import CasinoSidebar from '~/components/Dashboard/Casino/CasinoSidebar.vue'
+import Player from '~/components/Dashboard/Player.vue'
+import Fruits from '~/components/Games/Slots/Fruits.vue'
 import Roulette from '~/components/Icons/Roulette.vue'
 import SlotIcon from '~/components/Icons/SlotIcon.vue'
 export default {

@@ -34,6 +34,11 @@
 import GameList from './GameList.vue'
 export default {
   components: { GameList },
+  computed: {
+    gamelist() {
+      return this.$store.state.casino.gamelist
+    },
+  },
   props: ['title'],
 }
 </script>
