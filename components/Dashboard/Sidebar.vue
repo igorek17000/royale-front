@@ -10,16 +10,7 @@
     <div
       class="flex mx-auto flex-grow mt-4 flex-col text-gray-400 space-y-4 sidebar-icons"
     >
-      <nuxt-link
-        class="h-10 w-12 dark:text-gray-500 flex items-center justify-center"
-        :to="localePath({ name: 'casino-slots' })"
-        ><slots class="fill-current h-10"
-      /></nuxt-link>
-      <nuxt-link
-        class="h-10 w-12 dark:text-gray-500 flex items-center justify-center"
-        :to="localePath({ name: 'casino-roulette' })"
-        ><roulette class="h-10 fill-current"
-      /></nuxt-link>
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -29,6 +20,7 @@ import Roulette from '../Icons/Roulette.vue'
 import Slots from '../Icons/Slots.vue'
 export default {
   components: { Slots, Roulette },
+  props: ['menu'],
 }
 </script>
 

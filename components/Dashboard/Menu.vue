@@ -59,12 +59,18 @@
               aria-labelledby="user-menu"
             >
               <nuxt-link
-                class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 uppercase"
+                class="flex px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 capitalize items-center"
                 v-for="(menu, index) in userMenu"
                 :key="index"
                 :disabled="menu.disabled"
                 :to="localePath(`${menu.url}`)"
-                >{{ menu.name }}</nuxt-link
+              >
+                <img
+                  class="w-4 h-4 mr-2"
+                  :src="`./icons/${menu.icon}.png`"
+                  :alt="menu.icon"
+                />
+                {{ menu.name }}</nuxt-link
               >
             </div>
           </div>
@@ -90,14 +96,17 @@ export default {
         {
           name: `${this.$t('dashboard.user-menu.profile')}`,
           url: '/profile',
+          icon: 'user',
         },
         {
           name: `${this.$t('dashboard.user-menu.payments')}`,
           url: '/payments',
+          icon: 'payment',
         },
         {
           name: `${this.$t('dashboard.user-menu.logout')}`,
           url: '/logout',
+          icon: 'logout',
         },
       ],
     }
