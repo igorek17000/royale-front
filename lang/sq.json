@@ -8,8 +8,25 @@
       "login": "Login"
     }
   },
+  "dashboard": {
+    "menu": {
+      "casino": "Casino",
+      "poker": "Poker",
+      "bet": "Bet",
+      "exchange": "Exchange"
+    },
+    "user-menu": {
+      "profile": "Profili",
+      "payments": "Pagesat",
+      "logout": "Logout"
+    }
+  },
   "login": {
     "title": "Casino Royale",
     "login": "Logohuni ne llogarine tuaj!"
+  },
+  "register": {
+    "title": "Krijoni nje llogari",
+    "submit": "Regjistrohuni"
   }
 }

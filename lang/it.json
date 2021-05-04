@@ -8,8 +8,25 @@
       "login": "Login"
     }
   },
+  "dashboard": {
+    "menu": {
+      "casino": "Casino",
+      "poker": "Poker",
+      "bet": "Bet",
+      "exchange": "Exchange"
+    },
+    "user-menu": {
+      "profile": "Profilo",
+      "payments": "Pagamenti",
+      "logout": "Logout"
+    }
+  },
   "login": {
     "title": "Casino Royale",
     "login": "Accedi al tuo account"
+  },
+  "register": {
+    "title": "Crea un nuovo account",
+    "submit": "Registrati"
   }
 }

@@ -14,6 +14,11 @@
       "poker": "Poker",
       "bet": "Bet",
       "exchange": "Exchange"
+    },
+    "user-menu": {
+      "profile": "Profile",
+      "payments": "Payments",
+      "logout": "Logout"
     }
   },
   "login": {
