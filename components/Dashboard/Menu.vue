@@ -14,7 +14,7 @@
         class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8"
         v-for="menu in menus.data"
         :key="menu.name"
-        :disabled="menu.disabled"
+        :event="menu.disabled ? '' : 'click'"
         :to="localePath(`${menu.url}`)"
         >{{ menu.name }}</nuxt-link
       >

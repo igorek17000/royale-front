@@ -3,7 +3,11 @@
     <div
       class="flex items-center text-3xl text-gray-900 dark:text-white capitalize"
     >
-      <img :src="userImage" class="w-12 mr-4 rounded-full h-12" alt="profile" />
+      <img
+        :src="userImage"
+        class="w-12 mr-4 rounded-full h-12 object-cover"
+        alt="profile"
+      />
       {{ this.$auth.user.username }}
     </div>
     <div class="ml-auto sm:flex hidden items-center justify-end">

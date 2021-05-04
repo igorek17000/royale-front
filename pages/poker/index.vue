@@ -4,7 +4,6 @@
   >
     <Sidebar />
     <div class="flex-grow overflow-hidden h-full flex flex-col">
-      <Menu :menus="menuDashboard" />
       <section class="hero-welcome text-center text-gray-200 text-3xl my-4">
         <h2>Welcome {{ this.$auth.user.username }} to Casino Royale</h2>
         <h4>Select a game that you want to play!</h4>
@@ -24,43 +23,10 @@
 
 <script>
 import Sidebar from '~/components/Dashboard/Sidebar.vue'
-import Menu from '~/components/Dashboard/Menu.vue'
 import GameCards from '../../components/Dashboard/Casino/GameCards.vue'
 export default {
-  components: { Sidebar, Menu, GameCards },
+  components: { Sidebar, GameCards },
   middleware: 'auth',
-  name: 'Casino',
-  created() {
-    let getMenu = {
-      data: [
-        {
-          name: `${this.$t('dashboard.menu.casino')}`,
-          url: '/casino',
-          disabled: false,
-        },
-        {
-          name: `${this.$t('dashboard.menu.poker')}`,
-          url: '/poker',
-          disabled: false,
-        },
-        {
-          name: `${this.$t('dashboard.menu.bet')}`,
-          url: '/bet',
-          disabled: true,
-        },
-        {
-          name: `${this.$t('dashboard.menu.exchange')}`,
-          url: '/exchange',
-          disabled: true,
-        },
-      ],
-    }
-    this.$store.dispatch('loadMenu', getMenu)
-  },
-  computed: {
-    menuDashboard() {
-      return this.$store.state.menuDashboard
-    },
-  },
+  name: 'Poker',
 }
 </script>

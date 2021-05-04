@@ -69,7 +69,9 @@ export default {
 
     changeLocale(locale) {
       this.$i18n.setLocaleCookie(locale)
-      this.$router.push(this.switchLocalePath(locale))
+      this.$i18n.setLocale(locale)
+      location.reload()
+      // this.$router.push(this.switchLocalePath(locale))
       this.isOpenLang = !this.isOpenLang
     },
     hideLang() {

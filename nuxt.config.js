@@ -64,6 +64,7 @@ export default {
           syncMessages: true,
           syncRouteParams: true,
         },
+        strategy: 'no_prefix',
       },
     ],
   ],
