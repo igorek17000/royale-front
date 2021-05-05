@@ -18,6 +18,7 @@ module.exports = {
         secondary: '#1D2738',
         'custom-red': '#D91139',
         'custom-redh': '#f91c46',
+        money: '#40e094',
       },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],

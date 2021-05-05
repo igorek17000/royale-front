@@ -1,17 +1,19 @@
 <template>
   <div
-    class="h-16 lg:flex w-full border-b border-gray-200 dark:border-gray-800 hidden pr-10"
+    class="h-16 flex w-full border-b border-gray-200 dark:border-gray-800 pr-2 md:pr-10"
   >
     <div
-      class="h-auto w-20 flex items-center justify-center mr-5 border-r border-secondary"
+      class="h-auto w-20 flex items-center justify-center mr-3 md:mr-5 md:border-r md:border-secondary pt-4 bg-primary md:bg-secondary"
     >
       <nuxt-link :to="localePath({ name: 'casino' })">
-        <img class="h-14 w-14" src="~/assets/logo.png" alt="Logo" />
+        <img class="h-auto w-14" src="~/assets/logo.png" alt="Logo" />
       </nuxt-link>
     </div>
-    <div class="flex h-full text-gray-600 dark:text-gray-400 dashboard-menu">
+    <div
+      class="hidden md:flex h-full text-gray-600 dark:text-gray-400 dashboard-menu"
+    >
       <nuxt-link
-        class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8"
+        class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-3 md:mr-8"
         v-for="menu in menus.data"
         :key="menu.name"
         :event="menu.disabled ? '' : 'click'"
@@ -20,10 +22,17 @@
       >
     </div>
     <div class="ml-auto flex items-center space-x-7">
+      <div class="h-8 block md:hidden">
+        <span class="text-sm">Balance: </span>
+        <button class="balance rounded-md text-money h-8 shadow font-bold px-3">
+          $ {{ parseFloat(this.$auth.user.balance) }}
+        </button>
+      </div>
       <button class="h-8 px-3 rounded-md shadow text-white bg-blue-500">
         Deposit
       </button>
-      <div class="relative">
+
+      <div class="hidden md:flex relative">
         <button
           class="flex items-center focus:outline-none"
           @click="openProfileNav"
@@ -83,18 +92,20 @@
           </div>
         </transition>
       </div>
-
-      <lang-switcher />
+      <div class="hidden md:flex">
+        <lang-switcher />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import LangSwitcher from '../LangSwitcher.vue'
+import LangSwitcher from '~/components/LangSwitcher.vue'
 export default {
   components: { LangSwitcher },
   data() {
     return {
+      isOpen: false,
       openProfile: false,
       userImage:
         `http://localhost:1337${this.$auth.user.avatar.formats.thumbnail.url}` ||
