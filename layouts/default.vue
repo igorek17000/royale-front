@@ -71,6 +71,26 @@ export default {
       ],
     }
     this.$store.dispatch('loadMenuFooter', FooterMenu)
+    let userMenu = {
+      data: [
+        {
+          name: `${this.$t('dashboard.user-menu.profile')}`,
+          url: '/profile',
+          icon: 'user',
+        },
+        {
+          name: `${this.$t('dashboard.user-menu.payments')}`,
+          url: '/payments',
+          icon: 'payment',
+        },
+        {
+          name: `${this.$t('dashboard.user-menu.logout')}`,
+          url: '/logout',
+          icon: 'logout',
+        },
+      ],
+    }
+    this.$store.dispatch('loadUserMenu', userMenu)
   },
 }
 </script>

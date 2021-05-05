@@ -25,7 +25,9 @@
           >
             <player />
           </div>
-          <div class="sm:p-7 p-4">Game goes here</div>
+          <div class="sm:p-7 p-4">
+            <horizontal />
+          </div>
         </div>
       </div>
     </div>
@@ -38,8 +40,16 @@ import CasinoSidebar from '../../../components/Dashboard/Casino/CasinoSidebar.vu
 import Player from '../../../components/Dashboard/Player.vue'
 import Roulette from '~/components/Icons/Roulette.vue'
 import SlotIcon from '~/components/Icons/SlotIcon.vue'
+import Horizontal from '../../../components/Games/Roulette/Horizontal.vue'
 export default {
-  components: { Sidebar, CasinoSidebar, Player, Roulette, SlotIcon },
+  components: {
+    Sidebar,
+    CasinoSidebar,
+    Player,
+    Roulette,
+    SlotIcon,
+    Horizontal,
+  },
   middleware: 'auth',
   name: 'Roulete',
 }

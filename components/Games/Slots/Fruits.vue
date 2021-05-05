@@ -121,13 +121,13 @@ export default {
         //   }
         // })
 
-        if (isIOS()) {
-          setTimeout(function () {
-            sizeHandler()
-          }, 200)
-        } else {
-          sizeHandler()
-        }
+        // if (isIOS()) {
+        //   setTimeout(function () {
+        //     sizeHandler()
+        //   }, 200)
+        // } else {
+        //   sizeHandler()
+        // }
       })
     }, 2000)
   },

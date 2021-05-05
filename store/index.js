@@ -2,6 +2,7 @@ const state = () => ({
   menu: [],
   menuDashboard: [],
   footerMenu: [],
+  userMenu: [],
 })
 
 const getters = {}
@@ -15,6 +16,9 @@ const mutations = {
   },
   SET_FOOTER(state, getData) {
     state.footerMenu = getData
+  },
+  SET_USER(state, getData) {
+    state.userMenu = getData
   },
   user(state, user) {
     state.auth.user = user
@@ -48,6 +52,9 @@ const actions = {
   },
   loadMenuFooter({ commit }, state) {
     commit('SET_FOOTER', state)
+  },
+  loadUserMenu({ commit }, state) {
+    commit('SET_USER', state)
   },
 }
 

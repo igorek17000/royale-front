@@ -76,14 +76,14 @@
             >
               <nuxt-link
                 class="flex px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 capitalize items-center"
-                v-for="(menu, index) in userMenu"
+                v-for="(menu, index) in userMenu.data"
                 :key="index"
                 :disabled="menu.disabled"
                 :to="localePath(`${menu.url}`)"
               >
                 <img
                   class="w-4 h-4 mr-2"
-                  :src="`./icons/${menu.icon}.png`"
+                  :src="require(`~/assets/icons/${menu.icon}.png`)"
                   :alt="menu.icon"
                 />
                 {{ menu.name }}</nuxt-link
@@ -110,23 +110,6 @@ export default {
       userImage:
         `http://localhost:1337${this.$auth.user.avatar.formats.thumbnail.url}` ||
         '../../avatar.png',
-      userMenu: [
-        {
-          name: `${this.$t('dashboard.user-menu.profile')}`,
-          url: '/profile',
-          icon: 'user',
-        },
-        {
-          name: `${this.$t('dashboard.user-menu.payments')}`,
-          url: '/payments',
-          icon: 'payment',
-        },
-        {
-          name: `${this.$t('dashboard.user-menu.logout')}`,
-          url: '/logout',
-          icon: 'logout',
-        },
-      ],
     }
   },
   methods: {
@@ -140,6 +123,9 @@ export default {
   computed: {
     menus() {
       return this.$store.state.menuDashboard
+    },
+    userMenu() {
+      return this.$store.state.userMenu
     },
   },
 }
