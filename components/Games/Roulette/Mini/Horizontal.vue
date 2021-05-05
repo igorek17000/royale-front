@@ -4,16 +4,19 @@
       <div class="selector"></div>
       <div class="wheel"></div>
     </div>
-
     <div>
-      <input placeholder="outcome" v-model="inputdata" />
-      <button @click="clickRandom(inputdata)">Spin Wheel</button>
+      <button @click="clickRandom()">Spin Wheel</button>
     </div>
+    <Bets />
+    <Table />
   </div>
 </template>
 
 <script>
+import Bets from './Bets.vue'
+import Table from './Table.vue'
 export default {
+  components: { Bets, Table },
   ssr: false,
   head: {
     script: [
@@ -24,13 +27,17 @@ export default {
   data() {
     return {
       balance: this.$auth.user.balance,
-      inputdata: '',
     }
+  },
+  mounted() {
+    this.initWheel()
   },
   methods: {
     clickRandom(outcome) {
-      this.spinWheel(outcome)
+      const nr = parseInt(outcome)
+      this.spinWheel(nr)
     },
+
     initWheel() {
       var $wheel = $('.roulette-wrapper .wheel'),
         row = ''
@@ -57,10 +64,13 @@ export default {
         $wheel.append(row)
       }
     },
-    spinWheel(roll) {
-      var $wheel = $('.roulette-wrapper .wheel'),
-        order = [0, 11, 5, 10, 6, 9, 7, 8, 1, 14, 2, 13, 3, 12, 4],
-        position = order.indexOf(roll)
+    spinWheel() {
+      var $wheel = $('.roulette-wrapper .wheel')
+      var order = [0, 11, 5, 10, 6, 9, 7, 8, 1, 14, 2, 13, 3, 12, 4]
+      // number output
+      const roll = order[Math.floor(Math.random() * order.length)]
+      console.log(roll)
+      var position = order.indexOf(roll)
 
       //determine position where to land
       var rows = 12,
@@ -68,9 +78,9 @@ export default {
         landingPosition = rows * 15 * card + position * card
 
       var randomize = Math.floor(Math.random() * 75) - 75 / 2
+      // var randomize = order[Math.floor(Math.random() * order.length)]
 
       landingPosition = landingPosition + randomize
-
       var object = {
         x: Math.floor(Math.random() * 50) / 100,
         y: Math.floor(Math.random() * 20) / 100,
@@ -79,7 +89,7 @@ export default {
       $wheel.css({
         'transition-timing-function':
           'cubic-bezier(0,' + object.x + ',' + object.y + ',1)',
-        'transition-duration': '4s',
+        'transition-duration': '6s',
         transform: 'translate3d(-' + landingPosition + 'px, 0px, 0px)',
       })
 
@@ -91,11 +101,9 @@ export default {
 
         var resetTo = -(position * card + randomize)
         $wheel.css('transform', 'translate3d(' + resetTo + 'px, 0px, 0px)')
-      }, 4 * 1000)
+      }, 6 * 1000)
+      setTimeout(function () {}, 6150)
     },
-  },
-  mounted() {
-    this.initWheel()
   },
 }
 </script>

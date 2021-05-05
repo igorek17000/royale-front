@@ -21,12 +21,12 @@
         <casino-sidebar title="Roulete" />
         <div class="flex-grow dark:bg-primary overflow-y-auto">
           <div
-            class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-primary dark:text-white dark:border-gray-800 sticky top-0"
+            class="sm:px-7 sm:pt-7 px-4 pt-4 hidden md:flex flex-col w-full border-b border-gray-200 bg-white dark:bg-primary dark:text-white dark:border-gray-800 sticky top-0"
           >
             <player />
           </div>
           <div class="sm:p-7 p-4">
-            <horizontal />
+            <Horizontal />
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@ import CasinoSidebar from '../../../components/Dashboard/Casino/CasinoSidebar.vu
 import Player from '../../../components/Dashboard/Player.vue'
 import Roulette from '~/components/Icons/Roulette.vue'
 import SlotIcon from '~/components/Icons/SlotIcon.vue'
-import Horizontal from '../../../components/Games/Roulette/Horizontal.vue'
+import Horizontal from '~/components/Games/Roulette/Mini/Horizontal.vue'
 export default {
   components: {
     Sidebar,
