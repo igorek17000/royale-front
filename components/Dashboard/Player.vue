@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       userImage:
-        `http://localhost:1337${this.$auth.user.avatar.formats.thumbnail.url}` ||
+        `${this.$config.baseURL}${this.$auth.user.avatar.formats.thumbnail.url}` ||
         '../../avatar.png',
     }
   },

@@ -41,7 +41,11 @@
           @blur="hideProfileNav"
         >
           <span class="relative flex-shrink-0">
-            <img class="w-7 h-7 rounded-full" :src="userImage" alt="profile" />
+            <img
+              class="w-7 mr-4 rounded-full h-7 object-cover"
+              :src="userImage"
+              alt="profile"
+            />
           </span>
           <span class="ml-2">{{ this.$auth.user.username }}</span>
           <svg
@@ -66,7 +70,7 @@
         >
           <div
             v-show="openProfile"
-            class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg z-50"
+            class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg z-50 top-8"
           >
             <div
               class="py-1 rounded-md bg-white shadow-xs"
@@ -108,7 +112,7 @@ export default {
       isOpen: false,
       openProfile: false,
       userImage:
-        `http://localhost:1337${this.$auth.user.avatar.formats.thumbnail.url}` ||
+        `${this.$config.baseURL}${this.$auth.user.avatar.formats.thumbnail.url}` ||
         '../../avatar.png',
     }
   },

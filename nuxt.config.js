@@ -119,7 +119,9 @@ export default {
       },
     },
   },
-
+  publicRuntimeConfig: {
+    baseURL: 'http://localhost:1337',
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }

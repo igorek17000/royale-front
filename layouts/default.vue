@@ -41,7 +41,7 @@ export default {
         {
           name: `${this.$t('dashboard.menu.exchange')}`,
           url: '/exchange',
-          disabled: true,
+          disabled: false,
         },
       ],
     }
