@@ -82,7 +82,6 @@
                 class="flex px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 capitalize items-center"
                 v-for="(menu, index) in userMenu.data"
                 :key="index"
-                :disabled="menu.disabled"
                 :to="localePath(`${menu.url}`)"
               >
                 <img
@@ -121,7 +120,9 @@ export default {
       this.openProfile = !this.openProfile
     },
     hideProfileNav() {
-      this.openProfile = false
+      setTimeout(() => {
+        this.openProfile = false
+      }, 200)
     },
   },
   computed: {

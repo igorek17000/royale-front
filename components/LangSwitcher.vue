@@ -68,6 +68,7 @@ export default {
     },
 
     changeLocale(locale) {
+      console.log('locale here', locale)
       this.$i18n.setLocaleCookie(locale)
       this.$i18n.setLocale(locale)
       location.reload()
@@ -75,7 +76,9 @@ export default {
       this.isOpenLang = !this.isOpenLang
     },
     hideLang() {
-      this.isOpenLang = false
+      setTimeout(() => {
+        this.isOpenLang = false
+      }, 200)
     },
   },
 }

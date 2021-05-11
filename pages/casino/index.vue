@@ -2,22 +2,8 @@
   <div
     class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex overflow-hidden text-sm mb-20 md:mb-0"
   >
-    <Sidebar>
-      <nuxt-link
-        class="w-12 dark:text-gray-500 flex flex-col items-center justify-center"
-        :to="localePath({ name: 'casino-slots' })"
-      >
-        <SlotIcon class="fill-current h-10" />
-        <span class="text-xs text-gray-500">Slots</span>
-      </nuxt-link>
-      <nuxt-link
-        class="w-12 dark:text-gray-500 flex flex-col items-center justify-center"
-        :to="localePath({ name: 'casino-roulette' })"
-      >
-        <roulette class="h-10 fill-current" />
-        <span class="text-xs text-gray-500">Roulette</span>
-      </nuxt-link>
-    </Sidebar>
+    <Sidebar />
+
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <section class="hero-welcome text-center text-gray-200 text-3xl my-4">
         <h2 class="text-lg md:text-xl">
@@ -45,13 +31,11 @@
 </template>
 
 <script>
-import Sidebar from '~/components/Dashboard/Sidebar.vue'
+import Sidebar from '~/components/Dashboard/Casino/Sidebar.vue'
 import Menu from '~/components/Dashboard/Menu.vue'
 import GameCards from '~/components/Dashboard/Casino/GameCards.vue'
-import Roulette from '~/components/Icons/Roulette.vue'
-import SlotIcon from '~/components/Icons/SlotIcon.vue'
 export default {
-  components: { Sidebar, Menu, GameCards, SlotIcon, Roulette },
+  components: { Sidebar, Menu, GameCards },
   middleware: 'auth',
   name: 'Casino',
   data() {

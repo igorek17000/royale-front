@@ -27,3 +27,7 @@
   color: rgba(217, 17, 57, var(--tw-text-opacity));
   /* border-bottom: 1px solid #d91139; */
 }
+.sidebar-icons .nuxt-link-active span {
+  --tw-text-opacity: 1;
+  color: rgba(217, 17, 57, var(--tw-text-opacity));
+}

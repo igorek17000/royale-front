@@ -9,12 +9,8 @@
     </div>
   </div>
 </template>
-
 <script>
-import Roulette from '../Icons/Roulette.vue'
-import Slots from '../Icons/SlotIcon.vue'
 export default {
-  components: { Slots, Roulette },
   props: ['menu'],
 }
 </script>
