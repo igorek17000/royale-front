@@ -7,6 +7,7 @@
     </div>
     <div class="relative mt-2">
       <input
+        v-model="searchInput"
         type="text"
         class="pl-8 h-9 bg-transparent border border-gray-300 dark:border-gray-700 dark:text-white w-full rounded-md text-sm"
         placeholder="Search"
@@ -25,20 +26,63 @@
       </svg>
     </div>
     <div class="space-y-4 mt-3">
-      <game-list />
+      <!-- <game-list /> -->
+      <button
+        class="p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow-lg relative hover:ring-2 hover:ring-custom-red focus:outline-none"
+        v-for="game in filteredGames"
+        :key="game.id"
+      >
+        <div
+          class="flex flex-col font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full"
+        >
+          <div class="h-32 w-full mb-3">
+            <img
+              :src="baseURL + game.image.formats.medium.url"
+              class="h-full w-full object-cover"
+              :alt="game.title"
+            />
+          </div>
+          <p class="text-lg font-bold text-gray-300">
+            {{ game.title }}
+          </p>
+        </div>
+        <div class="flex items-center w-full">
+          <div
+            class="text-xs py-1 px-2 leading-none dark:bg-primary bg-green-100 text-green-600 rounded-md"
+          >
+            Sales
+          </div>
+          <div class="ml-auto text-xs text-gray-500">$2,794.00</div>
+        </div>
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import GameList from './GameList.vue'
+// import GameList from './GameList.vue'
 export default {
-  components: { GameList },
+  // components: { GameList },
+  data() {
+    return {
+      baseURL: this.$config.baseURL,
+      searchInput: '',
+    }
+  },
   computed: {
     gamelist() {
       return this.$store.state.casino.gamelist
     },
+    filteredGames() {
+      let games = this.gamelist.filter((game) => {
+        return (
+          game.title.toLowerCase().indexOf(this.searchInput.toLowerCase()) != -1
+        )
+      })
+      return games
+    },
   },
+  methods: {},
   props: ['title'],
 }
 </script>

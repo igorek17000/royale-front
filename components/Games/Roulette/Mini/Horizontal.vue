@@ -102,7 +102,7 @@ export default {
         var resetTo = -(position * card + randomize)
         $wheel.css('transform', 'translate3d(' + resetTo + 'px, 0px, 0px)')
       }, 6 * 1000)
-      setTimeout(function () {}, 6150)
+      // setTimeout(function () {}, 6150)
     },
   },
 }
