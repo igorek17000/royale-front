@@ -19,10 +19,9 @@
       </nuxt-link>
     </Sidebar>
     <div class="flex-grow overflow-hidden h-full flex flex-col">
-      <section
-        class="hero-welcome text-center text-gray-200 text-3xl my-4"
-      ></section>
-      <div class="container mx-auto md:flex"></div>
+      <div class="container mx-auto md:flex">
+        <trading-vue :data="tradingVue"></trading-vue>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +38,28 @@ export default {
   data() {
     return {
       baseURL: this.$config.baseURL,
+      tradingVue: this.$DataCube
+        ? new this.$DataCube({
+            chart: {
+              type: 'Candles',
+              data: [
+                [1551128400000, 33, 37.1, 14, 14, 196],
+                [1551132000000, 13.7, 30, 6.6, 30, 206],
+                [1551135600000, 29.9, 33, 21.3, 21.8, 74],
+                [1551139200000, 21.7, 25.9, 18, 24, 140],
+                [1551142800000, 24.1, 24.1, 24, 24.1, 29],
+              ],
+            },
+            onchart: [
+              {
+                name: 'Setups',
+                type: 'Setups',
+                data: [[1551128400000, 1, 35]],
+                settings: {},
+              },
+            ],
+          })
+        : {},
     }
   },
   computed: {},
