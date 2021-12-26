@@ -1,6 +1,17 @@
 <template>
   <div
-    class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex overflow-hidden text-sm mb-20 md:mb-0"
+    class="
+      bg-gray-100
+      dark:bg-primary dark:text-white
+      text-gray-600
+      h-full
+      md:h-screen
+      flex
+      overflow-hidden
+      text-sm
+      mb-20
+      md:mb-0
+    "
   >
     <Sidebar />
 
@@ -15,15 +26,7 @@
       </section>
       <div class="container mx-auto md:flex">
         <div class="w-full md:w-1/5" v-for="game in gamelist" :key="game.id">
-          <game-cards
-            :title="game.title"
-            :image="baseURL + game.image.formats.medium.url"
-            :desc="game.desc"
-            :category="game.category"
-            :url="game.url"
-            :min_bet="game.min_bet"
-            :max_bet="game.max_bet"
-          />
+          <game-cards :game="game" />
         </div>
       </div>
     </div>
@@ -33,7 +36,7 @@
 <script>
 import Sidebar from '~/components/Dashboard/Casino/Sidebar.vue'
 import Menu from '~/components/Dashboard/Menu.vue'
-import GameCards from '~/components/Dashboard/Casino/GameCards.vue'
+import GameCards from '~/components/Dashboard/GameCards.vue'
 export default {
   components: { Sidebar, Menu, GameCards },
   middleware: 'auth',
@@ -49,7 +52,11 @@ export default {
     },
   },
   async asyncData({ store, $axios }) {
-    let response = await $axios.get('/games')
+    let response = await $axios.get('/games', {
+      params: {
+        category: 'casino',
+      },
+    })
     let gameList = response.data
     await store.commit('casino/SET_GAME_LIST', gameList)
   },

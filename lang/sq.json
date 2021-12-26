@@ -20,6 +20,13 @@
       "profile": "Profili",
       "payments": "Pagesat",
       "logout": "Logout"
+    },
+    "exchange": {
+      "trade": {
+        "name": "trading",
+        "coins_daily": "💰 <span class=\"text-money underline capitalize\">Monedhat</span> më të tregtuara të ditës. 🚀"
+      },
+      "news": "Lajme"
     }
   },
   "login": {
@@ -29,5 +36,9 @@
   "register": {
     "title": "Krijoni nje llogari",
     "submit": "Regjistrohuni"
+  },
+  "account": {
+    "balance": "Gjenda e llogarise",
+    "balance-menu": "Bilanci"
   }
 }

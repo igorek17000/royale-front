@@ -20,6 +20,13 @@
       "profile": "Profilo",
       "payments": "Pagamenti",
       "logout": "Logout"
+    },
+    "exchange": {
+      "trade": {
+        "name": "trading",
+        "coins_daily": "💰 Le <span class=\"text-money underline capitalize\">monete</span> più scambiate della giornata. 🚀"
+      },
+      "news": "notizie"
     }
   },
   "login": {
@@ -29,5 +36,9 @@
   "register": {
     "title": "Crea un nuovo account",
     "submit": "Registrati"
+  },
+  "account": {
+    "balance": "Saldo del conto",
+    "balance-menu": "Bilancia"
   }
 }

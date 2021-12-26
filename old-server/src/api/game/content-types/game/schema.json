@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "games",
+  "info": {
+    "singularName": "game",
+    "pluralName": "games",
+    "displayName": "games",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "casino",
+        "poker",
+        "other"
+      ]
+    },
+    "cover": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "desc": {
+      "type": "richtext"
+    },
+    "min_bet": {
+      "type": "decimal"
+    },
+    "max_bet": {
+      "type": "decimal"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

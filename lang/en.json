@@ -20,6 +20,13 @@
       "profile": "Profile",
       "payments": "Payments",
       "logout": "Logout"
+    },
+    "exchange": {
+      "trade": {
+        "name": "trade",
+        "coins_daily": "💰 Most traded <span class=\"text-money underline capitalize\">coins</span> of the day. 🚀"
+      },
+      "news": "news"
     }
   },
   "login": {
@@ -29,5 +36,9 @@
   "register": {
     "title": "Create a new account",
     "submit": "Register"
+  },
+  "account": {
+    "balance": "Account balance",
+    "balance-menu": "Balance"
   }
 }

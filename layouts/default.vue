@@ -1,9 +1,17 @@
 <template>
   <div class="dark:bg-primary">
     <div
-      class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex md:overflow-hidden"
+      class="
+        bg-gray-100
+        dark:bg-primary dark:text-white
+        text-gray-600
+        h-full
+        md:h-screen
+        flex
+        md:overflow-hidden
+      "
     >
-      <div class="flex-grow overflow-hidden h-full flex flex-col">
+      <div class="flex-grow overflow-hidden h-full flex flex-col min-h-screen">
         <Menu />
         <nuxt />
         <Footer />
@@ -64,6 +72,11 @@ export default {
           disabled: true,
         },
         {
+          name: `${this.$t('dashboard.menu.exchange')}`,
+          url: '/exchange',
+          disabled: false,
+        },
+        {
           name: `${this.$t('dashboard.menu.profile')}`,
           url: '/profile',
           disabled: false,
@@ -91,6 +104,28 @@ export default {
       ],
     }
     this.$store.dispatch('loadUserMenu', userMenu)
+
+    this.getUserBalance()
+  },
+  methods: {
+    async getUserBalance() {
+      let payload = {
+        id: this.$auth.user.id,
+      }
+      await this.$axios
+        .post('/payments/get-balance', payload, {
+          headers: {
+            Authorization: `Bearer ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((res) => {
+          this.$store.commit('balance/SET_BALANCE', res.data)
+        })
+        .catch((err) => {
+          console.log('err', err)
+        })
+    },
   },
 }
 </script>

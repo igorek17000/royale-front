@@ -1,6 +1,14 @@
 <template>
   <div
-    class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-screen flex overflow-hidden text-sm"
+    class="
+      bg-gray-100
+      dark:bg-primary dark:text-white
+      text-gray-600
+      h-screen
+      flex
+      overflow-hidden
+      text-sm
+    "
   >
     <Sidebar />
 
@@ -9,9 +17,19 @@
         <casino-sidebar title="Slots" />
         <div class="flex-grow dark:bg-primary overflow-y-auto">
           <div
-            class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-primary dark:text-white dark:border-gray-800 sticky top-0"
+            class="
+              px-4
+              pt-4
+              flex flex-col
+              w-full
+              border-b border-gray-200
+              bg-white
+              dark:bg-primary dark:text-white dark:border-gray-800
+              sticky
+              top-0
+            "
           >
-            <player />
+            <player :balance="balance" />
           </div>
           <div class="sm:p-7 p-4">
             <client-only placeholder="loading">
@@ -35,5 +53,10 @@ export default {
   components: { Sidebar, CasinoSidebar, Player, Fruits },
   middleware: 'auth',
   name: 'Slots',
+  computed: {
+    balance() {
+      return this.$store.state.balance.balance
+    },
+  },
 }
 </script>

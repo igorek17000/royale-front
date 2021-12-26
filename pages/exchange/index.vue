@@ -1,72 +1,85 @@
 <template>
   <div
-    class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex overflow-hidden text-sm mb-20 md:mb-0"
+    class="
+      bg-gray-100
+      dark:bg-primary dark:text-white
+      text-gray-600
+      h-full
+      md:h-screen
+      flex
+      overflow-hidden
+      text-sm
+      mb-20
+      md:mb-0
+    "
   >
-    <Sidebar>
-      <nuxt-link
-        class="w-12 dark:text-gray-500 flex flex-col items-center justify-center"
-        :to="localePath({ name: 'casino-slots' })"
-      >
-        <SlotIcon class="fill-current h-10" />
-        <span class="text-xs text-gray-500">Slots</span>
-      </nuxt-link>
-      <nuxt-link
-        class="w-12 dark:text-gray-500 flex flex-col items-center justify-center"
-        :to="localePath({ name: 'casino-roulette' })"
-      >
-        <roulette class="h-10 fill-current" />
-        <span class="text-xs text-gray-500">Roulette</span>
-      </nuxt-link>
-    </Sidebar>
+    <Sidebar />
     <div class="flex-grow overflow-hidden h-full flex flex-col">
-      <div class="container mx-auto md:flex">
-        <trading-vue :data="tradingVue"></trading-vue>
+      <div class="flex-grow flex overflow-x-hidden">
+        <div class="flex-grow dark:bg-primary overflow-y-auto">
+          <div
+            class="
+              px-4
+              pt-4
+              flex flex-col
+              w-full
+              border-b border-gray-200
+              bg-white
+              dark:bg-primary dark:text-white dark:border-gray-800
+              sticky
+              top-0
+            "
+          >
+            <player :balance="balance" />
+          </div>
+          <div class="p-4 w-full">
+            <div class="container mx-auto">
+              <h3
+                class="text-4xl leading-relaxed text-center py-8 font-bold"
+                v-html="$t('dashboard.exchange.trade.coins_daily')"
+              ></h3>
+              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <bitcoin-card />
+                <etherium-card />
+                <litecoin-card />
+                <cardano-card />
+                <doge-card />
+                <polkadot-card />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Sidebar from '~/components/Dashboard/Sidebar.vue'
-import Menu from '~/components/Dashboard/Menu.vue'
-import Roulette from '~/components/Icons/Roulette.vue'
-import SlotIcon from '~/components/Icons/SlotIcon.vue'
+import Sidebar from '~/components/Dashboard/Exchange/Sidebar.vue'
+import Player from '~/components/Dashboard/Player.vue'
+import BitcoinCard from '~/components/Dashboard/Exchange/LiveCoins/BitcoinCard.vue'
+import EtheriumCard from '~/components/Dashboard/Exchange/LiveCoins/EtheriumCard.vue'
+import LitecoinCard from '~/components/Dashboard/Exchange/LiveCoins/LitecoinCard.vue'
+import CardanoCard from '~/components/Dashboard/Exchange/LiveCoins/CardanoCard.vue'
+import DogeCard from '~/components/Dashboard/Exchange/LiveCoins/DogeCard.vue'
+import PolkadotCard from '~/components/Dashboard/Exchange/LiveCoins/PolkadotCard.vue'
 export default {
-  components: { Sidebar, Menu, SlotIcon, Roulette },
-  middleware: 'auth',
-  name: 'Casino',
-  data() {
-    return {
-      baseURL: this.$config.baseURL,
-      tradingVue: this.$DataCube
-        ? new this.$DataCube({
-            chart: {
-              type: 'Candles',
-              data: [
-                [1551128400000, 33, 37.1, 14, 14, 196],
-                [1551132000000, 13.7, 30, 6.6, 30, 206],
-                [1551135600000, 29.9, 33, 21.3, 21.8, 74],
-                [1551139200000, 21.7, 25.9, 18, 24, 140],
-                [1551142800000, 24.1, 24.1, 24, 24.1, 29],
-              ],
-            },
-            onchart: [
-              {
-                name: 'Setups',
-                type: 'Setups',
-                data: [[1551128400000, 1, 35]],
-                settings: {},
-              },
-            ],
-          })
-        : {},
-    }
+  components: {
+    Sidebar,
+    Player,
+    BitcoinCard,
+    EtheriumCard,
+    LitecoinCard,
+    CardanoCard,
+    DogeCard,
+    PolkadotCard,
   },
-  computed: {},
-  async asyncData({ store, $axios }) {
-    let response = await $axios.get('/games')
-    let gameList = response.data
-    await store.commit('casino/SET_GAME_LIST', gameList)
+  middleware: 'auth',
+  name: 'Exchange',
+  computed: {
+    balance() {
+      return this.$store.state.balance.balance
+    },
   },
 }
 </script>
