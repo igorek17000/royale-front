@@ -6,6 +6,7 @@
       items-center
       border-b border-gray-200
       dark:border-gray-800
+      bg-primary
     "
   >
     <div
@@ -29,7 +30,9 @@
         v-if="isLoading"
       ></div>
 
-      <div :class="[colorClass]" v-else>${{ btc }}</div>
+      <div id="coinPrice" class="font-roboto" :class="[colorClass]" v-else>
+        ${{ btc }}
+      </div>
       <p class="pl-3 text-gray-500 text-lg hidden md:block">Market Price</p>
     </div>
     <div class="ml-auto flex items-center justify-end">
@@ -37,13 +40,15 @@
         <div class="text-xs text-gray-400 dark:text-gray-400">
           {{ $t('account.balance') }}:
         </div>
-        <div class="text-gray-900 text-lg dark:text-white">
+        <div class="text-gray-900 text-lg dark:text-white font-roboto">
           ${{ parseFloat(balance).toFixed(2) }} 💰
         </div>
       </div>
       <div class="text-right pr-5">
         <div class="text-xs text-gray-400 dark:text-gray-400">Proffit:</div>
-        <div class="text-lg" :class="[profitClass]">{{ proffit }}$</div>
+        <div class="text-lg font-roboto" :class="[profitClass]">
+          {{ proffit }}$
+        </div>
       </div>
     </div>
   </div>
@@ -67,13 +72,20 @@ export default {
     let coin = this.$route.params.coin
     this.getSinglePrice(coin)
     this.ws = new WebSocket(
-      `wss://stream.binance.com/stream?streams=${coin}@trade/${coin}@ticker`
+      `wss://stream.binance.com/stream?streams=${coin}@trade/${coin}@ticker/${coin}@kline_1m`
     )
     let vm = this
     this.ws.addEventListener('message', function (event) {
       let ev = JSON.parse(event.data)
       if (ev.stream === `${coin}@trade`) {
-        console.log('ev', ev)
+        let newPush = {
+          time: ev.data.T,
+          qty: ev.data.q,
+          price: ev.data.q * ev.data.p,
+          isBuyerMaker: ev.data.m,
+        }
+        vm.$store.commit('trade/NEW_TRADE', newPush)
+
         let price = parseFloat(ev.data.p).toFixed(2)
         vm.btc = price
         if (!vm.lastPrice || vm.lastPrice === price) {
@@ -87,6 +99,18 @@ export default {
       }
       if (ev.stream === `${coin}@ticker`) {
         // console.log('evennt', ev)
+      }
+      if (ev.stream === `${coin}@kline_1m`) {
+        let kline = {
+          time: ev.data.k.t,
+          open: parseFloat(ev.data.k.o),
+          high: parseFloat(ev.data.k.h),
+          low: parseFloat(ev.data.k.l),
+          close: parseFloat(ev.data.k.c),
+          volume: parseFloat(ev.data.k.v),
+        }
+        const klineValues = Object.values(kline)
+        vm.$store.commit('trade/NEW_KLINE', klineValues)
       }
     })
   },

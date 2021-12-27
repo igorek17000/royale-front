@@ -1,30 +1,27 @@
 {
   "kind": "collectionType",
-  "collectionName": "payments",
+  "collectionName": "deposits",
   "info": {
-    "name": "balance",
+    "name": "deposit",
     "description": ""
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "started_balance": {
-      "type": "float"
+    "payment": {
+      "via": "deposits",
+      "model": "payments"
     },
-    "actual_balance": {
+    "amount": {
       "type": "float"
     },
     "user": {
       "plugin": "users-permissions",
       "model": "user"
-    },
-    "deposits": {
-      "via": "payment",
-      "collection": "deposit"
     },
     "isDeleted": {
       "type": "boolean",

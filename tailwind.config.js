@@ -19,9 +19,12 @@ module.exports = {
         'custom-red': '#D91139',
         'custom-redh': '#f91c46',
         money: '#40e094',
+        pinkMoney: 'rgb(255, 73, 106)',
+        greenMoney: 'rgb(78, 227, 157)',
       },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        roboto: ['Roboto Mono'],
       },
     },
   },

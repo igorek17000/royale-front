@@ -61,7 +61,7 @@
         <span class="text-xs text-gray-400 dark:text-gray-400"
           >{{ $t('account.balance-menu') }}:
         </span>
-        <p class="balance rounded-md text-money shadow font-bold">
+        <p class="balance rounded-md text-money shadow font-bold font-roboto">
           $ {{ parseFloat(balance).toFixed(2) }} 💰
         </p>
       </div>

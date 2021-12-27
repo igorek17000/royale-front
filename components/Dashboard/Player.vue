@@ -22,13 +22,15 @@
         <div class="text-xs text-gray-400 dark:text-gray-400">
           {{ $t('account.balance') }}:
         </div>
-        <div class="text-gray-900 text-lg dark:text-white">
+        <div class="text-gray-900 text-lg dark:text-white font-roboto">
           ${{ parseFloat(current_balance).toFixed(2) }} 💰
         </div>
       </div>
       <div class="text-right pr-5">
         <div class="text-xs text-gray-400 dark:text-gray-400">Proffit:</div>
-        <div class="text-lg" :class="[profitClass]">{{ proffit }}$</div>
+        <div class="text-lg font-roboto" :class="[profitClass]">
+          {{ proffit }}$
+        </div>
       </div>
     </div>
   </div>

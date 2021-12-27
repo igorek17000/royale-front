@@ -20,6 +20,7 @@ const mutations = {
   SET_USER(state, getData) {
     state.userMenu = getData
   },
+
   user(state, user) {
     state.auth.user = user
   },

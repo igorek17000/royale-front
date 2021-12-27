@@ -17,17 +17,19 @@
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <div class="flex-grow flex overflow-x-hidden">
         <TradeSidebar title="Exchange" />
-        <div class="w-full h-full">
+        <div class="w-full h-full bg-secondary">
           <trade-header @set-head-meta="setMeta" />
-          <div class="trade-table flex">
-            <div ref="tradeChart">
-              <client-only>
-                <trading-table />
-              </client-only>
+          <div class="trade-table block md:flex">
+            <client-only>
+              <trading-table />
+            </client-only>
+            <div class="w-full md:w-1/5 bg-primary px-4 py-6">
+              <buy-sell />
             </div>
-            <div>custom data here</div>
           </div>
-          <div class="footer-order"></div>
+          <div class="footer-order bg-secondary px-4 py-6">
+            <tabs-wrapper />
+          </div>
         </div>
       </div>
     </div>
@@ -35,30 +37,67 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Sidebar from '~/components/Dashboard/Exchange/Sidebar.vue'
 import TradingTable from '~/components/Dashboard/Exchange/Trade/TradingTable.vue'
 import TradeSidebar from '~/components/Dashboard/Exchange/Trade/TradeSidebar.vue'
 import TradeHeader from '~/components/Dashboard/Exchange/Trade/TradeHeader.vue'
+import BuySell from '~/components/Dashboard/Exchange/Trade/BuySell.vue'
+import TabsWrapper from '~/components/TabsWrapper.vue'
 
 export default {
-  components: { Sidebar, TradingTable, TradeSidebar, TradeHeader },
+  components: {
+    Sidebar,
+    TabsWrapper,
+    TradingTable,
+    TradeSidebar,
+    TradeHeader,
+    BuySell,
+  },
   middleware: 'auth',
   name: 'coin',
   head: {
     title: 'Trade | Casino Royale',
   },
   data() {
-    return {}
+    return {
+      coinPrice: null,
+      interval: null,
+    }
   },
   methods: {
     setMeta(val) {
+      this.coinPrice = val
       this.$options.head.title = `${val} | ${this.$route.params.coin} | Casino Royale`
       this.$meta().refresh()
     },
+    async getCoinPrice(val) {
+      let vm = this
+      await axios
+        .get(
+          `https://api.binance.com/api/v3/avgPrice?symbol=${val.toUpperCase()}`
+        )
+        .then((res) => {
+          let price = parseFloat(res.data.price).toFixed(2)
+          vm.$store.commit('trade/SET_COIN_PRICE', price)
+        })
+        .catch((err) => {
+          console.log('err getCoin', err)
+        })
+    },
   },
   mounted() {
-    this.$options.head.title = `${this.$route.params.coin} | Casino Royale`
+    let coin = this.$route.params.coin
+    this.$options.head.title = `${coin} | Casino Royale`
     this.$meta().refresh()
+    this.getCoinPrice(coin)
+    this.interval = setInterval(() => {
+      this.getCoinPrice(coin)
+    }, 60000)
+  },
+  beforeDestroy() {
+    this.$store.commit('trade/SET_COIN_PRICE', null)
+    clearInterval(this.interval)
   },
 }
 </script>

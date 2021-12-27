@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/deposits",
+      "handler": "deposit.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/deposits/count",
+      "handler": "deposit.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/deposits/:id",
+      "handler": "deposit.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/deposits",
+      "handler": "deposit.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/deposits/:id",
+      "handler": "deposit.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/deposits/:id",
+      "handler": "deposit.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

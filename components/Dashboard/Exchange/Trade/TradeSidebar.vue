@@ -56,30 +56,67 @@
     </div>
     <div class="space-y-4 mt-3 relative">
       <search-coin :filterCoins="filterCoins" v-if="showSearch" />
-      <div class="flex justify-between">
+      <div
+        class="
+          text-sm text-gray-400
+          tracking-wider
+          border-t border-gray-800
+          pt-2
+          mt-2
+        "
+        v-if="!showSearch"
+      >
+        Market Trades (last hour)
+      </div>
+      <div v-if="!showSearch" class="flex justify-between">
         <p class="w-16 text-gray-400 text-sm">Coin Size</p>
         <p class="w-16 text-gray-400 text-sm">Price</p>
         <p class="w-16 text-gray-400 text-sm">Time</p>
       </div>
-      <div v-if="!showSearch" class="h-96 overflow-y-auto">
+      <div v-if="!showSearch" class="coin-trades overflow-y-auto">
         <div
           class="trades flex justify-between"
           v-for="trade in tradeBook"
           :key="trade.id"
         >
           <p
-            class="w-16"
-            :class="[trade.isBuyerMaker ? 'text-money' : 'text-custom-redh']"
+            class="w-16 text-sm font-roboto pr-1"
+            :class="[trade.isBuyerMaker ? 'text-greenMoney' : 'text-pinkMoney']"
           >
             {{ parseFloat(trade.qty).toFixed(4) }}
           </p>
-          <p class="w-16 text-white">
-            {{ spentPrice(trade.price, trade.qty) }}
+          <p class="w-24 text-white text-sm font-roboto pl-1">
+            $ {{ parseFloat(trade.price).toFixed(2) }}
           </p>
-          <p class="w-16 text-gray-400">{{ timeDone(trade.time) }}</p>
+          <p class="w-16 text-gray-400 text-xs text-center">
+            {{ timeDone(trade.time) }}
+          </p>
         </div>
       </div>
-      <div class="h-48 bg-red-400 w-full z-50"></div>
+      <div v-if="!showSearch" class="w-full border-t border-gray-800 pt-6">
+        <div class="percentage flex justify-between align-middle items-center">
+          <div
+            class="bg-negative p-2 rounded-l-lg"
+            :style="{ width: negativePerc + '%' }"
+          >
+            <p class="font-bold text-white text-left">{{ negativePerc }}%</p>
+          </div>
+          <div
+            class="bg-positive p-2 rounded-r-lg"
+            :style="{ width: positivePerc + '%' }"
+          >
+            <p class="font-bold text-black text-right">{{ positivePerc }}%</p>
+          </div>
+        </div>
+        <div class="prices flex justify-between align-middle items-center pt-4">
+          <p class="font-bold font-roboto">
+            $ {{ parseFloat(negativeCap).toFixed(2) }}
+          </p>
+          <p class="font-bold font-roboto">
+            $ {{ parseFloat(positiveCap).toFixed(2) }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -97,7 +134,10 @@ export default {
       searchInput: '',
       coins: coins,
       showSearch: false,
-      tradeBook: [],
+      positiveCap: null,
+      negativeCap: null,
+      positivePerc: null,
+      negativePerc: null,
     }
   },
   computed: {
@@ -107,16 +147,15 @@ export default {
       })
       return games
     },
+    tradeBook() {
+      return this.$store.state.trade.tradeBook
+    },
   },
   mounted() {
     let coin = this.$route.params.coin
     this.getTradeBook(coin)
   },
   methods: {
-    spentPrice(price, qty) {
-      let total = price * qty
-      return parseFloat(total).toFixed(2)
-    },
     timeDone(val) {
       let unix_timestamp = val
       // Create a new JavaScript Date object based on the timestamp
@@ -141,11 +180,38 @@ export default {
           `https://api.binance.com/api/v3/trades?symbol=${val.toUpperCase()}&limit=100`
         )
         .then((res) => {
-          this.tradeBook = res.data.reverse()
+          let data = res.data.map((item) => {
+            return {
+              time: item.time,
+              qty: item.qty,
+              price: item.qty * item.price,
+              isBuyerMaker: item.isBuyerMaker,
+            }
+          })
+
+          let tradebook = data.reverse()
+          this.$store.commit('trade/SET_TRADEBOOK', tradebook)
         })
         .catch((err) => {
           console.log('err getCoin', err)
         })
+    },
+    checkFooterTotal(val) {
+      this.positiveCap = val.reduce(function (sum, record) {
+        if (record.isBuyerMaker === false) return sum + record.price
+        else return sum
+      }, 0)
+      this.negativeCap = val.reduce(function (sum, record) {
+        if (record.isBuyerMaker === true) return sum + record.price
+        else return sum
+      }, 0)
+      let total = val.reduce(function (sum, record) {
+        return sum + record.price
+      }, 0)
+      let positivePercentage = (this.positiveCap / total) * 100
+      this.positivePerc = parseFloat(positivePercentage).toFixed(2)
+      let negativePercentage = (this.negativeCap / total) * 100
+      this.negativePerc = parseFloat(negativePercentage).toFixed(2)
     },
   },
   watch: {
@@ -156,13 +222,30 @@ export default {
         this.showSearch = true
       }
     },
-    tradeBook: (val) => {
-      console.log('val', val)
+    tradeBook: function (val) {
+      this.checkFooterTotal(val)
     },
   },
   props: ['title'],
 }
 </script>
 
-<style>
+<style scoped>
+.coin-trades {
+  height: calc(100vh - 370px);
+}
+.bg-negative {
+  background: rgba(0, 0, 0, 0)
+    linear-gradient(267.73deg, rgb(255, 85, 85) 0.92%, rgb(253, 15, 130) 100%)
+    repeat scroll 0% 0%;
+}
+.bg-positive {
+  background: rgba(0, 0, 0, 0)
+    linear-gradient(
+      265.28deg,
+      rgb(78, 227, 157) 10.92%,
+      rgb(65, 175, 199) 94.87%
+    )
+    repeat scroll 0% 0%;
+}
 </style>
