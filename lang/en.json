@@ -30,7 +30,7 @@
     }
   },
   "login": {
-    "title": "Casino Royale",
+    "title": "Ace Trading Platform",
     "login": "Log in to your account"
   },
   "register": {
@@ -39,6 +39,7 @@
   },
   "account": {
     "balance": "Account balance",
-    "balance-menu": "Balance"
+    "balance-menu": "Balance",
+    "coin-balance": "Coin Balance"
   }
 }

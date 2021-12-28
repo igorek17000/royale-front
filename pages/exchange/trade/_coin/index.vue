@@ -24,11 +24,11 @@
               <trading-table />
             </client-only>
             <div class="w-full md:w-1/5 bg-primary px-4 py-6">
-              <buy-sell />
+              <buy-sell @reload-footer="reloadF = !reloadF" />
             </div>
           </div>
-          <div class="footer-order bg-secondary px-4 py-6">
-            <tabs-wrapper />
+          <div class="footer-order bg-secondary">
+            <tabs-wrapper :reloadFoot="reloadF" />
           </div>
         </div>
       </div>
@@ -57,18 +57,19 @@ export default {
   middleware: 'auth',
   name: 'coin',
   head: {
-    title: 'Trade | Casino Royale',
+    title: 'Trade | Ace Trading Platform',
   },
   data() {
     return {
       coinPrice: null,
       interval: null,
+      reloadF: false,
     }
   },
   methods: {
     setMeta(val) {
       this.coinPrice = val
-      this.$options.head.title = `${val} | ${this.$route.params.coin} | Casino Royale`
+      this.$options.head.title = `${val} | ${this.$route.params.coin} | Ace Trading Platform`
       this.$meta().refresh()
     },
     async getCoinPrice(val) {
@@ -88,7 +89,7 @@ export default {
   },
   mounted() {
     let coin = this.$route.params.coin
-    this.$options.head.title = `${coin} | Casino Royale`
+    this.$options.head.title = `${coin} | Ace Trading Platform`
     this.$meta().refresh()
     this.getCoinPrice(coin)
     this.interval = setInterval(() => {

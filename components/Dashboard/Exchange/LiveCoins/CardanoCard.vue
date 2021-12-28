@@ -52,7 +52,7 @@
     "
     v-else
   >
-    <div class="w-12 h-12">
+    <div class="w-8 h-8 md:w-12 md:h-12">
       <img
         class="w-auto h-auto object-cover bg-white rounded-full"
         src="~/assets/logo/Cardano.jpg"
@@ -62,7 +62,10 @@
     <div class="body flex-auto">
       <h4 class="text-2xl pb-3 border-b border-gray-300">Cardano</h4>
 
-      <div class="price pt-3 text-xl font-bold text-money" v-if="coin">
+      <div
+        class="price pt-3 text-base md:text-xl font-bold text-money"
+        v-if="coin"
+      >
         $ {{ coin }}
       </div>
     </div>

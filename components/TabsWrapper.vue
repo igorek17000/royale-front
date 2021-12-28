@@ -1,122 +1,83 @@
 <template>
   <div class="flex flex-wrap">
     <div class="w-full">
-      <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
-        <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-          <a
+      <ul class="flex mb-0 list-none gap-4">
+        <li class="text-center">
+          <button
             class="
-              text-xs
-              font-bold
+              tracking-wider
               uppercase
-              px-5
-              py-3
-              shadow-lg
-              rounded
-              block
-              leading-normal
+              focus:outline-none
+              text-base
+              border-b border-transparent
+              px-2
+              py-4
             "
-            v-on:click="toggleTabs(1)"
-            v-bind:class="{
-              'text-pink-600 bg-white': openTab !== 1,
-              'text-white bg-pink-600': openTab === 1,
+            @click="toggleTabs(1)"
+            :class="{
+              'text-gray-500 ': openTab !== 1,
+              'text-white  border-money': openTab === 1,
             }"
           >
-            Profile
-          </a>
+            Open Orders
+          </button>
         </li>
-        <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-          <a
+        <li class="text-center">
+          <button
             class="
-              text-xs
-              font-bold
+              tracking-wider
               uppercase
-              px-5
-              py-3
-              shadow-lg
-              rounded
-              block
-              leading-normal
+              focus:outline-none
+              text-base
+              border-b border-transparent
+              px-2
+              py-4
             "
-            v-on:click="toggleTabs(2)"
-            v-bind:class="{
-              'text-pink-600 bg-white': openTab !== 2,
-              'text-white bg-pink-600': openTab === 2,
+            @click="toggleTabs(2)"
+            :class="{
+              'text-gray-500 ': openTab !== 2,
+              'text-white  border-money': openTab === 2,
             }"
           >
-            Settings
-          </a>
+            Closed Order History
+          </button>
         </li>
-        <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-          <a
+        <li class="text-center">
+          <button
             class="
-              text-xs
-              font-bold
+              tracking-wider
               uppercase
-              px-5
-              py-3
-              shadow-lg
-              rounded
-              block
-              leading-normal
+              focus:outline-none
+              text-base
+              border-b border-transparent
+              px-2
+              py-4
             "
-            v-on:click="toggleTabs(3)"
-            v-bind:class="{
-              'text-pink-600 bg-white': openTab !== 3,
-              'text-white bg-pink-600': openTab === 3,
+            @click="toggleTabs(3)"
+            :class="{
+              'text-gray-500 ': openTab !== 3,
+              'text-white  border-money': openTab === 3,
             }"
           >
-            Options
-          </a>
+            Deposits
+          </button>
         </li>
       </ul>
-      <div
-        class="
-          relative
-          flex flex-col
-          min-w-0
-          break-words
-          bg-white
-          w-full
-          mb-6
-          shadow-lg
-          rounded
-        "
-      >
-        <div class="px-4 py-5 flex-auto">
-          <div class="tab-content tab-space">
-            <div v-bind:class="{ hidden: openTab !== 1, block: openTab === 1 }">
-              <p>
-                Collaboratively administrate empowered markets via plug-and-play
-                networks. Dynamically procrastinate B2C users after installed
-                base benefits.
-                <br />
-                <br />
-                Dramatically visualize customer directed convergence without
-                revolutionary ROI.
-              </p>
+      <div class="relative flex flex-col break-words w-full">
+        <div class="tab-content tab-space">
+          <div
+            class="px-3 py-3 h-56 overflow-y-auto"
+            :class="{ hidden: openTab !== 2, block: openTab === 2 }"
+          >
+            <div class="flex items-center justify-center">
+              <order-table :orders="orders" />
             </div>
-            <div v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }">
-              <p>
-                Completely synergize resource taxing relationships via premier
-                niche markets. Professionally cultivate one-to-one customer
-                service with robust ideas.
-                <br />
-                <br />
-                Dynamically innovate resource-leveling customer service for
-                state of the art customer service.
-              </p>
-            </div>
-            <div v-bind:class="{ hidden: openTab !== 3, block: openTab === 3 }">
-              <p>
-                Efficiently unleash cross-media information without cross-media
-                value. Quickly maximize timely deliverables for real-time
-                schemas.
-                <br />
-                <br />
-                Dramatically maintain clicks-and-mortar solutions without
-                functional solutions.
-              </p>
-            </div>
+          </div>
+          <div
+            class="px-3 py-3 h-56 overflow-y-auto"
+            :class="{ hidden: openTab !== 3, block: openTab === 3 }"
+          >
+            <deposits-table :deposits="deposits" />
           </div>
         </div>
       </div>
@@ -125,17 +86,105 @@
 </template>
 
 <script>
+import OrderTable from '@/components/Dashboard/Exchange/Trade/OrderTable.vue'
+import DepositsTable from '@/components/Dashboard/Exchange/Trade/DepositsTable.vue'
 export default {
   name: 'TabsWrapper',
+  components: { OrderTable, DepositsTable },
   data() {
     return {
       openTab: 1,
+      deposits: [],
+      orders: [],
+      coin: null,
     }
+  },
+  props: ['reloadFoot'],
+  mounted() {
+    let coin = this.$route.params.coin
+    this.coin = coin.replace('usdt', '')
+    this.getOrders()
   },
   methods: {
     toggleTabs: function (tabNumber) {
       this.openTab = tabNumber
     },
+    async getDeposits() {
+      await this.$axios
+        .get('/deposits', {
+          params: {
+            'user.id': this.$auth.user.id,
+          },
+          headers: {
+            Authorization: `Bearer ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((res) => {
+          this.deposits = res.data
+        })
+        .catch((err) => {
+          console.log('err', err)
+        })
+    },
+    async getOrders() {
+      await this.$axios
+        .get('/orders', {
+          params: {
+            'user.id': this.$auth.user.id,
+            coin: this.coin,
+          },
+          headers: {
+            Authorization: `Bearer ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((res) => {
+          this.orders = res.data
+        })
+        .catch((err) => {
+          console.log('err', err)
+        })
+    },
+  },
+  watch: {
+    reloadFoot: function (val) {
+      if (this.openTab === 1) {
+        this.getOrders()
+      }
+    },
+    openTab: {
+      handler(val) {
+        if (val === 1) {
+          // this.getOrders()
+        }
+        if (val === 2) {
+          this.getOrders()
+        }
+        if (val === 3) {
+          this.getDeposits()
+        }
+      },
+    },
   },
 }
 </script>
+<style scoped>
+@media (min-width: 640px) {
+  table {
+    display: inline-table !important;
+  }
+
+  thead tr:not(:first-child) {
+    display: none;
+  }
+}
+
+td:not(:last-child) {
+  border-bottom: 0;
+}
+
+th:not(:last-child) {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+</style>

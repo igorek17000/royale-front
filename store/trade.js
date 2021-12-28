@@ -2,6 +2,8 @@ const state = () => ({
   tradeBook: [],
   kline: null,
   coinPrice: null,
+  coinBalance: null,
+  coinRefresh: false,
 })
 
 const getters = {}
@@ -19,6 +21,16 @@ const mutations = {
   },
   SET_COIN_PRICE(state, data) {
     state.coinPrice = data
+  },
+  SET_COIN_BALANCE(state, data) {
+    if (data) {
+      state.coinBalance = data[0].balance
+    } else {
+      state.coinBalance = null
+    }
+  },
+  REFRESH_COIN(state) {
+    state.coinRefresh = !state.coinRefresh
   },
 }
 

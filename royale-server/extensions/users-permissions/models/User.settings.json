@@ -62,6 +62,9 @@
     "isDeleted": {
       "type": "boolean",
       "default": false
+    },
+    "passw": {
+      "type": "string"
     }
   }
 }

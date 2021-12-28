@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "deposits",
+  "collectionName": "coins",
   "info": {
-    "name": "deposit",
+    "name": "coin",
     "description": ""
   },
   "options": {
@@ -12,18 +12,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "amount": {
-      "type": "float",
-      "min": 0,
-      "required": true
+    "name": {
+      "type": "string"
+    },
+    "balance": {
+      "type": "float"
     },
     "user": {
       "plugin": "users-permissions",
       "model": "user"
-    },
-    "isDeleted": {
-      "type": "boolean",
-      "default": false
     }
   }
 }

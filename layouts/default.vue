@@ -66,11 +66,11 @@ export default {
           url: '/poker',
           disabled: false,
         },
-        {
-          name: `${this.$t('dashboard.menu.bet')}`,
-          url: '/bet',
-          disabled: true,
-        },
+        // {
+        //   name: `${this.$t('dashboard.menu.bet')}`,
+        //   url: '/bet',
+        //   disabled: true,
+        // },
         {
           name: `${this.$t('dashboard.menu.exchange')}`,
           url: '/exchange',
@@ -106,6 +106,16 @@ export default {
     this.$store.dispatch('loadUserMenu', userMenu)
 
     this.getUserBalance()
+  },
+  computed: {
+    refreshBalance() {
+      return this.$store.state.refreshBalance
+    },
+  },
+  watch: {
+    refreshBalance: function (val) {
+      this.getUserBalance()
+    },
   },
   methods: {
     async getUserBalance() {

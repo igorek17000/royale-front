@@ -13,18 +13,17 @@
   "pluginOptions": {},
   "attributes": {
     "started_balance": {
-      "type": "float"
+      "type": "float",
+      "default": 0,
+      "min": 0
     },
     "actual_balance": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "user": {
       "plugin": "users-permissions",
       "model": "user"
-    },
-    "deposits": {
-      "via": "payment",
-      "collection": "deposit"
     },
     "isDeleted": {
       "type": "boolean",

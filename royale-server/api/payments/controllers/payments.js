@@ -12,7 +12,7 @@ module.exports = {
     if (!entity) return
 
     if (entity.user.id !== user.id) {
-      return ctx.unauthorized('You are not the owner of this note')
+      return ctx.unauthorized('You are not the owner!')
     } else {
       if (entity.user) delete entity.user
       if (entity.id) delete entity.id

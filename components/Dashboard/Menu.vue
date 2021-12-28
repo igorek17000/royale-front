@@ -19,13 +19,14 @@
         justify-center
         mr-3
         md:mr-5 md:border-r md:border-secondary
-        pt-4
         bg-primary
         md:bg-secondary
+        sticky
+        top-0
       "
     >
       <nuxt-link :to="localePath({ name: 'casino' })">
-        <img class="h-auto w-14" src="~/assets/logo.png" alt="Logo" />
+        <img class="h-auto w-14 py-2" src="~/assets/logo.png" alt="Logo" />
       </nuxt-link>
     </div>
     <div
@@ -65,9 +66,9 @@
           $ {{ parseFloat(balance).toFixed(2) }} 💰
         </p>
       </div>
-      <button class="h-8 px-3 rounded-md shadow text-white bg-blue-500">
+      <!-- <button class="h-8 px-3 rounded-md shadow text-white bg-blue-500">
         Deposit
-      </button>
+      </button> -->
 
       <div class="hidden md:flex relative">
         <button

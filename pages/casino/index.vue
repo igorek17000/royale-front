@@ -18,7 +18,7 @@
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <section class="hero-welcome text-center text-gray-200 text-3xl my-4">
         <h2 class="text-lg md:text-xl">
-          Welcome {{ this.$auth.user.username }} to Casino Royale
+          Welcome {{ this.$auth.user.username }} to Ace Trading Platform
         </h2>
         <h4 class="text-base md:text-lg">
           Select a game that you want to play!

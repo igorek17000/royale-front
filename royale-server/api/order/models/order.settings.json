@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "name": "order",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "coin_price": {
+      "type": "float",
+      "required": true
+    },
+    "trade_type": {
+      "type": "enumeration",
+      "enum": [
+        "buy",
+        "sell"
+      ],
+      "required": true
+    },
+    "amount": {
+      "type": "float",
+      "required": true
+    },
+    "amount_coin": {
+      "type": "string"
+    },
+    "return_amount": {
+      "type": "float"
+    },
+    "return_coin": {
+      "type": "string"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "coin": {
+      "type": "string"
+    },
+    "isOpen": {
+      "type": "boolean",
+      "default": true
+    },
+    "proffit": {
+      "type": "float"
+    }
+  }
+}

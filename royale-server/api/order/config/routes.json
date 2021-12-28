@@ -2,56 +2,56 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/deposits",
-      "handler": "deposit.find",
+      "path": "/orders",
+      "handler": "order.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/deposits/count",
-      "handler": "deposit.count",
+      "path": "/orders/count",
+      "handler": "order.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/deposits/:id",
-      "handler": "deposit.findOne",
+      "path": "/orders/:id",
+      "handler": "order.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/deposits",
-      "handler": "deposit.create",
+      "path": "/orders",
+      "handler": "order.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/deposits/new",
-      "handler": "deposit.newDeposit",
+      "path": "/orders/new",
+      "handler": "order.newOrder",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/deposits/:id",
-      "handler": "deposit.update",
+      "path": "/orders/:id",
+      "handler": "order.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/deposits/:id",
-      "handler": "deposit.delete",
+      "path": "/orders/:id",
+      "handler": "order.delete",
       "config": {
         "policies": []
       }

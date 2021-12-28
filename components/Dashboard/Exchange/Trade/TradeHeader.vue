@@ -36,15 +36,24 @@
       <p class="pl-3 text-gray-500 text-lg hidden md:block">Market Price</p>
     </div>
     <div class="ml-auto flex items-center justify-end">
+      <div class="text-right pr-5">
+        <div class="text-xs text-gray-400 dark:text-gray-400 uppercase">
+          {{ coin }} :
+        </div>
+        <div class="font-roboto text-greenMoney" v-if="coinBalance">
+          {{ parseFloat(coinBalance).toFixed(6) }}
+        </div>
+        <div class="text-white font-roboto" v-else>0.00</div>
+      </div>
       <div class="text-right pr-5 hidden md:block">
         <div class="text-xs text-gray-400 dark:text-gray-400">
           {{ $t('account.balance') }}:
         </div>
-        <div class="text-gray-900 text-lg dark:text-white font-roboto">
-          ${{ parseFloat(balance).toFixed(2) }} 💰
+        <div class="text-white font-roboto">
+          ${{ parseFloat(balance).toFixed(4) }} 💰
         </div>
       </div>
-      <div class="text-right pr-5">
+      <div class="text-right pr-5" v-if="proffit > 0">
         <div class="text-xs text-gray-400 dark:text-gray-400">Proffit:</div>
         <div class="text-lg font-roboto" :class="[profitClass]">
           {{ proffit }}$
@@ -66,11 +75,14 @@ export default {
       colorClass: 'text-white',
       isLoading: true,
       profitClass: 'text-white',
+      coin: null,
     }
   },
   mounted() {
     let coin = this.$route.params.coin
+    this.coin = coin.replace('usdt', '')
     this.getSinglePrice(coin)
+    this.getCoinBalance(this.coin)
     this.ws = new WebSocket(
       `wss://stream.binance.com/stream?streams=${coin}@trade/${coin}@ticker/${coin}@kline_1m`
     )
@@ -128,13 +140,39 @@ export default {
           console.log('err getCoin', err)
         })
     },
+    async getCoinBalance(val) {
+      await this.$axios
+        .get(`/coins`, {
+          params: {
+            name: val,
+            'user.id': this.$auth.user.id,
+          },
+          headers: {
+            Authorization: `Bearer ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((res) => {
+          let response = res.data
+          if (response.length !== 0) {
+            this.$store.commit('trade/SET_COIN_BALANCE', response)
+          }
+        })
+        .catch((err) => {
+          console.log('err SET_COIN_BALANCE', err)
+        })
+    },
   },
   beforeDestroy() {
+    this.$store.commit('trade/SET_COIN_BALANCE', null)
     this.ws.close()
   },
   watch: {
     btc: function (val) {
       this.$emit('set-head-meta', val)
+    },
+    coinRefresh: function (val) {
+      this.getCoinBalance(this.coin)
     },
   },
   computed: {
@@ -143,6 +181,12 @@ export default {
     },
     started_balance() {
       return this.$store.state.balance.balance.started_balance
+    },
+    coinBalance() {
+      return this.$store.state.trade.coinBalance
+    },
+    coinRefresh() {
+      return this.$store.state.trade.coinRefresh
     },
     proffit() {
       let proffit = this.balance - this.started_balance

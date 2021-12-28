@@ -3,6 +3,7 @@ const state = () => ({
   menuDashboard: [],
   footerMenu: [],
   userMenu: [],
+  refreshBalance: false,
 })
 
 const getters = {}
@@ -19,6 +20,9 @@ const mutations = {
   },
   SET_USER(state, getData) {
     state.userMenu = getData
+  },
+  REFRESH_BALANCE(state) {
+    state.refreshBalance = !state.refreshBalance
   },
 
   user(state, user) {
