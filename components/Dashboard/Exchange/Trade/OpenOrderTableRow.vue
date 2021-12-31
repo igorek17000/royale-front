@@ -1,12 +1,28 @@
 <template>
-  <div class="flex w-full">
-    <div class="uppercase p-3 relative w-1/6">
+  <div class="flex w-full flex-wrap md:flex-nowrap">
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+    >
       <span class="px-2 md:hidden">Order ID:</span>{{ order.id }}
     </div>
-    <div class="uppercase p-3 relative w-1/6">
-      <span class="px-2 md:hidden">Coin Price:</span>{{ order.coin_price }} USD
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+    >
+      <span class="px-2 md:hidden">Price:</span>{{ order.coin_price }} USD
     </div>
-    <div class="p-3 truncate uppercase relative w-1/6">
+    <div
+      class="
+        p-1
+        md:p-3
+        truncate
+        uppercase
+        relative
+        w-1/2
+        md:w-1/6
+        border
+        md:border-none
+      "
+    >
       <span class="px-2 md:hidden">Trade Type:</span>
       <span
         :class="[
@@ -16,21 +32,38 @@
         {{ order.trade_type }}
       </span>
     </div>
-    <div class="uppercase p-3 relative w-1/6">
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+    >
       <span class="px-2 md:hidden">Amount:</span>
       {{ parseFloat(order.amount).toFixed(2) }}
       USD
     </div>
 
-    <div class="uppercase p-3 relative w-1/6">
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+    >
       <span class="px-2 md:hidden">Date:</span>
       {{ order.created_at.split('T')[0] }}
     </div>
-    <div class="uppercase p-3 relative w-1/6" v-if="proffit">
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+    >
       <span class="px-2 md:hidden">Proffit:</span>
       {{ proffit }} USD
     </div>
-    <div class="uppercase p-3 relative w-1/6">
+    <div
+      class="
+        uppercase
+        p-1
+        md:p-3
+        relative
+        w-full
+        md:w-1/6
+        border
+        md:border-none
+      "
+    >
       <span class="px-2 md:hidden">Action:</span>
       <button
         class="
@@ -41,7 +74,6 @@
           focus:outline-none
           hover:bg-custom-red
         "
-        v-if="proffit"
         @click="closeTrade(order)"
       >
         Close Trade

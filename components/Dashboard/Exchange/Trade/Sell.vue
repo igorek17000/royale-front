@@ -81,10 +81,10 @@
         <input
           type="number"
           min="0"
-          step="1"
-          class="bg-transparent w-6"
+          step="0.01"
+          class="bg-transparent w-12"
           v-model="buyLoot"
-        />%
+        />
       </p>
       <input
         type="range"
