@@ -71,7 +71,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://localhost:1337',
+    baseURL: 'https://api.acetrader.co.uk',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -120,7 +120,7 @@ export default {
     },
   },
   publicRuntimeConfig: {
-    baseURL: 'http://localhost:1337',
+    baseURL: 'https://api.acetrader.co.uk',
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

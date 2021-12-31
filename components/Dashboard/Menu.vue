@@ -26,7 +26,7 @@
       "
     >
       <nuxt-link :to="localePath({ name: 'exchange' })">
-        <img class="h-auto w-14 py-2" src="~/assets/logo.png" alt="Logo" />
+        <img class="h-auto w-14 py-2" src="~/assets/Logo.png" alt="Logo" />
       </nuxt-link>
     </div>
     <div
