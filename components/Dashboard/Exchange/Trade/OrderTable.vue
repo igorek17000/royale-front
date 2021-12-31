@@ -23,10 +23,11 @@
           sm:mb-0
         "
       >
+        <th class="p-3 text-left">Order ID</th>
         <th class="p-3 text-left">Coin Price</th>
         <th class="p-3 text-left">Trade Type</th>
         <th class="p-3 text-left">Amount</th>
-        <th class="p-3 text-left">Return</th>
+        <th class="p-3 text-left">Proffit</th>
         <th class="p-3 text-left">Date</th>
       </tr>
     </thead>
@@ -45,6 +46,9 @@
         :key="order.id"
       >
         <td class="uppercase p-3 relative">
+          <span class="px-2 md:hidden">Order ID:</span>{{ order.id }}
+        </td>
+        <td class="uppercase p-3 relative">
           <span class="px-2 md:hidden">Coin Price:</span
           >{{ order.coin_price }} USD
         </td>
@@ -62,13 +66,14 @@
         </td>
         <td class="uppercase p-3 cursor-pointer relative">
           <span class="px-2 md:hidden">Amount:</span>
-          {{ parseFloat(order.amount).toFixed(4) }}
-          {{ order.amount_coin }}
+          {{ parseFloat(order.amount).toFixed(2) }}
+          USD
         </td>
+
         <td class="uppercase p-3 cursor-pointer relative">
-          <span class="px-2 md:hidden">Return:</span>
-          {{ parseFloat(order.return_amount).toFixed(4) }}
-          {{ order.return_coin }}
+          <span class="px-2 md:hidden">Proffit:</span>
+          {{ parseFloat(order.proffit).toFixed(2) }}
+          USD
         </td>
         <td class="uppercase p-3 relative">
           <span class="px-2 md:hidden">Date:</span>

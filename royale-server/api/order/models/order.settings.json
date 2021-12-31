@@ -13,7 +13,7 @@
   "pluginOptions": {},
   "attributes": {
     "coin_price": {
-      "type": "float",
+      "type": "decimal",
       "required": true
     },
     "trade_type": {
@@ -25,19 +25,11 @@
       "required": true
     },
     "amount": {
-      "type": "float",
+      "type": "decimal",
       "required": true
     },
-    "amount_coin": {
-      "type": "string"
-    },
-    "return_amount": {
-      "type": "float"
-    },
-    "return_coin": {
-      "type": "string"
-    },
     "user": {
+      "autoPopulate": false,
       "plugin": "users-permissions",
       "model": "user"
     },
@@ -49,7 +41,10 @@
       "default": true
     },
     "proffit": {
-      "type": "float"
+      "type": "decimal"
+    },
+    "buyLoot": {
+      "type": "decimal"
     }
   }
 }

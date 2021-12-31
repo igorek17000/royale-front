@@ -21,6 +21,8 @@ module.exports = {
         money: '#40e094',
         pinkMoney: 'rgb(255, 73, 106)',
         greenMoney: 'rgb(78, 227, 157)',
+        greenBorder: 'rgba(39,165,154,.38)',
+        pinkBorder: 'rgba(239,83,79,.38)',
       },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],

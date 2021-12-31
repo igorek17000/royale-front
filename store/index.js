@@ -4,6 +4,7 @@ const state = () => ({
   footerMenu: [],
   userMenu: [],
   refreshBalance: false,
+  notification: null,
 })
 
 const getters = {}
@@ -23,6 +24,9 @@ const mutations = {
   },
   REFRESH_BALANCE(state) {
     state.refreshBalance = !state.refreshBalance
+  },
+  OPEN_NOTIFICATION(state, data) {
+    state.notification = data
   },
 
   user(state, user) {

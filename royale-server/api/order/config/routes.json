@@ -41,6 +41,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/orders/close",
+      "handler": "order.closeOrder",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/orders/:id",
       "handler": "order.update",

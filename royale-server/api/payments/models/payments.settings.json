@@ -13,12 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "started_balance": {
-      "type": "float",
+      "type": "decimal",
       "default": 0,
       "min": 0
     },
     "actual_balance": {
-      "type": "float",
+      "type": "decimal",
       "default": 0
     },
     "user": {

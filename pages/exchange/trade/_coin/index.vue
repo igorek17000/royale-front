@@ -28,7 +28,10 @@
             </div>
           </div>
           <div class="footer-order bg-secondary">
-            <tabs-wrapper :reloadFoot="reloadF" />
+            <tabs-wrapper
+              :reloadFoot="reloadF"
+              @reload-footer="reloadF = !reloadF"
+            />
           </div>
         </div>
       </div>

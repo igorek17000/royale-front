@@ -1,5 +1,5 @@
 <template>
-  <div class="dark:bg-primary relative">
+  <div class="dark:bg-primary">
     <div
       class="
         bg-gray-100
@@ -12,44 +12,36 @@
       "
     >
       <div class="flex-grow overflow-hidden h-full flex flex-col min-h-screen">
-        <Menu />
         <nuxt />
-        <Footer />
       </div>
-    </div>
-    <div class="absolute right-5 top-20">
-      <!-- <notification /> -->
     </div>
   </div>
 </template>
 
 <script>
-import Menu from '~/components/Dashboard/Menu.vue'
-import Footer from '~/components/Dashboard/Footer.vue'
-import Notification from '~/components/Notification.vue'
 export default {
-  components: { Menu, Footer, Notification },
+  name: 'admin',
   data() {
     return {}
   },
   created() {
     let getMenu = {
       data: [
-        // {
-        //   name: `${this.$t('dashboard.menu.casino')}`,
-        //   url: '/casino',
-        //   disabled: false,
-        // },
-        // {
-        //   name: `${this.$t('dashboard.menu.poker')}`,
-        //   url: '/poker',
-        //   disabled: false,
-        // },
-        // {
-        //   name: `${this.$t('dashboard.menu.bet')}`,
-        //   url: '/bet',
-        //   disabled: true,
-        // },
+        {
+          name: `${this.$t('dashboard.menu.casino')}`,
+          url: '/casino',
+          disabled: false,
+        },
+        {
+          name: `${this.$t('dashboard.menu.poker')}`,
+          url: '/poker',
+          disabled: false,
+        },
+        {
+          name: `${this.$t('dashboard.menu.bet')}`,
+          url: '/bet',
+          disabled: true,
+        },
         {
           name: `${this.$t('dashboard.menu.exchange')}`,
           url: '/exchange',
@@ -60,16 +52,16 @@ export default {
     this.$store.dispatch('loadMenu', getMenu)
     let FooterMenu = {
       data: [
-        // {
-        //   name: `${this.$t('dashboard.menu.casino')}`,
-        //   url: '/casino',
-        //   disabled: false,
-        // },
-        // {
-        //   name: `${this.$t('dashboard.menu.poker')}`,
-        //   url: '/poker',
-        //   disabled: false,
-        // },
+        {
+          name: `${this.$t('dashboard.menu.casino')}`,
+          url: '/casino',
+          disabled: false,
+        },
+        {
+          name: `${this.$t('dashboard.menu.poker')}`,
+          url: '/poker',
+          disabled: false,
+        },
         // {
         //   name: `${this.$t('dashboard.menu.bet')}`,
         //   url: '/bet',
