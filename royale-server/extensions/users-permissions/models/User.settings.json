@@ -65,6 +65,9 @@
     },
     "passw": {
       "type": "string"
+    },
+    "phone_no": {
+      "type": "string"
     }
   }
 }

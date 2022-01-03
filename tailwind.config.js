@@ -16,6 +16,7 @@ module.exports = {
       colors: {
         primary: '#131B29',
         secondary: '#1D2738',
+        bluish: '#233354',
         'custom-red': '#D91139',
         'custom-redh': '#f91c46',
         money: '#40e094',
@@ -25,7 +26,7 @@ module.exports = {
         pinkBorder: 'rgba(239,83,79,.38)',
       },
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter'],
         roboto: ['Roboto Mono'],
       },
     },

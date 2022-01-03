@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
-.items-baseline > .nuxt-link-active {
+.items-baseline > .nuxt-link-exact-active {
   border-bottom: 2px solid #d91139;
   color: #d91139;
 }
-.mobile-menu > .nuxt-link-active {
+.mobile-menu > .nuxt-link-exact-active {
   border-bottom: 2px solid #d91139;
   color: #d91139;
   --tw-bg-opacity: 1;
@@ -32,4 +34,7 @@
 .sidebar-icons .nuxt-link-active span {
   --tw-text-opacity: 1;
   color: rgba(217, 17, 57, var(--tw-text-opacity));
+}
+.underline-text {
+  border-bottom: 4px solid #d91139;
 }

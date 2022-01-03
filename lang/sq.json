@@ -5,8 +5,12 @@
     "faq": "Pyetje",
     "buttons": {
       "register": "Regjistrohu",
-      "login": "Login"
-    }
+      "login": "Login",
+      "bonus": "Bonusi i mirëseardhjes",
+      "read-more": "Lexo më shumë",
+      "try-now": "Provo tani"
+    },
+    "guidance": "Udhëzues"
   },
   "dashboard": {
     "menu": {

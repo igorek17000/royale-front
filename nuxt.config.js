@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Ace Trading Platform',
+    title: 'Ace Trading Platform | All-in-One Trade Platform',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -71,7 +71,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://api.acetrader.co.uk',
+    // baseURL: 'https://api.acetrader.co.uk',
+    baseURL: 'http://localhost:1337',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -120,7 +121,8 @@ export default {
     },
   },
   publicRuntimeConfig: {
-    baseURL: 'https://api.acetrader.co.uk',
+    // baseURL: 'https://api.acetrader.co.uk',
+    baseURL: 'http://localhost:1337',
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

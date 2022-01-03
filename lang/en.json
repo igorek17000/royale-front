@@ -5,8 +5,12 @@
     "faq": "FAQs",
     "buttons": {
       "register": "Register",
-      "login": "Login"
-    }
+      "login": "Login",
+      "bonus": "Welcome Bonus",
+      "read-more": "Read More",
+      "try-now": "Try Now"
+    },
+    "guidance": "Guidance"
   },
   "dashboard": {
     "menu": {

@@ -28,6 +28,10 @@ export default {
           url: '/bonus',
         },
         {
+          name: `${this.$t('menu.guidance')}`,
+          url: '/guidance',
+        },
+        {
           name: `${this.$t('menu.faq')}`,
           url: '/faq',
         },

@@ -1,19 +1,30 @@
 <template>
-  <nav class="bg-gray-800">
+  <nav class="bg-white shadow-sm fixed top-0 w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <div class="flex-shrink-0">
+        <a href="/" class="flex-shrink-0 flex items-center">
           <img
-            class="h-8 w-8"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-400.svg"
-            alt="Workflow logo"
+            class="h-12 w-12"
+            src="~/assets/Logo.png"
+            alt="Ace Trader Platform"
           />
-        </div>
+          <span class="pl-2 text-sm font-bold uppercase text-primary"
+            >Ace Trading</span
+          >
+        </a>
         <div class="flex items-center">
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline">
               <nuxt-link
-                class="ml-4 px-3 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                class="
+                  ml-4
+                  px-3
+                  py-4
+                  text-lg text-primary
+                  hover:text-custom-red
+                  focus:outline-none
+                  font-bold
+                "
                 v-for="menus in menu.data"
                 :key="menus.name"
                 :to="localePath(`${menus.url}`)"
@@ -24,13 +35,38 @@
         </div>
         <div class="ml-10 hidden md:flex items-center">
           <button
-            class="rounded-lg bg-custom-red text-white px-4 py-3 font-semibold text-md leading-tight shadow-md hover:bg-custom-redh ml-4"
+            class="
+              rounded-lg
+              bg-custom-red
+              text-white
+              px-4
+              py-3
+              font-semibold
+              text-md
+              leading-tight
+              shadow-md
+              hover:bg-custom-redh
+              ml-4
+            "
             @click="openRegister"
           >
             {{ $t('menu.buttons.register') }}
           </button>
           <button
-            class="rounded-lg bg-transparent text-custom-red px-4 py-3 font-semibold text-md leading-tight shadow-md hover:bg-white ml-4 border border-custom-red"
+            class="
+              rounded-lg
+              bg-transparent
+              text-custom-red
+              px-4
+              py-3
+              font-semibold
+              text-md
+              leading-tight
+              shadow-md
+              hover:bg-white
+              ml-4
+              border border-custom-red
+            "
             @click="openLogin"
           >
             {{ $t('menu.buttons.login') }}
@@ -44,7 +80,16 @@
           <!-- Mobile menu button -->
           <button
             @click="toggle"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
+            class="
+              inline-flex
+              items-center
+              justify-center
+              p-2
+              rounded-md
+              text-gray-400
+              hover:text-white hover:bg-gray-700
+              focus:outline-none focus:bg-gray-700 focus:text-white
+            "
           >
             <svg
               :class="[isOpen ? 'hidden' : 'block', 'h-6 w-6']"

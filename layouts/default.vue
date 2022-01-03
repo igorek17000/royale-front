@@ -1,5 +1,5 @@
 <template>
-  <div class="dark:bg-primary relative">
+  <div class="dark:bg-primary relative font-sans">
     <div
       class="
         bg-gray-100
