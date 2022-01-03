@@ -18,7 +18,9 @@
       "poker": "Poker",
       "bet": "Bet",
       "exchange": "Exchange",
-      "profile": "Profile"
+      "profile": "Profile",
+      "forex": "Forex",
+      "news": "News"
     },
     "user-menu": {
       "profile": "Profile",
