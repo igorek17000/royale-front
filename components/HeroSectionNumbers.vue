@@ -81,9 +81,6 @@ export default {
 </script>
 
 <style scoped>
-.h-custom-hero {
-  height: calc(100vh - 80px);
-}
 .hero-image {
   background-image: url('~assets/imgs/hero.svg');
   background-size: contain;

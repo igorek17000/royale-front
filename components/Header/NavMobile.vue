@@ -2,7 +2,7 @@
   <div :class="[isOpen ? '' : 'hidden', 'md:hidden']">
     <div class="px-2 pt-2 pb-3 sm:px-3 mobile-menu">
       <nuxt-link
-        class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+        class="mt-1 block px-3 py-2 text-base font-medium text-gray-900"
         v-for="menus in menu.data"
         :key="menus.name"
         :to="localePath(`${menus.url}`)"
@@ -11,17 +11,18 @@
     </div>
     <div class="pt-4 pb-3 border-t border-gray-700">
       <div class="mt-3 px-2">
-        <a
-          href="#"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+        <button
+          class="mt-1 block px-3 py-2 text-base font-medium text-gray-900"
+          @click="$nuxt.$emit('open-register')"
         >
-          {{ $t('menu.buttons.register') }}</a
+          {{ $t('menu.buttons.register') }}
+        </button>
+        <button
+          class="mt-1 block px-3 py-2 text-base font-medium text-gray-900"
+          @click="$nuxt.$emit('open-login')"
         >
-        <a
-          href="#"
-          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-          >{{ $t('menu.buttons.login') }}</a
-        >
+          {{ $t('menu.buttons.login') }}
+        </button>
       </div>
     </div>
   </div>
