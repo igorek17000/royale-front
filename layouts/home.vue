@@ -22,7 +22,7 @@
       v-if="registerModal"
       class="opacity-25 fixed inset-0 z-40 bg-black"
     ></div>
-    <nuxt @open-register="openRegisterModal" class="mt-20" />
+    <nuxt @open-register="openRegisterModal" class="mt-16" />
     <FooterBottom />
   </div>
 </template>

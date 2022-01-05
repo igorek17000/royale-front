@@ -1042,8 +1042,27 @@
               rounded-lg
               focus:outline-none focus:shadow-outline
             "
-            type="text"
+            type="email"
             v-model="email"
+            required
+          />
+        </div>
+        <div class="mt-8">
+          <span class="uppercase text-sm text-gray-600 font-bold"
+            >Phone Number</span
+          >
+          <input
+            class="
+              w-full
+              bg-gray-300
+              text-gray-900
+              mt-2
+              p-3
+              rounded-lg
+              focus:outline-none focus:shadow-outline
+            "
+            type="text"
+            v-model="phone_number"
             required
           />
         </div>
@@ -1071,16 +1090,22 @@
               text-sm
               font-bold
               tracking-wide
-              bg-indigo-500
-              text-gray-100
               p-3
               rounded-lg
               w-full
               focus:outline-none focus:shadow-outline
+              flex
+              justify-center
             "
+            :class="[
+              !isSent
+                ? 'bg-custom-red text-gray-100'
+                : 'bg-greenMoney text-gray-900',
+            ]"
             type="submit"
           >
-            Send Message
+            <loading v-if="isLoading" />
+            {{ !isSent ? 'Send Message' : 'Message Send Succesfully' }}
           </button>
         </div>
       </form>
@@ -1089,28 +1114,43 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading.vue'
 export default {
   name: 'ContactUs',
   layout: 'home',
+  components: { Loading },
   data() {
     return {
       name: '',
       email: '',
+      phone_number: '',
       message: '',
+      isLoading: false,
+      isSent: false,
     }
   },
   methods: {
     async submitForm() {
+      this.isLoading = true
       await this.$axios
         .post('/mails/new', {
           from: this.email,
           subject: 'Contact form | No Login',
-          text: this.message,
+          html: `Name: ${this.name} , <br>
+                 Phone Number: ${this.phone_number} , <br>
+          Message: ${this.message}`,
         })
         .then((res) => {
+          this.isSent = true
+          this.isLoading = false
+          this.name = ''
+          this.email = ''
+          this.phone_number = ''
+          this.message = ''
           console.log('res data', res.data)
         })
         .catch((err) => {
+          this.isLoading = false
           console.log('err', err)
         })
     },

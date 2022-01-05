@@ -75,15 +75,14 @@ export default {
 </script>
 
 <style scoped>
-.h-custom-hero {
-  height: calc(100vh - 200px);
-}
-
 .tech-socials {
   background: url('~assets/imgs/Tech_Final.svg') no-repeat center center/
     contain;
 }
 @media (min-width: 778px) {
+  .h-custom-hero {
+    height: calc(100vh - 200px);
+  }
   .hero-image {
     background-image: url('~assets/imgs/hero.svg');
     background-size: contain;
