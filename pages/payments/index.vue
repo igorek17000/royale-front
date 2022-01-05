@@ -13,8 +13,24 @@
     <Sidebar />
 
     <div class="flex-grow overflow-hidden h-full flex flex-col">
-      <div class="container mx-auto flex py-12">
-        <div>profile here</div>
+      <div
+        class="
+          container
+          mx-auto
+          flex
+          h-full
+          justify-center
+          items-center
+          flex-col
+          py-12
+        "
+      >
+        <h4 class="text-2xl font-bold">
+          Please contact us if you want to make payments!
+        </h4>
+        <nuxt-link class="uppercase underline text-2xl mt-4" to="contact">
+          Contact Us
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -26,6 +42,6 @@ import Menu from '~/components/Dashboard/Menu.vue'
 export default {
   components: { Sidebar, Menu },
   middleware: 'auth',
-  name: 'Profile',
+  name: 'Payments',
 }
 </script>

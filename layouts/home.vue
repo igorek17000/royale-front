@@ -81,6 +81,10 @@ export default {
           name: `${this.$t('menu.faq')}`,
           url: '/faq',
         },
+        {
+          name: `${this.$t('menu.contact')}`,
+          url: '/contact-us',
+        },
       ],
     }
     this.$store.dispatch('loadSidebar', getData)
