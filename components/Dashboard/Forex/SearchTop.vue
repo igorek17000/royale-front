@@ -1,5 +1,7 @@
 <template>
-  <div>news</div>
+  <div>
+    <input type="text" />
+  </div>
 </template>
 
 <script>

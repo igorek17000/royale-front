@@ -7,16 +7,14 @@
       border-b border-gray-200
       dark:border-gray-800
       bg-primary
-      flex-wrap
-      md:flex-nowrap
     "
   >
     <div
       class="
         flex
         items-center
-        md:text-lg
-        text-gray-900 text-sm
+        md:text-3xl
+        text-gray-900 text-lg
         justify-center
         dark:text-white
         capitalize
@@ -24,8 +22,6 @@
         dark:border-gray-800
         px-5
         py-4
-        w-1/2
-        md:w-1/5
       "
     >
       <div
@@ -38,92 +34,6 @@
         ${{ btc }}
       </div>
       <p class="pl-3 text-gray-500 text-lg hidden md:block">Market Price</p>
-    </div>
-    <div
-      class="
-        flex
-        items-center
-        md:text-lg
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-5
-        py-4
-        w-1/2
-        md:w-1/5
-      "
-    >
-      <div
-        data-placeholder
-        class="livecoin h-9 overflow-hidden relative bg-secondary"
-        v-if="isLoading_change"
-      ></div>
-
-      <div id="coinPrice" class="font-roboto" v-else>
-        {{ coin_change }} {{ coin_change_percentage }}%
-      </div>
-      <p class="pl-3 text-gray-500 text-base hidden md:block">24h Change</p>
-    </div>
-    <div
-      class="
-        hidden
-        md:flex
-        items-center
-        md:text-lg
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-5
-        py-4
-        w-1/2
-        md:w-1/5
-      "
-    >
-      <div
-        data-placeholder
-        class="livecoin h-9 overflow-hidden relative bg-secondary"
-        v-if="isLoading_change"
-      ></div>
-
-      <div id="coinPrice" class="font-roboto" v-else>
-        {{ coin_change_high }}
-      </div>
-      <p class="pl-3 text-gray-500 text-base hidden md:block">24h High</p>
-    </div>
-    <div
-      class="
-        items-center
-        md:text-lg
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-5
-        py-4
-        w-1/2
-        md:w-1/5
-        hidden
-        md:flex
-      "
-    >
-      <div
-        data-placeholder
-        class="livecoin h-9 overflow-hidden relative bg-secondary"
-        v-if="isLoading_change"
-      ></div>
-
-      <div id="coinPrice" class="font-roboto" v-else>
-        {{ coin_change_low }}
-      </div>
-      <p class="pl-3 text-gray-500 text-base hidden md:block">24h Low</p>
     </div>
     <div class="ml-auto flex items-center justify-end">
       <div class="text-right pr-5 hidden md:block">
@@ -157,11 +67,6 @@ export default {
       isLoading: true,
       profitClass: 'text-white',
       coin: null,
-      isLoading_change: true,
-      coin_change: null,
-      coin_change_percentage: null,
-      coin_change_high: null,
-      coin_change_low: null,
     }
   },
   mounted() {
@@ -169,11 +74,12 @@ export default {
     this.coin = coin.replace('usdt', '')
     this.getSinglePrice(coin)
     this.ws = new WebSocket(
-      `wss://stream.binance.com/stream?streams=${coin}@trade/${coin}@ticker/${coin}@kline_1m`
+      `wss://ws.twelvedata.com/v1/quotes/price?apikey=bbeaa82a1aa842f1ab6d68680b8428c9`
     )
     let vm = this
     this.ws.addEventListener('message', function (event) {
       let ev = JSON.parse(event.data)
+      console.log('🚀 ~ ev', ev)
       if (ev.stream === `${coin}@trade`) {
         let newPush = {
           time: ev.data.T,
@@ -197,11 +103,6 @@ export default {
       }
       if (ev.stream === `${coin}@ticker`) {
         // console.log('evennt', ev)
-        vm.isLoading_change = false
-        vm.coin_change = parseFloat(ev.data.p).toFixed(2)
-        vm.coin_change_percentage = ev.data.P
-        vm.coin_change_high = parseFloat(ev.data.h).toFixed(2)
-        vm.coin_change_low = parseFloat(ev.data.l).toFixed(2)
       }
       if (ev.stream === `${coin}@kline_1m`) {
         let kline = {

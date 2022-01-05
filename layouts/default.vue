@@ -51,8 +51,18 @@ export default {
         //   disabled: true,
         // },
         {
+          name: `${this.$t('dashboard.menu.forex')}`,
+          url: '/forex',
+          disabled: false,
+        },
+        {
           name: `${this.$t('dashboard.menu.exchange')}`,
           url: '/exchange',
+          disabled: false,
+        },
+        {
+          name: `${this.$t('dashboard.menu.news')}`,
+          url: '/news',
           disabled: false,
         },
       ],
@@ -76,8 +86,18 @@ export default {
         //   disabled: true,
         // },
         {
+          name: `${this.$t('dashboard.menu.forex')}`,
+          url: '/forex',
+          disabled: false,
+        },
+        {
           name: `${this.$t('dashboard.menu.exchange')}`,
           url: '/exchange',
+          disabled: false,
+        },
+        {
+          name: `${this.$t('dashboard.menu.news')}`,
+          url: '/news',
           disabled: false,
         },
         {
