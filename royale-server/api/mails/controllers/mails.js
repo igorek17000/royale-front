@@ -8,6 +8,9 @@ module.exports = {
   async new(ctx) {
     const { from, subject, text } = ctx.request.body
 
+    console.log('from', from)
+    console.log('subject', subject)
+    console.log('text', text)
     if (!from) return
 
     let mail = await strapi.plugins['email'].services.email.send({
@@ -16,10 +19,10 @@ module.exports = {
       subject: subject,
       text: text,
     })
+    console.log('mail', mail)
     ctx.send(
       {
         message: 'The content was created!',
-        mail: mail,
       },
       201
     )

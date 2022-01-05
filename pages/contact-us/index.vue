@@ -1105,10 +1105,7 @@ export default {
         .post('/mails/new', {
           from: this.email,
           subject: 'Contact form | No Login',
-          text: {
-            name: this.name,
-            message: this.message,
-          },
+          text: this.message,
         })
         .then((res) => {
           console.log('res data', res.data)
