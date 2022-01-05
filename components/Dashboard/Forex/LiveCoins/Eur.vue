@@ -48,25 +48,18 @@
       bg-secondary
     "
     @click="
-      $router.push({ name: 'exchange-trade-coin', params: { coin: 'dotusdt' } })
+      $router.push({ name: 'forex-trade-coin', params: { coin: 'EUR/USD' } })
     "
     v-else
   >
-    <div class="w-8 h-8 md:w-12 md:h-12">
-      <img
-        class="w-auto h-auto object-cover bg-white rounded-full"
-        src="~/assets/logo/Polkadot.png"
-        alt="Polkadot"
-      />
-    </div>
     <div class="body flex-auto">
-      <h4 class="text-2xl pb-3 border-b border-gray-300">Polkadot</h4>
+      <h4 class="text-2xl pb-3 border-b border-gray-300">EUR/USD</h4>
 
       <div
         class="price pt-3 text-base md:text-xl font-bold text-money"
         v-if="coin"
       >
-        $ {{ coin }}
+        {{ coin }}
       </div>
     </div>
   </div>
@@ -75,7 +68,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'PolkadotCard',
+  name: 'EurCard',
   data() {
     return {
       ws: null,
@@ -85,20 +78,25 @@ export default {
       isLoading: true,
     }
   },
+
   mounted() {
     this.getPrice()
   },
+
   methods: {
     async getPrice() {
       await axios
-        .get('https://api.binance.com/api/v3/avgPrice', {
+        .get('https://api.twelvedata.com/exchange_rate', {
           params: {
-            symbol: 'DOTUSDT',
+            apikey: 'bbeaa82a1aa842f1ab6d68680b8428c9',
+            symbol: 'EUR/USD',
           },
         })
         .then((res) => {
           let payload = res.data
-          this.coin = parseFloat(payload.price).toFixed(2)
+          console.log('🚀 ~ .then ~ payload', payload)
+          this.coin = parseFloat(payload.rate).toFixed(6)
+
           this.isLoading = false
         })
         .catch((err) => {

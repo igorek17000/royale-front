@@ -153,7 +153,7 @@ export default {
   },
   mounted() {
     let coin = this.$route.params.coin
-    this.getTradeBook(coin)
+    // this.getTradeBook(coin)
   },
   methods: {
     timeDone(val) {
@@ -174,28 +174,28 @@ export default {
 
       return formattedTime
     },
-    async getTradeBook(val) {
-      await axios
-        .get(
-          `https://api.binance.com/api/v3/trades?symbol=${val.toUpperCase()}&limit=100`
-        )
-        .then((res) => {
-          let data = res.data.map((item) => {
-            return {
-              time: item.time,
-              qty: item.qty,
-              price: item.qty * item.price,
-              isBuyerMaker: item.isBuyerMaker,
-            }
-          })
+    // async getTradeBook(val) {
+    //   await axios
+    //     .get(
+    //       `https://api.binance.com/api/v3/trades?symbol=${val.toUpperCase()}&limit=100`
+    //     )
+    //     .then((res) => {
+    //       let data = res.data.map((item) => {
+    //         return {
+    //           time: item.time,
+    //           qty: item.qty,
+    //           price: item.qty * item.price,
+    //           isBuyerMaker: item.isBuyerMaker,
+    //         }
+    //       })
 
-          let tradebook = data.reverse()
-          this.$store.commit('trade/SET_TRADEBOOK', tradebook)
-        })
-        .catch((err) => {
-          console.log('err getCoin', err)
-        })
-    },
+    //       let tradebook = data.reverse()
+    //       this.$store.commit('trade/SET_TRADEBOOK', tradebook)
+    //     })
+    //     .catch((err) => {
+    //       console.log('err getCoin', err)
+    //     })
+    // },
     checkFooterTotal(val) {
       this.positiveCap = val.reduce(function (sum, record) {
         if (record.isBuyerMaker === false) return sum + record.price

@@ -36,15 +36,10 @@
             <div class="container mx-auto">
               <h3
                 class="text-4xl leading-relaxed text-center py-8 font-bold"
-                v-html="$t('dashboard.exchange.trade.coins_daily')"
+                v-html="$t('dashboard.forex.trade.coins_daily')"
               ></h3>
               <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <bitcoin-card />
-                <etherium-card />
-                <litecoin-card />
-                <cardano-card />
-                <doge-card />
-                <polkadot-card />
+                <EurCard />
               </div>
             </div>
           </div>
@@ -57,22 +52,12 @@
 <script>
 import Sidebar from '~/components/Dashboard/Forex/Sidebar.vue'
 import Player from '~/components/Dashboard/Player.vue'
-import BitcoinCard from '~/components/Dashboard/Forex/LiveCoins/BitcoinCard.vue'
-import EtheriumCard from '~/components/Dashboard/Forex/LiveCoins/EtheriumCard.vue'
-import LitecoinCard from '~/components/Dashboard/Forex/LiveCoins/LitecoinCard.vue'
-import CardanoCard from '~/components/Dashboard/Forex/LiveCoins/CardanoCard.vue'
-import DogeCard from '~/components/Dashboard/Forex/LiveCoins/DogeCard.vue'
-import PolkadotCard from '~/components/Dashboard/Forex/LiveCoins/PolkadotCard.vue'
+import EurCard from '~/components/Dashboard/Forex/LiveCoins/Eur.vue'
 export default {
   components: {
     Sidebar,
     Player,
-    BitcoinCard,
-    EtheriumCard,
-    LitecoinCard,
-    CardanoCard,
-    DogeCard,
-    PolkadotCard,
+    EurCard,
   },
   middleware: 'auth',
   name: 'Forex',

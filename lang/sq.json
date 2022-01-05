@@ -33,6 +33,11 @@
         "coins_daily": "💰 <span class=\"text-money underline capitalize\">Monedhat</span> më të tregtuara të ditës. 🚀"
       },
       "news": "Lajme"
+    },
+    "forex": {
+      "trade": {
+        "coins_daily": "💰 <span class=\"text-money underline capitalize\">Kombinimet</span> më të tregtuara të ditës. 🚀"
+      }
     }
   },
   "login": {

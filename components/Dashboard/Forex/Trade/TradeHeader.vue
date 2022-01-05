@@ -74,11 +74,12 @@ export default {
     this.coin = coin.replace('usdt', '')
     this.getSinglePrice(coin)
     this.ws = new WebSocket(
-      `wss://stream.binance.com/stream?streams=${coin}@trade/${coin}@ticker/${coin}@kline_1m`
+      `wss://ws.twelvedata.com/v1/quotes/price?apikey=bbeaa82a1aa842f1ab6d68680b8428c9`
     )
     let vm = this
     this.ws.addEventListener('message', function (event) {
       let ev = JSON.parse(event.data)
+      console.log('🚀 ~ ev', ev)
       if (ev.stream === `${coin}@trade`) {
         let newPush = {
           time: ev.data.T,

@@ -41,7 +41,7 @@ export default {
   created() {},
   mounted() {
     let coin = this.$route.params.coin
-    this.getCoin(coin)
+    // this.getCoin(coin)
     this.width = this.$refs.tradeChart.clientWidth
     this.height = this.$refs.tradeChart.clientHeight
     // setInterval(() => {

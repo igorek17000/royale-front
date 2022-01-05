@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer bg-white relative pt-1 border-b-2 border-blue-700">
+  <footer class="footer bg-white relative pt-1">
     <div class="container mx-auto px-6">
       <div class="sm:flex sm:mt-8">
         <div class="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row">
@@ -17,9 +17,22 @@
             <h4 class="text-gray-700 text-xl max-w-sm mb-3">
               Real-time Trading and Exchange Platform
             </h4>
-            <p class="max-w-sm">
-              Stocks, Forex, Cryptocurrency, Indices ,ETFs and a lot more using
-              latest technologies.
+            <p class="max-w-md text-xs text-gray-500">
+              Risk Warning: Our products are traded on leverage which means they
+              carry a high level of risk and you could lose more than your
+              deposits. These products are not suitable for all investors.
+              Please ensure you fully understand the risks and carefully
+              consider your financial situation and trading experience before
+              trading. Seek independent advice if necessary.
+              <br />
+              It is important that you read and consider the relevant legal
+              documents associated with your account, including the Terms of
+              Business issued by AceTrader before you start trading. The
+              provided information is not directed at residents of the United
+              States, Canada, European Union, Hong Kong, Australia or Japan and
+              is not intended for distribution to, or use by, any person in any
+              country or jurisdiction where such distribution or use would be
+              contrary to local law or regulation.
             </p>
           </div>
           <div class="flex flex-col w-full md:w-1/2">

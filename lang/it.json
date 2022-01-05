@@ -33,6 +33,11 @@
         "coins_daily": "💰 Le <span class=\"text-money underline capitalize\">monete</span> più scambiate della giornata. 🚀"
       },
       "news": "notizie"
+    },
+    "forex": {
+      "trade": {
+        "coins_daily": "💰 Le <span class=\"text-money underline capitalize\">pari</span> più scambiate della giornata. 🚀"
+      }
     }
   },
   "login": {

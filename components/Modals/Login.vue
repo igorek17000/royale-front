@@ -254,7 +254,7 @@ export default {
           data: this.user,
         })
 
-        this.$router.push('/exchange')
+        this.$router.push('/forex')
       } catch (err) {
         this.error_server = true
       }
