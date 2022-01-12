@@ -24,15 +24,6 @@
               Please ensure you fully understand the risks and carefully
               consider your financial situation and trading experience before
               trading. Seek independent advice if necessary.
-              <br />
-              It is important that you read and consider the relevant legal
-              documents associated with your account, including the Terms of
-              Business issued by AceTrader before you start trading. The
-              provided information is not directed at residents of the United
-              States, Canada, European Union, Hong Kong, Australia or Japan and
-              is not intended for distribution to, or use by, any person in any
-              country or jurisdiction where such distribution or use would be
-              contrary to local law or regulation.
             </p>
           </div>
           <div class="flex flex-col w-full md:w-1/2">

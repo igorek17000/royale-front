@@ -3,7 +3,16 @@
     <div>
       <button
         @click="toggleLang"
-        class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid uppercase"
+        class="
+          max-w-xs
+          flex
+          items-center
+          text-sm
+          rounded-full
+          text-white
+          focus:outline-none focus:shadow-solid
+          uppercase
+        "
         id="lang-menu"
         aria-label="lang menu"
         aria-haspopup="true"
@@ -26,7 +35,16 @@
     >
       <div
         v-show="isOpenLang"
-        class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg z-50"
+        class="
+          origin-top-right
+          absolute
+          right-0
+          mt-2
+          w-32
+          rounded-md
+          shadow-lg
+          z-50
+        "
       >
         <div
           class="py-1 rounded-md bg-white shadow-xs"
@@ -36,7 +54,14 @@
         >
           <a
             href="#"
-            class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 uppercase"
+            class="
+              flex
+              px-4
+              py-2
+              text-sm text-gray-700
+              hover:bg-gray-100
+              uppercase
+            "
             role="menuitem"
             v-for="locale in $i18n.locales"
             :key="locale.code"
@@ -68,7 +93,7 @@ export default {
     },
 
     changeLocale(locale) {
-      console.log('locale here', locale)
+      // console.log('locale here', locale)
       this.$i18n.setLocaleCookie(locale)
       this.$i18n.setLocale(locale)
       location.reload()

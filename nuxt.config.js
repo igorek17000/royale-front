@@ -38,11 +38,11 @@ export default {
             name: 'It',
             file: 'it.json',
           },
-          {
-            code: 'sq',
-            name: 'Sq',
-            file: 'sq.json',
-          },
+          // {
+          //   code: 'sq',
+          //   name: 'Sq',
+          //   file: 'sq.json',
+          // },
           {
             code: 'en',
             name: 'En',
@@ -71,13 +71,16 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://api.acetrader.co.uk',
-    // baseURL: 'http://localhost:1337',
+    // baseURL: 'https://api.acetrader.co.uk',
+    baseURL: 'http://localhost:1337',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
+      name: 'Ace Trader',
+      short_name: 'Ace',
+      description: 'Real-time Trading and Exchange Platform',
       lang: 'en',
     },
   },
@@ -121,8 +124,8 @@ export default {
     },
   },
   publicRuntimeConfig: {
-    baseURL: 'https://api.acetrader.co.uk',
-    // baseURL: 'http://localhost:1337',
+    // baseURL: 'https://api.acetrader.co.uk',
+    baseURL: 'http://localhost:1337',
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

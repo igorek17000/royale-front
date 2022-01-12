@@ -9,6 +9,7 @@
     <why-us-section @open-register="$nuxt.$emit('open-register')" />
     <support-section />
     <review-section />
+    <faq-section />
     <footer-action />
   </div>
 </template>
@@ -20,6 +21,7 @@ import PromoSection from '@/components/PromoSection.vue'
 import WhyUsSection from '@/components/WhyUsSection.vue'
 import ReviewSection from '@/components/ReviewSection.vue'
 import SupportSection from '@/components/SupportSection.vue'
+import FaqSection from '@/components/FaqSection.vue'
 import FooterAction from '@/components/FooterAction.vue'
 export default {
   name: 'home',
@@ -32,6 +34,7 @@ export default {
     WhyUsSection,
     ReviewSection,
     SupportSection,
+    FaqSection,
     FooterAction,
   },
   data() {
