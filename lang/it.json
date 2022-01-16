@@ -66,6 +66,7 @@
           "deposits": "Depositi",
           "no_open_orders": "Nessun ordine aperto",
           "no_orders": "Nessun ordine",
+          "no_deposits": "Nessun deposito",
           "order": {
             "id": "ID ordine",
             "coin_price": "Prezzo",
