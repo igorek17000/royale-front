@@ -143,7 +143,7 @@ export default {
           data: this.user,
         })
 
-        this.$router.push('/casino')
+        this.$router.push('/trade')
       } catch (err) {
         this.error_server = true
       }

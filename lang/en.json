@@ -18,7 +18,7 @@
       "casino": "Casino",
       "poker": "Poker",
       "bet": "Bet",
-      "exchange": "Exchange",
+      "exchange": "Crypto",
       "profile": "Profile",
       "forex": "Forex",
       "news": "News"
@@ -31,7 +31,57 @@
     "exchange": {
       "trade": {
         "name": "trade",
-        "coins_daily": "💰 Most traded <span class=\"text-money underline capitalize\">coins</span> of the day. 🚀"
+        "coins_daily": "💰 Most traded <span class=\"text-money underline capitalize\">coins</span> of the day. 🚀",
+        "header": {
+          "market_price": "Market Price",
+          "24h_change": "24h Change",
+          "24h_high": "24h High",
+          "24h_low": "24h Low",
+          "leverage": "Leverage Value:",
+          "proffit": "Proffit:"
+        },
+        "buysell": {
+          "sell": "Sell",
+          "buy": "Buy",
+          "price": "Price",
+          "leverage": "Lot:",
+          "lot_value": "Lot Value:",
+          "max_lot": "Max Lot:",
+          "max_volume": "Max Volume:",
+          "used_margin": "Used margin:",
+          "free_margin": "Free margin:",
+          "order_saved": "Order succesfully saved with id",
+          "order_error": "Error saving order. Please Refresh"
+        },
+        "sidebar": {
+          "search": "Search by coin.. Ex: (BTC)",
+          "market_trades": " Market Trades (last hour)",
+          "coin_size": "Coin size",
+          "price": "Price",
+          "time": "Time"
+        },
+        "footer": {
+          "open_orders": "  Open Orders",
+          "orders_history": "Orders History",
+          "deposits": "Deposits",
+          "no_open_orders": "No open orders",
+          "no_orders": "No orders",
+          "no_deposits": "No deposits",
+          "order": {
+            "id": "Order ID",
+            "coin_price": "Coin Price",
+            "trade_type": "Trade Type",
+            "amount": "Amount",
+            "proffit": "Proffit",
+            "date": "Date",
+            "margin": "Margin",
+            "close_trade": "Close Trade"
+          },
+          "deposit": {
+            "amount": "Amount",
+            "date": "Date"
+          }
+        }
       },
       "news": "news"
     },
@@ -53,5 +103,93 @@
     "balance": "Account balance",
     "balance-menu": "Balance",
     "coin-balance": "Coin Balance"
+  },
+  "home": {
+    "login": {
+      "error": " Credentials dont match!",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "email_placeholder": "Enter your email address",
+      "password_placeholder": "Enter your password",
+      "username_placeholder": "Enter your username",
+      "phone_placeholder": "Enter your phone number"
+    },
+    "hero": {
+      "title": "Real-time Trading and Exchange <span class=\"underline-text\">Platform</span> 🚀",
+      "subtitle": "Stocks, Forex, Cryptocurrency, Indices ,ETFs and a lot more using latest technologies.",
+      "info": "No Fees | No Commission | Transparent Pricing",
+      "numbers": {
+        "trusted": "Trusted Ace Traders",
+        "trades": " Trades / Day",
+        "open": "Open Trading",
+        "support": "Online Support"
+      }
+    },
+    "promo": {
+      "title": "We provide any type of product you need",
+      "subtitle": "Just choose the ones you want and start to work with them",
+      "stock": "Stock data",
+      "stock_detail": "US and Global Market Data",
+      "forex": "Forex",
+      "forex_detail": "Large Forex Data Coverage",
+      "crypto": "Cryptocurrencies",
+      "crypto_details": "1700+ cryptocurrency symbols",
+      "indicies": "Indices",
+      "indicies_details": "Global Index Market Data",
+      "etf_details": "Global Exchange Traded Fund and Mutual Fund Data",
+      "fundamentals": "Fundamentals",
+      "fundamentals_details": "Statements, Calendar and More",
+      "testimonial": "In our industry, data accuracy is critical but robust systems to ensure data availability are even more important. The talented team at AceTrader delivers, so we never miss a beat while securing billions for our clients. We rely on AceTrader because our clients rely on us."
+    },
+    "whyus": {
+      "title": "Our Top <span class=\"underline-text\">Platform</span>  Built For You 🚀",
+      "subtile": "Trading/Exchange Platform",
+      "unleash": "Unleash",
+      "unleash_details": "robust chart tools on an award-winning platform — great for technical           traders.",
+      "explore": "Explore",
+      "explore_details": "powerful, preloaded tools like Real Volume, Market Depth, and Trader           Sentiment.",
+      "customize": "Customize",
+      "customize_details": "your experience: Download indicators, create watch lists and custom           layouts to adapt the platform for your strategy."
+    },
+    "review": {
+      "title": "Our <span class=\"underline-text\">customers</span> reviews",
+      "reviews": "Reviews",
+      "allison": {
+        "title": "Cool crypto platform",
+        "desc": "Honestly I think this app is the easiest way to do trade on crypto             curriencies! Also here is an equal situation for everyone to earn             money!"
+      },
+      "justin": {
+        "title": "I give 4 stars",
+        "desc": "It is wonderful and easy. But try to work at demo until familiar             with this environment. Very good platform keep up the good work."
+      },
+      "charlie": {
+        "title": "I was new to the trading scene",
+        "desc": "Glad that i found this app, it’s a good expirience to make you get             better at trading... amazing 👏... also the strategists are very             good."
+      }
+    },
+    "support": {
+      "title": "Trade with <span class=\"underline-text\">support & guidance</span>",
+      "trade": "FX Trade Signals",
+      "trade_desc": " Amp up your trading with real-time trade signals and analysis tool             Trading Central.",
+      "market": "Market Strategist",
+      "market_desc": "Our Trained market strategists can work with you on developing a             trading plan.",
+      "anylist": "Market Analysis",
+      "anylist_desc": "Stay informed with real-time market insights and actionable trade             ideas from our research team."
+    },
+    "footer-cta": {
+      "title": "Try <span class=\"underline-text\">ACETRADER</span> now!",
+      "subtitle": "Claim your bonus and talk with our trading experts with just one click!",
+      "cc": "*No Credit Card required!"
+    },
+    "faq": {
+      "bitcoin": "What is Bitcoin?",
+      "bitcoin_desc": "Bitcoin is a decentralized digital currency, meaning that it lacks a             central bank or single administrator. Bitcoin can be sent from user             to user through the peer-to-peer network without the need for             intermediaries.",
+      "start_trading": "Can I start trading with just $1?",
+      "start_trading_desc": "AceTrader allows users to improve their practical experience through             a variety of trading and financial products for as low as $1.",
+      "is_safe": "Is AceTrader safe?",
+      "is_safe_desc": "AceTrader boasts one of the world's most sophisticated security             technology and maintenance team, and is constantly upgrading our             security systems to ensure the safety of user assets and accounts.",
+      "help": "Can i get help from trained market strategists?",
+      "help_desc": "YES. Our trained team will be there for you 24/7 to advise and help             you with everything to maximise your proffit."
+    }
   }
 }

@@ -1,10 +1,9 @@
 <template>
   <div class="px-4 py-8 w-full container mx-auto mt-16">
-    <h3 class="text-bluish font-semibold text-3xl text-center uppercase">
-      Our
-      <span class="underline-text"> customers </span>
-      reviews
-    </h3>
+    <h3
+      class="text-bluish font-semibold text-3xl text-center uppercase"
+      v-html="$t('home.review.title')"
+    ></h3>
     <div
       class="
         trustpilot
@@ -30,7 +29,7 @@
       </div>
       <div class="review-text text-center text-white">
         <h4 class="text-2xl font-bold">Excellent 4.6</h4>
-        <p>Reviews 12 672</p>
+        <p>{{ $t('home.review.reviews') }} 12 672</p>
       </div>
     </div>
     <div
@@ -69,11 +68,11 @@
           </div>
         </div>
         <div class="flex flex-col text-white mt-4">
-          <h4 class="mb-2 font-bold">Cool crypto platform</h4>
+          <h4 class="mb-2 font-bold">
+            {{ $t('home.review.allison.title') }}
+          </h4>
           <p>
-            Honestly I think this app is the easiest way to do trade on crypto
-            curriencies! Also here is an equal situation for everyone to earn
-            money!
+            {{ $t('home.review.allison.desc') }}
           </p>
         </div>
       </div>
@@ -100,10 +99,11 @@
           </div>
         </div>
         <div class="flex flex-col text-white mt-4">
-          <h4 class="mb-2 font-bold">I give 4 stars</h4>
+          <h4 class="mb-2 font-bold">
+            {{ $t('home.review.justin.title') }}
+          </h4>
           <p>
-            It is wonderful and easy. But try to work at demo until familiar
-            with this environment. Very good platform keep up the good work.
+            {{ $t('home.review.justin.desc') }}
           </p>
         </div>
       </div>
@@ -130,11 +130,11 @@
           </div>
         </div>
         <div class="flex flex-col text-white mt-4">
-          <h4 class="mb-2 font-bold">I was new to the trading scene</h4>
+          <h4 class="mb-2 font-bold">
+            {{ $t('home.review.charlie.title') }}
+          </h4>
           <p>
-            Glad that i found this app, it’s a good expirience to make you get
-            better at trading... amazing 👏... also the strategists are very
-            good.
+            {{ $t('home.review.charlie.desc') }}
           </p>
         </div>
       </div>

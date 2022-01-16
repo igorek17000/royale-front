@@ -12,10 +12,10 @@
     >
       <div class="w-full md:w-2/4">
         <h2 class="text-white font-semibold text-2xl">
-          We provide any type of product you need
+          {{ $t('home.promo.title') }}
         </h2>
         <h4 class="text-white text-sm">
-          Just choose the ones you want and start to work with them
+          {{ $t('home.promo.subtitle') }}
         </h4>
         <div class="pairs-services py-6 flex flex-wrap">
           <div class="w-full md:w-1/2 flex items-center py-2">
@@ -27,8 +27,10 @@
               />
             </div>
             <div class="text-white flex flex-col text-sm">
-              <p class="font-bold">Stock data</p>
-              <p>US and Global Market Data</p>
+              <p class="font-bold">
+                {{ $t('home.promo.stock') }}
+              </p>
+              <p>{{ $t('home.promo.stock_detail') }}</p>
             </div>
           </div>
           <div class="w-full md:w-1/2 flex items-center py-2">
@@ -40,8 +42,10 @@
               />
             </div>
             <div class="text-white flex flex-col text-sm">
-              <p class="font-bold">Forex</p>
-              <p>Large Forex Data Coverage</p>
+              <p class="font-bold">{{ $t('home.promo.forex') }}</p>
+              <p>
+                {{ $t('home.promo.forex_detail') }}
+              </p>
             </div>
           </div>
           <div class="w-full md:w-1/2 flex items-center py-2">
@@ -53,8 +57,10 @@
               />
             </div>
             <div class="text-white flex flex-col text-sm">
-              <p class="font-bold">Cryptocurrencies</p>
-              <p>1700+ cryptocurrency symbols</p>
+              <p class="font-bold">{{ $t('home.promo.crypto') }}</p>
+              <p>
+                {{ $t('home.promo.crypto_details') }}
+              </p>
             </div>
           </div>
           <div class="w-full md:w-1/2 flex items-center py-2">
@@ -66,8 +72,10 @@
               />
             </div>
             <div class="text-white flex flex-col text-sm">
-              <p class="font-bold">Indices</p>
-              <p>Global Index Market Data</p>
+              <p class="font-bold">{{ $t('home.promo.indicies') }}</p>
+              <p>
+                {{ $t('home.promo.indicies_details') }}
+              </p>
             </div>
           </div>
           <div class="w-full md:w-1/2 flex items-center py-2">
@@ -76,7 +84,9 @@
             </div>
             <div class="text-white flex flex-col text-sm">
               <p class="font-bold">ETF</p>
-              <p>Global Exchange Traded Fund and Mutual Fund Data</p>
+              <p>
+                {{ $t('home.promo.etf_details') }}
+              </p>
             </div>
           </div>
           <div class="w-full md:w-1/2 flex items-center py-2">
@@ -88,8 +98,12 @@
               />
             </div>
             <div class="text-white flex flex-col text-sm">
-              <p class="font-bold">Fundamentals</p>
-              <p>Statements, Calendar and More</p>
+              <p class="font-bold">
+                {{ $t('home.promo.fundamentals') }}
+              </p>
+              <p>
+                {{ $t('home.promo.fundamentals_details') }}
+              </p>
             </div>
           </div>
         </div>
@@ -118,10 +132,7 @@
           </div>
         </div>
         <div class="body text-white text-base py-4">
-          In our industry, data accuracy is critical but robust systems to
-          ensure data availability are even more important. The talented team at
-          AceTrader delivers, so we never miss a beat while securing billions
-          for our clients. We rely on AceTrader because our clients rely on us.
+          {{ $t('home.promo.testimonial') }}
         </div>
       </div>
     </div>

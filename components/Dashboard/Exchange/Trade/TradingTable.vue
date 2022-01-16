@@ -44,13 +44,6 @@ export default {
     this.getCoin(coin)
     this.width = this.$refs.tradeChart.clientWidth
     this.height = this.$refs.tradeChart.clientHeight
-    // setInterval(() => {
-    //   this.tradingVue.update({
-    //     candle: [1640531820000, 50114.9, 50114.9, 50114.9, 50114.9, 50114.9],
-    //   })
-
-    //   console.log('🚀 ~ setTimeout ~ this.tradingVue', this.tradingVue)
-    // }, 2000)
   },
 
   methods: {
@@ -115,19 +108,19 @@ export default {
     height: 350px;
   }
 }
-@media only screen and (min-width: 1336px) {
+@media only screen and (min-width: 1280px) {
   .h-trade {
     height: 350px;
   }
 }
-@media only screen and (min-width: 1600px) {
+@media only screen and (min-width: 1336px) {
   .h-trade {
     height: 400px;
   }
 }
 @media only screen and (min-width: 1600px) {
   .h-trade {
-    height: 500px;
+    height: 540px;
   }
 }
 </style>

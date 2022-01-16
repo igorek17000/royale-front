@@ -30,7 +30,7 @@
           rounded-md
           text-sm
         "
-        placeholder="Search by coin (ex: BTC)"
+        :placeholder="$t('dashboard.exchange.trade.sidebar.search')"
       />
       <svg
         viewBox="0 0 24 24"
@@ -66,12 +66,18 @@
         "
         v-if="!showSearch"
       >
-        Market Trades (last hour)
+        {{ $t('dashboard.exchange.trade.sidebar.market_trades') }}
       </div>
       <div v-if="!showSearch" class="flex justify-between">
-        <p class="w-16 text-gray-400 text-sm">Coin Size</p>
-        <p class="w-16 text-gray-400 text-sm">Price</p>
-        <p class="w-16 text-gray-400 text-sm">Time</p>
+        <p class="w-16 text-gray-400 text-sm">
+          {{ $t('dashboard.exchange.trade.sidebar.coin_size') }}
+        </p>
+        <p class="w-16 text-gray-400 text-sm">
+          {{ $t('dashboard.exchange.trade.sidebar.price') }}
+        </p>
+        <p class="w-16 text-gray-400 text-sm">
+          {{ $t('dashboard.exchange.trade.sidebar.time') }}
+        </p>
       </div>
       <div v-if="!showSearch" class="coin-trades overflow-y-auto">
         <div
@@ -110,10 +116,32 @@
         </div>
         <div class="prices flex justify-between align-middle items-center pt-4">
           <p class="font-bold font-roboto">
-            $ {{ parseFloat(negativeCap).toFixed(2) }}
+            <vue-numeric
+              v-if="negativeCap"
+              currency="$"
+              separator=","
+              read-only
+              read-only-class=" flex
+        items-center pr-3
+          w-full"
+              :value="negativeCap"
+              :precision="2"
+              class=""
+            ></vue-numeric>
           </p>
           <p class="font-bold font-roboto">
-            $ {{ parseFloat(positiveCap).toFixed(2) }}
+            <vue-numeric
+              v-if="positiveCap"
+              currency="$"
+              separator=","
+              read-only
+              read-only-class=" flex
+        items-center pr-3
+          w-full"
+              :value="positiveCap"
+              :precision="2"
+              class=""
+            ></vue-numeric>
           </p>
         </div>
       </div>
@@ -125,8 +153,9 @@
 import SearchCoin from './SearchCoin.vue'
 import coins from './coins.json'
 import axios from 'axios'
+import VueNumeric from 'vue-numeric'
 export default {
-  components: { SearchCoin },
+  components: { SearchCoin, VueNumeric },
   name: 'TradeSidebar',
   data() {
     return {

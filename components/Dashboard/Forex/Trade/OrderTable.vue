@@ -77,7 +77,7 @@
         </td>
         <td class="uppercase p-3 relative">
           <span class="px-2 md:hidden">Date:</span>
-          {{ order.created_at.split('T')[0] }}
+          {{ formatTime(order.created_at) }}
         </td>
       </tr>
     </tbody>
@@ -88,6 +88,11 @@
 export default {
   name: 'OrderTable',
   props: ['orders'],
+  methods: {
+    formatTime(val) {
+      return this.$dayjs(val).format('DD/MM/YYYY - HH:mm')
+    },
+  },
 }
 </script>
 

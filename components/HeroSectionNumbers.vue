@@ -24,7 +24,9 @@
       "
     >
       <p class="text-2xl text-bluish font-bold">21,000+</p>
-      <p class="text-base text-secondary pl-4">Trusted Ace Traders</p>
+      <p class="text-base text-secondary pl-4">
+        {{ $t('home.hero.numbers.trusted') }}
+      </p>
     </div>
     <div
       class="
@@ -39,7 +41,9 @@
       "
     >
       <p class="text-2xl text-bluish font-bold">145K+</p>
-      <p class="text-base text-secondary pl-4">Trades / Day</p>
+      <p class="text-base text-secondary pl-4">
+        {{ $t('home.hero.numbers.trades') }}
+      </p>
     </div>
     <div
       class="
@@ -54,7 +58,9 @@
       "
     >
       <p class="text-2xl text-bluish font-bold">24/7</p>
-      <p class="text-base text-secondary pl-4">Open Trading</p>
+      <p class="text-base text-secondary pl-4">
+        {{ $t('home.hero.numbers.open') }}
+      </p>
     </div>
     <div
       class="
@@ -69,7 +75,9 @@
       "
     >
       <p class="text-2xl text-bluish font-bold">24/7</p>
-      <p class="text-base text-secondary pl-4">Online Support</p>
+      <p class="text-base text-secondary pl-4">
+        {{ $t('home.hero.numbers.support') }}
+      </p>
     </div>
   </div>
 </template>

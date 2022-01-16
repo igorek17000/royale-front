@@ -63,10 +63,12 @@
       />
     </div>
     <div class="body flex-auto">
-      <h4 class="text-2xl pb-3 border-b border-gray-300">Dogecoin</h4>
+      <h4 class="text-base md:text-2xl pb-3 border-b border-gray-300">
+        Dogecoin
+      </h4>
 
       <div
-        class="price pt-3 text-base md:text-xl font-bold text-money"
+        class="price pt-3 text-xs md:text-xl font-bold text-money"
         v-if="coin"
       >
         $ {{ coin }}

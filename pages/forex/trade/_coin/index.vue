@@ -96,13 +96,9 @@ export default {
     this.$options.head.title = `${coin} | Ace Trading Platform`
     this.$meta().refresh()
     // this.getCoinPrice(coin)
-    // this.interval = setInterval(() => {
-    //   this.getCoinPrice(coin)
-    // }, 60000)
   },
   beforeDestroy() {
     this.$store.commit('trade/SET_COIN_PRICE', null)
-    // clearInterval(this.interval)
   },
 }
 </script>

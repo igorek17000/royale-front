@@ -7,15 +7,42 @@ const { sanitizeEntity } = require('strapi-utils')
 
 module.exports = {
   async newOrder(ctx) {
-    const { user, amount, trade_type, return_amount, coin } = ctx.request.body
+    const {
+      user,
+      buyLoot,
+      coin_price,
+      coin,
+      trade_type,
+      leverage,
+    } = ctx.request.body
     let entity
     if (!user) return
+    if (buyLoot === 0.0) return
 
-    let payment = await strapi.services.payments.findOne({ 'user.id': user })
+    let totalAmount =
+      parseFloat(coin_price).toFixed(2) * parseFloat(buyLoot).toFixed(2)
 
-    if (!payment) return
+    let totalMargin =
+      parseFloat(totalAmount).toFixed(2) / parseFloat(leverage).toFixed(2)
 
-    entity = await strapi.services.order.create(ctx.request.body)
+    let payload = {
+      coin_price: coin_price,
+      trade_type: trade_type,
+      amount: totalAmount,
+      coin: coin,
+      amount: totalAmount,
+      isOpen: true,
+      proffit: 0,
+      buyLoot: buyLoot,
+      margin: totalMargin,
+      user: user,
+      leverage: leverage,
+    }
+
+    entity = await strapi.services.order.create(payload)
+    // let payment = await strapi.services.payments.findOne({ 'user.id': user })
+
+    // if (!payment) return
 
     // if (trade_type === 'sell') {
     //   let coinSearch = await strapi.services.coin.findOne({
@@ -90,14 +117,9 @@ module.exports = {
     let actual = parseFloat(payment.actual_balance).toFixed(2)
     let totalBalance = parseFloat(proff) + parseFloat(actual)
     let paymentData
-    if (proff < 0) {
-      paymentData = {
-        actual_balance: 0,
-      }
-    } else {
-      paymentData = {
-        actual_balance: totalBalance,
-      }
+
+    paymentData = {
+      actual_balance: totalBalance,
     }
 
     console.log('🚀 ~ closeOrder ~ paymentData', paymentData)

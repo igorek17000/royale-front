@@ -113,18 +113,7 @@ export default {
         })
     },
     formatDate(val) {
-      let dt = new Date(val)
-      let dd = dt.getDate()
-      let mm = dt.getMonth() + 1
-      let yyyy = dt.getFullYear()
-
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      return dd + '/' + mm + '/' + yyyy
+      return this.$dayjs(val).format('DD/MM/YYYY - HH:mm')
     },
   },
 }

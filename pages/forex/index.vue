@@ -35,7 +35,14 @@
           <div class="p-4 w-full">
             <div class="container mx-auto">
               <h3
-                class="text-4xl leading-relaxed text-center py-8 font-bold"
+                class="
+                  text-lg
+                  md:text-4xl
+                  leading-relaxed
+                  text-center
+                  py-8
+                  font-bold
+                "
                 v-html="$t('dashboard.forex.trade.coins_daily')"
               ></h3>
               <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">

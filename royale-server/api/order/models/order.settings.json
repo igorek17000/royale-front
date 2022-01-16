@@ -44,7 +44,15 @@
       "type": "decimal"
     },
     "buyLoot": {
+      "type": "decimal",
+      "required": true
+    },
+    "margin": {
       "type": "decimal"
+    },
+    "leverage": {
+      "type": "integer",
+      "required": true
     }
   }
 }

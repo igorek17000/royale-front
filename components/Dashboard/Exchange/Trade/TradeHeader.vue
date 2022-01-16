@@ -11,18 +11,21 @@
       md:flex-nowrap
     "
   >
+    <div class="mobile block md:hidden w-full px-4 py-4">
+      <search-mobile />
+    </div>
     <div
       class="
         flex
         items-center
-        md:text-lg
-        text-gray-900 text-sm
+        md:text-base
+        text-sm
         justify-center
         dark:text-white
         capitalize
-        border-r border-gray-200
+        border-r
         dark:border-gray-800
-        px-5
+        px-2
         py-4
         w-1/2
         md:w-1/5
@@ -35,22 +38,37 @@
       ></div>
 
       <div id="coinPrice" class="font-roboto" :class="[colorClass]" v-else>
-        ${{ btc }}
+        <vue-numeric
+          v-if="btc"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-2
+          pr-2"
+          :value="btc"
+          :precision="2"
+          class=""
+        ></vue-numeric>
       </div>
-      <p class="pl-3 text-gray-500 text-lg hidden md:block">Market Price</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">
+        {{ $t('dashboard.exchange.trade.header.market_price') }}
+      </p>
     </div>
     <div
       class="
         flex
         items-center
-        md:text-lg
+        md:text-base
         text-gray-900 text-sm
         justify-center
         dark:text-white
         capitalize
         border-r border-gray-200
         dark:border-gray-800
-        px-5
+        px-2
         py-4
         w-1/2
         md:w-1/5
@@ -65,21 +83,23 @@
       <div id="coinPrice" class="font-roboto" v-else>
         {{ coin_change }} {{ coin_change_percentage }}%
       </div>
-      <p class="pl-3 text-gray-500 text-base hidden md:block">24h Change</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">
+        {{ $t('dashboard.exchange.trade.header.24h_change') }}
+      </p>
     </div>
     <div
       class="
         hidden
         md:flex
         items-center
-        md:text-lg
+        md:text-base
         text-gray-900 text-sm
         justify-center
         dark:text-white
         capitalize
         border-r border-gray-200
         dark:border-gray-800
-        px-5
+        px-2
         py-4
         w-1/2
         md:w-1/5
@@ -92,21 +112,36 @@
       ></div>
 
       <div id="coinPrice" class="font-roboto" v-else>
-        {{ coin_change_high }}
+        <vue-numeric
+          v-if="coin_change_high"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="coin_change_high"
+          :precision="2"
+          class=""
+        ></vue-numeric>
       </div>
-      <p class="pl-3 text-gray-500 text-base hidden md:block">24h High</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">
+        {{ $t('dashboard.exchange.trade.header.24h_high') }}
+      </p>
     </div>
     <div
       class="
         items-center
-        md:text-lg
+        md:text-base
         text-gray-900 text-sm
         justify-center
         dark:text-white
         capitalize
         border-r border-gray-200
         dark:border-gray-800
-        px-5
+        px-2
         py-4
         w-1/2
         md:w-1/5
@@ -121,31 +156,91 @@
       ></div>
 
       <div id="coinPrice" class="font-roboto" v-else>
-        {{ coin_change_low }}
+        <vue-numeric
+          v-if="coin_change_low"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="coin_change_low"
+          :precision="2"
+          class=""
+        ></vue-numeric>
       </div>
-      <p class="pl-3 text-gray-500 text-base hidden md:block">24h Low</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">
+        {{ $t('dashboard.exchange.trade.header.24h_low') }}
+      </p>
     </div>
-    <div class="ml-auto flex items-center justify-end">
-      <div class="text-right pr-5 hidden md:block">
+    <div
+      class="
+        items-center
+        md:text-base
+        text-gray-900 text-sm
+        justify-center
+        dark:text-white
+        capitalize
+        border-r border-gray-200
+        dark:border-gray-800
+        px-2
+        py-4
+        w-1/2
+        md:w-1/5
+        hidden
+        md:flex
+      "
+    >
+      <div class="text-xs text-gray-400 dark:text-gray-400">
+        {{ $t('dashboard.exchange.trade.header.leverage') }}
+      </div>
+      <div class="text-white font-roboto flex items-center">
+        <vue-numeric
+          v-if="leverage"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="leverage"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
+      <!-- <div class="text-right pr-5 hidden md:block" v-if="proffit > 0">
         <div class="text-xs text-gray-400 dark:text-gray-400">
-          {{ $t('account.balance') }}:
+          {{ $t('dashboard.exchange.trade.header.proffit') }}
         </div>
-        <div class="text-white font-roboto">
-          ${{ parseFloat(balance).toFixed(2) }} 💰
-        </div>
-      </div>
-      <div class="text-right pr-5" v-if="proffit > 0">
-        <div class="text-xs text-gray-400 dark:text-gray-400">Proffit:</div>
         <div class="text-lg font-roboto" :class="[profitClass]">
-          {{ proffit }}$
+          <vue-numeric
+            v-if="proffit"
+            currency="$"
+            separator=","
+            read-only
+            read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+            :value="proffit"
+            :precision="2"
+            class=""
+          ></vue-numeric>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import VueNumeric from 'vue-numeric'
+import SearchMobile from './SearchMobile.vue'
 export default {
   name: 'TradeHeader',
   data() {
@@ -163,6 +258,10 @@ export default {
       coin_change_high: null,
       coin_change_low: null,
     }
+  },
+  components: {
+    VueNumeric,
+    SearchMobile,
   },
   mounted() {
     let coin = this.$route.params.coin
@@ -273,7 +372,9 @@ export default {
     started_balance() {
       return this.$store.state.balance.balance.started_balance
     },
-
+    leverage() {
+      return this.$store.state.balance.balance.leverage
+    },
     proffit() {
       let proffit = this.balance - this.started_balance
       if (proffit < 0) {

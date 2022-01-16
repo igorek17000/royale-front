@@ -60,13 +60,25 @@
       />
     </div>
     <div class="body flex-auto">
-      <h4 class="text-2xl pb-3 border-b border-gray-300">Bitcoin</h4>
+      <h4 class="text-base md:text-2xl pb-3 border-b border-gray-300">
+        Bitcoin
+      </h4>
 
       <div
-        class="price pt-3 text-base md:text-xl font-bold text-money"
+        class="price pt-3 text-xs md:text-xl font-bold text-money"
         v-if="coin"
       >
-        $ {{ coin }}
+        <vue-numeric
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center pr-3
+          w-full"
+          :value="coin"
+          :precision="2"
+          class=""
+        ></vue-numeric>
       </div>
     </div>
   </div>
@@ -74,8 +86,10 @@
 
 <script>
 import axios from 'axios'
+import VueNumeric from 'vue-numeric'
 export default {
   name: 'BitcoinCard',
+  components: { VueNumeric },
   data() {
     return {
       ws: null,

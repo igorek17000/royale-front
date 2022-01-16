@@ -91,7 +91,7 @@
           >
             <div class="w-full h-100">
               <div class="error-server" v-if="error_server">
-                Credentials dont match!
+                {{ $t('home.login.error') }}
               </div>
               <form @submit="onSubmit">
                 <div>
@@ -99,7 +99,7 @@
                   <input
                     type="text"
                     v-model="user.username"
-                    placeholder="Enter your username"
+                    :placeholder="$t('home.login.username_placeholder')"
                     class="
                       w-full
                       px-4
@@ -116,11 +116,13 @@
                   />
                 </div>
                 <div class="mt-4">
-                  <label class="block text-gray-200">Email</label>
+                  <label class="block text-gray-200">
+                    {{ $t('home.login.email') }}</label
+                  >
                   <input
                     type="email"
                     v-model="user.email"
-                    placeholder="Enter your email"
+                    :placeholder="$t('home.login.email_placeholder')"
                     autofocus
                     autocomplete
                     class="
@@ -137,11 +139,13 @@
                   />
                 </div>
                 <div class="mt-4">
-                  <label class="block text-gray-200">Phone Number</label>
+                  <label class="block text-gray-200">
+                    {{ $t('home.login.phone') }}</label
+                  >
                   <input
                     type="text"
                     v-model="user.phone_number"
-                    placeholder="Enter your phone number"
+                    :placeholder="$t('home.login.phone_placeholder')"
                     minlength="6"
                     class="
                       w-full
@@ -161,7 +165,7 @@
                   <input
                     type="password"
                     v-model="user.password"
-                    placeholder="Enter Password"
+                    :placeholder="$t('home.login.password_placeholder')"
                     minlength="6"
                     class="
                       w-full

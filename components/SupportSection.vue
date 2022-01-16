@@ -1,9 +1,9 @@
 <template>
   <div class="px-4 py-16 w-full mt-16 bg-gray-300">
-    <h3 class="text-bluish font-semibold text-3xl text-center uppercase">
-      Trade with
-      <span class="underline-text"> support & guidance </span>
-    </h3>
+    <h3
+      class="text-bluish font-semibold text-3xl text-center uppercase"
+      v-html="$t('home.support.title')"
+    ></h3>
     <div
       class="flex items-center mt-16 container mx-auto justify-center flex-wrap"
     >
@@ -16,10 +16,11 @@
           />
         </div>
         <div class="flex flex-col text-center max-w-xs mx-auto">
-          <h4 class="mb-4 font-bold text-bluish">FX Trade Signals</h4>
+          <h4 class="mb-4 font-bold text-bluish">
+            {{ $t('home.support.trade') }}
+          </h4>
           <p>
-            Amp up your trading with real-time trade signals and analysis tool
-            Trading Central.
+            {{ $t('home.support.trade_desc') }}
           </p>
         </div>
       </div>
@@ -32,10 +33,11 @@
           />
         </div>
         <div class="flex flex-col text-center max-w-xs mx-auto">
-          <h4 class="mb-4 font-bold text-bluish">Market Strategist</h4>
+          <h4 class="mb-4 font-bold text-bluish">
+            {{ $t('home.support.market') }}
+          </h4>
           <p>
-            Our Trained market strategists can work with you on developing a
-            trading plan.
+            {{ $t('home.support.market_desc') }}
           </p>
         </div>
       </div>
@@ -48,10 +50,11 @@
           />
         </div>
         <div class="flex flex-col text-center max-w-xs mx-auto">
-          <h4 class="mb-4 font-bold text-bluish">Market Analysis</h4>
+          <h4 class="mb-4 font-bold text-bluish">
+            {{ $t('home.support.anylist') }}
+          </h4>
           <p>
-            Stay informed with real-time market insights and actionable trade
-            ideas from our research team.
+            {{ $t('home.support.anylist_desc') }}
           </p>
         </div>
       </div>
