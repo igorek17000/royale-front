@@ -16,14 +16,14 @@
       <div class="p-3 text-left w-1/6">Coin Price</div>
       <div class="p-3 text-left w-1/6">Trade Type</div>
       <div class="p-3 text-left w-1/6">Amount</div>
+      <div class="p-3 text-left w-1/6">Margin</div>
       <div class="p-3 text-left w-1/6">Date</div>
-      <div class="p-3 text-left w-1/6">Live Price</div>
       <div class="p-3 text-left w-1/6">Proffit</div>
       <div class="p-3 text-left w-1/6">Action</div>
     </div>
     <div class="flex-1 sm:flex-none">
       <div
-        class="flex flex-row items-center mb-2 w-100"
+        class="flex flex-row items-center mb-2 w-full"
         v-for="order in orders"
         :key="order.id"
       >

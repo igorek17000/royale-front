@@ -180,6 +180,8 @@ export default {
         })
     },
     async getOpenOrders() {
+      this.$store.commit('trade/reset_MARGIN')
+
       await this.$axios
         .get('/orders', {
           params: {

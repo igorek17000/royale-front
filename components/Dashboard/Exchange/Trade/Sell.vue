@@ -89,6 +89,89 @@
         ></vue-numeric>
       </div>
     </div>
+    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+      <div class="text-xs">Leverage Value:</div>
+      <div class="uppercase">
+        <vue-numeric
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="leverage"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
+    </div>
+    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+      <div class="text-xs">Max Lot:</div>
+      <div class="uppercase">
+        <p class="px-4" v-if="liveCoinPrice">
+          {{ parseFloat(maxLot).toFixed(2) }}
+        </p>
+      </div>
+    </div>
+    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+      <div class="text-xs">Max Volume:</div>
+      <div class="uppercase">
+        <vue-numeric
+          v-if="maxVolume"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="maxVolume"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
+    </div>
+    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+      <div class="text-xs">Used Margin:</div>
+      <div class="uppercase">
+        <vue-numeric
+          v-if="totalMargin"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="totalMargin"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
+    </div>
+    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+      <div class="text-xs">Free Margin:</div>
+      <div class="uppercase">
+        <vue-numeric
+          v-if="freeMargin"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="freeMargin"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -103,7 +186,8 @@ export default {
       isDisabled: true,
       isLoading: false,
       buyLoot: null,
-      totalSellAmount: 0,
+      totalBuyAmount: 0,
+      coinName: null,
     }
   },
   components: {
@@ -120,22 +204,25 @@ export default {
     liveCoinPrice() {
       return this.$store.state.trade.liveCoinPrice
     },
+    leverage() {
+      return this.$store.state.balance.balance.leverage
+    },
+    maxVolume() {
+      return this.leverage * this.freeMargin
+    },
+    maxLot() {
+      let totalLot = this.maxVolume / this.liveCoinPrice
+      return parseFloat(totalLot).toFixed(2)
+    },
+    totalMargin() {
+      return this.$store.state.trade.totalMargin
+    },
+    freeMargin() {
+      return this.balance - this.totalMargin
+    },
   },
 
   watch: {
-    totalSellAmount: function (val) {
-      if (val < 0.0) {
-        this.totalSellAmount = 0
-      } else if (val === 0) {
-        this.isDisabled = true
-      } else {
-        if (val > this.balance) {
-          this.totalSellAmount = this.balance
-        } else {
-          this.isDisabled = false
-        }
-      }
-    },
     buyLoot: {
       handler: function (val) {
         this.totalSellAmount =
@@ -150,15 +237,19 @@ export default {
       this.buyLoot = val
     },
     async sendSell() {
+      if (!this.buyLoot) return
       this.isLoading = true
+      let marginData = this.totalBuyAmount / this.leverage
       let payload = {
         coin_price: this.liveCoinPrice,
         trade_type: 'sell',
         amount: this.totalSellAmount,
         user: this.$auth.user.id,
-        coin: this.coin,
+        coin: this.coinName,
         isOpen: true,
         buyLoot: this.buyLoot,
+        margin: marginData,
+        leverage: this.leverage,
       }
       await this.$axios
         .post('/orders/new', payload, {
@@ -183,10 +274,11 @@ export default {
     },
   },
   mounted() {
+    this.coinName = this.$route.params.coin
     if (process.client) {
       let buyLoot = localStorage.getItem('buyLoot')
-      console.log('🚀 ~ mounted ~ buyLoot', buyLoot)
-      this.buyLoot = buyLoot
+      this.buyLoot = parseFloat(buyLoot)
+      console.log('🚀 ~ mounted ~ this.buyLoot', this.buyLoot)
     }
   },
 }

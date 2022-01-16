@@ -165,7 +165,7 @@
       <p class="pl-3 text-gray-500 text-sm hidden md:block">24h Low</p>
     </div>
     <div class="ml-auto flex items-center justify-end">
-      <div class="text-right pr-5 hidden md:block">
+      <!-- <div class="text-right pr-5 hidden md:block">
         <div class="text-xs text-gray-400 dark:text-gray-400">Free Margin:</div>
         <div class="text-white font-roboto flex items-center">
           <vue-numeric
@@ -183,8 +183,8 @@
             class=""
           ></vue-numeric>
         </div>
-      </div>
-      <div class="text-right pr-5" v-if="proffit > 0">
+      </div> -->
+      <div class="text-right pr-5 hidden md:block" v-if="proffit > 0">
         <div class="text-xs text-gray-400 dark:text-gray-400">Proffit:</div>
         <div class="text-lg font-roboto" :class="[profitClass]">
           {{ proffit }}$

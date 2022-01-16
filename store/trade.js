@@ -6,6 +6,7 @@ const state = () => ({
   coinRefresh: false,
   liveCoinPrice: 0,
   leverage: 100,
+  totalMargin: 0,
 })
 
 const getters = {}
@@ -36,6 +37,12 @@ const mutations = {
   },
   REFRESH_COIN(state) {
     state.coinRefresh = !state.coinRefresh
+  },
+  ADD_MARGIN(state, data) {
+    state.totalMargin += data
+  },
+  reset_MARGIN(state) {
+    state.totalMargin = 0
   },
 }
 

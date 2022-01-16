@@ -20,8 +20,7 @@
         w-1/2
         md:w-1/6
         border
-        md:border-none
-        text-gray-400
+        md:border-none md:text-gray-400
       "
     >
       <span class="px-2 md:hidden">Order ID:</span>{{ order.id }}
@@ -78,6 +77,21 @@
         :precision="2"
       ></vue-numeric>
     </div>
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+    >
+      <span class="px-2 md:hidden">Margin:</span>
+      <vue-numeric
+        currency="$"
+        separator=","
+        read-only
+        read-only-class=" flex
+        items-center
+          w-full"
+        :value="order.margin"
+        :precision="2"
+      ></vue-numeric>
+    </div>
 
     <div
       class="
@@ -88,32 +102,13 @@
         w-1/2
         md:w-1/6
         border
-        md:border-none
-        text-gray-400
+        md:border-none md:text-gray-400
       "
     >
       <span class="px-2 md:hidden">Date:</span>
       {{ formatTime(order.created_at) }}
     </div>
-    <div
-      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
-      :class="isPositive ? 'text-greenMoney' : 'text-pinkMoney'"
-    >
-      <span class="px-2 md:hidden">Live Price:</span>
 
-      <vue-numeric
-        v-if="liveCoinPrice"
-        currency="$"
-        separator=","
-        read-only
-        read-only-class=" flex
-        items-center
-          w-full"
-        :value="liveCoinPrice"
-        :precision="2"
-      ></vue-numeric>
-      <loading v-else />
-    </div>
     <div
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
       :class="isPositive ? 'text-greenMoney' : 'text-pinkMoney'"
@@ -174,18 +169,20 @@ export default {
     }
   },
   mounted() {
-    let coin = `${this.order.coin}usdt`
-    this.ws = new WebSocket(
-      `wss://stream.binance.com/stream?streams=${coin}@trade`
-    )
-    let vm = this
-    this.ws.addEventListener('message', function (event) {
-      let ev = JSON.parse(event.data)
-      if (ev.stream === `${coin}@trade`) {
-        let price = parseFloat(ev.data.p).toFixed(2)
-        vm.liveCoinPrice = price
-      }
-    })
+    const coin = this.order.coin
+    if (coin) {
+      this.ws = new WebSocket(
+        `wss://stream.binance.com/stream?streams=${coin}@trade`
+      )
+      let vm = this
+      this.ws.addEventListener('message', function (event) {
+        let ev = JSON.parse(event.data)
+        if (ev.stream === `${coin}@trade`) {
+          let price = parseFloat(ev.data.p).toFixed(2)
+          vm.liveCoinPrice = price
+        }
+      })
+    }
   },
   beforeDestroy() {
     // this.$store.commit('trade/SET_COIN_BALANCE', null)
@@ -199,8 +196,19 @@ export default {
       deep: true,
       immediate: true,
     },
+    'order.margin': {
+      handler: function (val) {
+        this.$store.commit('trade/ADD_MARGIN', val)
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   computed: {
+    leverage() {
+      return this.$store.state.balance.balance.leverage
+    },
+
     proffit() {
       if (!this.liveCoinPrice) {
         return 0

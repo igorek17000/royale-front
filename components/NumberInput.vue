@@ -34,7 +34,7 @@
         outline-none
       "
       name="custom-input-number"
-      v-model="nrValue"
+      v-model="newVal"
       :step="steps"
       min="0"
       :max="maxLot"
@@ -56,17 +56,18 @@ export default {
   data() {
     return {
       steps: 0.01,
+      newVal: 0,
     }
   },
   methods: {
     increment() {
-      let increase = Number(this.steps) + Number(this.nrValue)
-      this.nrValue = parseFloat(increase).toFixed(2)
+      let increase = Number(this.steps) + Number(this.newVal)
+      this.newVal = parseFloat(increase).toFixed(2)
     },
     decrement() {
-      if (this.nrValue === 0) return
-      let decrease = Number(this.nrValue) - Number(this.steps)
-      this.nrValue = parseFloat(decrease).toFixed(2)
+      if (this.newVal === 0) return
+      let decrease = Number(this.newVal) - Number(this.steps)
+      this.newVal = parseFloat(decrease).toFixed(2)
     },
   },
   watch: {
@@ -75,12 +76,29 @@ export default {
         val = parseFloat(val)
 
         if (val < 0) {
-          this.nrValue = 0
+          this.newVal = 0
         }
         if (val > this.maxLot) {
-          this.nrValue = this.maxLot
+          this.newVal = this.maxLot
         }
-        this.$emit('lot-value', val)
+        this.newVal = val
+        this.$emit('lot-value', this.newVal)
+      },
+      deep: true,
+      immediate: true,
+    },
+    newVal: {
+      handler: function (val) {
+        val = parseFloat(val)
+
+        if (val < 0) {
+          this.newVal = 0
+        }
+        if (val > this.maxLot) {
+          this.newVal = this.maxLot
+        }
+        this.newVal = val
+        this.$emit('lot-value', this.newVal)
       },
       deep: true,
       immediate: true,
@@ -94,6 +112,7 @@ export default {
     //   immediate: true,
     // },
   },
+  mounted() {},
 }
 </script>
 
