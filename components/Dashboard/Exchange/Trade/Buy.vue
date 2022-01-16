@@ -92,7 +92,7 @@
         ></vue-numeric>
       </div>
     </div>
-    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+    <!-- <div class="mt-4 relative rounded-sm flex justify-between items-center">
       <div class="text-xs">Leverage Value:</div>
       <div class="uppercase">
         <vue-numeric
@@ -109,7 +109,7 @@
           class=""
         ></vue-numeric>
       </div>
-    </div>
+    </div> -->
     <div class="mt-4 relative rounded-sm flex justify-between items-center">
       <div class="text-xs">Max Lot:</div>
       <div class="uppercase">
@@ -190,7 +190,6 @@ export default {
       isBuyDisabled: true,
       isLoading: false,
       buyLoot: 0,
-      totalBuyAmount: 0,
       coinName: null,
     }
   },
@@ -228,11 +227,9 @@ export default {
   watch: {
     buyLoot: {
       handler: function (val) {
-        if (val > 0.0) {
+        if (val > 0.0 && this.freeMargin > 1) {
           this.isBuyDisabled = false
         }
-        this.totalBuyAmount =
-          parseFloat(this.liveCoinPrice).toFixed(2) * parseFloat(val)
       },
       deep: true,
       immediate: true,
@@ -245,16 +242,13 @@ export default {
     async sendBuy() {
       if (!this.buyLoot) return
       this.isLoading = true
-      let marginData = this.totalBuyAmount / this.leverage
       let payload = {
         coin_price: this.liveCoinPrice,
         trade_type: 'buy',
-        amount: this.totalBuyAmount,
         user: this.$auth.user.id,
         coin: this.coinName,
         isOpen: true,
         buyLoot: this.buyLoot,
-        margin: marginData,
         leverage: this.leverage,
       }
       await this.$axios
@@ -272,10 +266,19 @@ export default {
           if (process.client) {
             localStorage.setItem('buyLoot', this.buyLoot)
           }
-          this.totalBuyAmount = null
+          this.$toasted.show(`Order succesfully saved with id ${res.data.id}`, {
+            type: 'success',
+            position: 'bottom-right',
+            duration: 2500,
+          })
         })
         .catch((err) => {
           console.log('err', err)
+          this.$toasted.show('Error saving order. Please Refresh', {
+            type: 'error',
+            position: 'bottom-right',
+            duration: 2500,
+          })
         })
     },
   },

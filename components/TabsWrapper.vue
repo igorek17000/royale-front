@@ -12,7 +12,7 @@
               md:text-sm
               border-b border-transparent
               px-2
-              py-4
+              py-2
             "
             @click="toggleTabs(1)"
             :class="{
@@ -33,7 +33,7 @@
               md:text-sm
               border-b border-transparent
               px-2
-              py-4
+              py-2
             "
             @click="toggleTabs(2)"
             :class="{
@@ -54,7 +54,7 @@
               md:text-sm
               border-b border-transparent
               px-2
-              py-4
+              py-2
             "
             @click="toggleTabs(3)"
             :class="{
@@ -68,7 +68,7 @@
       </ul>
       <div class="relative flex flex-col break-words w-full">
         <div
-          class="px-3 h-auto md:h-56 overflow-y-auto"
+          class="px-3"
           :class="{
             hidden: openTab !== 1,
             'block bg-secondary': openTab === 1,

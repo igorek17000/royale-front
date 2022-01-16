@@ -13,11 +13,11 @@ module.exports = {
       coin_price,
       coin,
       trade_type,
-      margin,
       leverage,
     } = ctx.request.body
     let entity
     if (!user) return
+    if (buyLoot === 0.0) return
 
     let totalAmount =
       parseFloat(coin_price).toFixed(2) * parseFloat(buyLoot).toFixed(2)

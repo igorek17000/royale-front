@@ -97,8 +97,10 @@ export default {
     },
     maxLot: {
       handler: function (val) {
-        console.log('vall', val)
-        this.maxLot = val
+        let parsed = parseFloat(val).toFixed(2)
+        if (parsed < this.newVal) {
+          this.newVal = parsed
+        }
       },
       deep: true,
       immediate: true,

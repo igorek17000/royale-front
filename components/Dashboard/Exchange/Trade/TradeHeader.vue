@@ -11,6 +11,9 @@
       md:flex-nowrap
     "
   >
+    <div class="mobile block md:hidden w-full px-4 py-4">
+      <search-mobile />
+    </div>
     <div
       class="
         flex
@@ -164,26 +167,43 @@
       </div>
       <p class="pl-3 text-gray-500 text-sm hidden md:block">24h Low</p>
     </div>
-    <div class="ml-auto flex items-center justify-end">
-      <!-- <div class="text-right pr-5 hidden md:block">
-        <div class="text-xs text-gray-400 dark:text-gray-400">Free Margin:</div>
-        <div class="text-white font-roboto flex items-center">
-          <vue-numeric
-            v-if="balance"
-            currency="$"
-            separator=","
-            read-only
-            read-only-class=" flex
+    <div
+      class="
+        items-center
+        md:text-base
+        text-gray-900 text-sm
+        justify-center
+        dark:text-white
+        capitalize
+        border-r border-gray-200
+        dark:border-gray-800
+        px-2
+        py-4
+        w-1/2
+        md:w-1/5
+        hidden
+        md:flex
+      "
+    >
+      <div class="text-xs text-gray-400 dark:text-gray-400">
+        Leverage Value:
+      </div>
+      <div class="text-white font-roboto flex items-center">
+        <vue-numeric
+          v-if="leverage"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
         items-center
           w-full
           pl-4
           pr-4"
-            :value="balance"
-            :precision="2"
-            class=""
-          ></vue-numeric>
-        </div>
-      </div> -->
+          :value="leverage"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
       <div class="text-right pr-5 hidden md:block" v-if="proffit > 0">
         <div class="text-xs text-gray-400 dark:text-gray-400">Proffit:</div>
         <div class="text-lg font-roboto" :class="[profitClass]">
@@ -197,6 +217,7 @@
 <script>
 import axios from 'axios'
 import VueNumeric from 'vue-numeric'
+import SearchMobile from './SearchMobile.vue'
 export default {
   name: 'TradeHeader',
   data() {
@@ -217,6 +238,7 @@ export default {
   },
   components: {
     VueNumeric,
+    SearchMobile,
   },
   mounted() {
     let coin = this.$route.params.coin
@@ -327,7 +349,9 @@ export default {
     started_balance() {
       return this.$store.state.balance.balance.started_balance
     },
-
+    leverage() {
+      return this.$store.state.balance.balance.leverage
+    },
     proffit() {
       let proffit = this.balance - this.started_balance
       if (proffit < 0) {

@@ -17,6 +17,7 @@ export default {
   plugins: [
     { src: '~/plugins/trading-vue.client.js', mode: 'client' },
     { src: '~/plugins/vue-numeric.js', mode: 'client' },
+    { src: '~/plugins/vue-toasted.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
