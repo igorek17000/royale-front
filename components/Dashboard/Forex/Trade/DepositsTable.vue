@@ -9,7 +9,7 @@
     <tbody class="">
       <tr v-for="deposit in deposits" :key="deposit.id">
         <td class="text-money text-base">+{{ deposit.amount }}</td>
-        <td>{{ deposit.created_at.split('T')[0] }}</td>
+        <td>{{ formatTime(deposit.created_at) }}</td>
       </tr>
     </tbody>
   </table>
@@ -19,6 +19,11 @@
 export default {
   name: 'DepositsTable',
   props: ['deposits'],
+  methods: {
+    formatTime(val) {
+      return this.$dayjs(val).format('DD/MM/YYYY - HH:mm')
+    },
+  },
 }
 </script>
 

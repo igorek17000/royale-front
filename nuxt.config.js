@@ -14,7 +14,10 @@ export default {
   css: ['@/assets/css/custom.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/trading-vue.client.js', mode: 'client' }],
+  plugins: [
+    { src: '~/plugins/trading-vue.client.js', mode: 'client' },
+    { src: '~/plugins/vue-numeric.js', mode: 'client' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -27,6 +30,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@nuxtjs/dayjs',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     [
@@ -74,7 +78,12 @@ export default {
     // baseURL: 'https://api.acetrader.co.uk',
     baseURL: 'http://localhost:1337',
   },
-
+  dayjs: {
+    defaultLocale: 'en',
+    plugins: [
+      // 'relativeTime', // import 'dayjs/plugin/relativeTime'
+    ],
+  },
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {

@@ -17,17 +17,17 @@
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <div class="flex-grow flex overflow-x-hidden">
         <TradeSidebar title="Exchange" />
-        <div class="w-full h-full bg-secondary">
+        <div class="w-full h-full">
           <trade-header @set-head-meta="setMeta" />
-          <div class="trade-table block md:flex">
+          <div class="trade-table block md:flex relative">
             <client-only>
               <trading-table />
             </client-only>
-            <div class="w-full md:w-1/5 bg-primary px-4 py-6">
+            <div class="w-full md:w-1/5 bg-primary px-4 pt-4">
               <buy-sell @reload-footer="reloadF = !reloadF" />
             </div>
           </div>
-          <div class="footer-order bg-secondary">
+          <div class="footer-order w-full md:w-4/5">
             <tabs-wrapper
               :reloadFoot="reloadF"
               @reload-footer="reloadF = !reloadF"

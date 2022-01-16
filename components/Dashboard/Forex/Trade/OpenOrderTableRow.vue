@@ -44,7 +44,7 @@
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
     >
       <span class="px-2 md:hidden">Date:</span>
-      {{ order.created_at.split('T')[0] }}
+      {{ formatTime(order.created_at) }}
     </div>
     <div
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
@@ -138,6 +138,9 @@ export default {
         .catch((err) => {
           console.log('err', err)
         })
+    },
+    formatTime(val) {
+      return this.$dayjs(val).format('DD/MM/YYYY - HH:mm')
     },
   },
 }

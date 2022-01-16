@@ -8,15 +8,16 @@
               tracking-wider
               uppercase
               focus:outline-none
-              text-base
+              text-xs
+              md:text-sm
               border-b border-transparent
               px-2
               py-4
             "
             @click="toggleTabs(1)"
             :class="{
-              'text-gray-500 ': openTab !== 1,
-              'text-white  border-money': openTab === 1,
+              'text-gray-500 bg-primary': openTab !== 1,
+              'text-white  border-money bg-secondary': openTab === 1,
             }"
           >
             Open Orders
@@ -28,7 +29,8 @@
               tracking-wider
               uppercase
               focus:outline-none
-              text-base
+              text-xs
+              md:text-sm
               border-b border-transparent
               px-2
               py-4
@@ -36,7 +38,7 @@
             @click="toggleTabs(2)"
             :class="{
               'text-gray-500 ': openTab !== 2,
-              'text-white  border-money': openTab === 2,
+              'text-white  border-money bg-secondary': openTab === 2,
             }"
           >
             Closed Order History
@@ -48,7 +50,8 @@
               tracking-wider
               uppercase
               focus:outline-none
-              text-base
+              text-xs
+              md:text-sm
               border-b border-transparent
               px-2
               py-4
@@ -56,7 +59,7 @@
             @click="toggleTabs(3)"
             :class="{
               'text-gray-500 ': openTab !== 3,
-              'text-white  border-money': openTab === 3,
+              'text-white  border-money bg-secondary': openTab === 3,
             }"
           >
             Deposits
@@ -64,41 +67,48 @@
         </li>
       </ul>
       <div class="relative flex flex-col break-words w-full">
-        <div class="tab-content tab-space">
-          <div
-            class="px-3 py-3 h-56 overflow-y-auto"
-            :class="{ hidden: openTab !== 1, block: openTab === 1 }"
-          >
-            <div class="flex items-center justify-center">
-              <open-order-table
-                :orders="openOrders"
-                v-if="openOrders.length !== 0"
-                @reload-footer="$emit('reload-footer')"
-              />
-              <div v-else class="h-full">
-                <p class="text-lg text-white uppercase">No Open Orders</p>
-              </div>
+        <div
+          class="px-3 h-auto md:h-56 overflow-y-auto"
+          :class="{
+            hidden: openTab !== 1,
+            'block bg-secondary': openTab === 1,
+          }"
+        >
+          <div class="h-full flex items-center justify-center">
+            <open-order-table
+              :orders="openOrders"
+              v-if="openOrders.length !== 0"
+              @reload-footer="$emit('reload-footer')"
+            />
+            <div v-else>
+              <p class="text-lg text-white uppercase">No Open Orders</p>
             </div>
           </div>
-          <div
-            class="px-3 py-3 h-56 overflow-y-auto"
-            :class="{ hidden: openTab !== 2, block: openTab === 2 }"
-          >
-            <div class="flex items-center justify-center">
-              <order-table :orders="orders" v-if="orders.length !== 0" />
-              <div v-else class="h-full">
-                <p class="text-lg text-white uppercase">No Orders</p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="px-3 py-3 h-56 overflow-y-auto"
-            :class="{ hidden: openTab !== 3, block: openTab === 3 }"
-          >
-            <deposits-table :deposits="deposits" v-if="deposits.length !== 0" />
+        </div>
+        <div
+          class="px-3 h-auto md:h-56 overflow-y-auto"
+          :class="{
+            hidden: openTab !== 2,
+            'block bg-secondary': openTab === 2,
+          }"
+        >
+          <div class="flex items-center justify-center">
+            <order-table :orders="orders" v-if="orders.length !== 0" />
             <div v-else class="h-full">
-              <p class="text-lg text-white uppercase">No Deposits</p>
+              <p class="text-lg text-white uppercase">No Orders</p>
             </div>
+          </div>
+        </div>
+        <div
+          class="px-3 h-auto md:h-56 overflow-y-auto"
+          :class="{
+            hidden: openTab !== 3,
+            'block bg-secondary': openTab === 3,
+          }"
+        >
+          <deposits-table :deposits="deposits" v-if="deposits.length !== 0" />
+          <div v-else class="h-full">
+            <p class="text-lg text-white uppercase">No Deposits</p>
           </div>
         </div>
       </div>

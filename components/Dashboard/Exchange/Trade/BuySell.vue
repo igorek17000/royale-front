@@ -58,13 +58,21 @@
             :class="{ hidden: openTab !== 1, block: openTab === 1 }"
             class="py-4"
           >
-            <Sell :coin="coin" @reload-footer="$emit('reload-footer')" />
+            <Sell
+              :coin="coin"
+              @reload-footer="$emit('reload-footer')"
+              v-if="openTab === 1"
+            />
           </div>
           <div
             :class="{ hidden: openTab !== 2, block: openTab === 2 }"
             class="py-4"
           >
-            <Buy :coin="coin" @reload-footer="$emit('reload-footer')" />
+            <Buy
+              :coin="coin"
+              @reload-footer="$emit('reload-footer')"
+              v-if="openTab === 2"
+            />
           </div>
         </div>
       </div>
@@ -87,12 +95,6 @@ export default {
       openTab: 2,
       coin: null,
     }
-  },
-  computed: {},
-
-  mounted() {
-    let coin = this.$route.params.coin
-    this.coin = coin.replace('usdt', '')
   },
   methods: {
     toggleTabs: function (tabNumber) {

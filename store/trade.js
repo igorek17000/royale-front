@@ -1,10 +1,11 @@
 const state = () => ({
   tradeBook: [],
   kline: null,
-  coinPrice: null,
+  coinPrice: 0,
   coinBalance: 0,
   coinRefresh: false,
-  liveCoinPrice: null,
+  liveCoinPrice: 0,
+  leverage: 100,
 })
 
 const getters = {}

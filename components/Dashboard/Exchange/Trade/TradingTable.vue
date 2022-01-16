@@ -115,19 +115,19 @@ export default {
     height: 350px;
   }
 }
-@media only screen and (min-width: 1336px) {
+@media only screen and (min-width: 1280px) {
   .h-trade {
     height: 350px;
   }
 }
-@media only screen and (min-width: 1600px) {
+@media only screen and (min-width: 1336px) {
   .h-trade {
     height: 400px;
   }
 }
 @media only screen and (min-width: 1600px) {
   .h-trade {
-    height: 500px;
+    height: 540px;
   }
 }
 </style>

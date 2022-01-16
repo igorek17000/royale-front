@@ -22,14 +22,44 @@
         <div class="text-xs text-gray-400 dark:text-gray-400">
           {{ $t('account.balance') }}:
         </div>
-        <div class="text-gray-900 text-lg dark:text-white font-roboto">
-          ${{ parseFloat(current_balance).toFixed(2) }} 💰
+        <div
+          class="
+            text-gray-900 text-lg
+            dark:text-white
+            font-roboto
+            flex
+            items-center
+          "
+        >
+          <vue-numeric
+            v-if="current_balance"
+            currency="$"
+            separator=","
+            read-only
+            read-only-class=" flex
+        items-center pr-3
+          w-full"
+            :value="current_balance"
+            :precision="2"
+            class=""
+          ></vue-numeric>
+          💰
         </div>
       </div>
-      <div class="text-right pr-5">
+      <div class="text-right pr-5" v-if="proffit">
         <div class="text-xs text-gray-400 dark:text-gray-400">Proffit:</div>
         <div class="text-lg font-roboto" :class="[profitClass]">
-          {{ proffit }}$
+          <vue-numeric
+            currency="$"
+            separator=","
+            read-only
+            read-only-class=" flex
+        items-center
+          w-full"
+            :value="proffit"
+            :precision="2"
+            class=""
+          ></vue-numeric>
         </div>
       </div>
     </div>
@@ -38,6 +68,7 @@
 
 <script>
 import Avatar from '~/components/Dashboard/Avatar.vue'
+import VueNumeric from 'vue-numeric'
 export default {
   data() {
     return {
@@ -48,7 +79,7 @@ export default {
     }
   },
   props: ['balance'],
-  components: { Avatar },
+  components: { Avatar, VueNumeric },
   computed: {
     current_balance() {
       return this.balance.actual_balance
@@ -59,10 +90,8 @@ export default {
     proffit() {
       let proffit = this.current_balance - this.started_balance
       if (proffit < 0) {
-        proffit = `${parseFloat(proffit).toFixed(2)}`
         this.profitClass = 'text-custom-red'
       } else {
-        proffit = `+${parseFloat(proffit).toFixed(2)}`
         this.profitClass = 'text-money'
       }
       return proffit

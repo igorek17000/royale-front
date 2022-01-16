@@ -66,7 +66,17 @@
         class="price pt-3 text-base md:text-xl font-bold text-money"
         v-if="coin"
       >
-        $ {{ coin }}
+        <vue-numeric
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center pr-3
+          w-full"
+          :value="coin"
+          :precision="2"
+          class=""
+        ></vue-numeric>
       </div>
     </div>
   </div>
@@ -74,8 +84,10 @@
 
 <script>
 import axios from 'axios'
+import VueNumeric from 'vue-numeric'
 export default {
   name: 'EtheriumCard',
+  components: { VueNumeric },
   data() {
     return {
       ws: null,

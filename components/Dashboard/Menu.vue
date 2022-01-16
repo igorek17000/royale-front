@@ -62,8 +62,30 @@
         <span class="text-xs text-gray-400 dark:text-gray-400"
           >{{ $t('account.balance-menu') }}:
         </span>
-        <p class="balance rounded-md text-money shadow font-bold font-roboto">
-          $ {{ parseFloat(balance).toFixed(2) }} 💰
+        <p
+          class="
+            balance
+            rounded-md
+            text-money
+            shadow
+            font-bold font-roboto
+            flex
+            items-center
+          "
+        >
+          <vue-numeric
+            v-if="balance"
+            currency="$"
+            separator=","
+            read-only
+            read-only-class=" flex
+        items-center pr-3
+          w-full"
+            :value="balance"
+            :precision="2"
+            class=""
+          ></vue-numeric>
+          💰
         </p>
       </div>
       <!-- <button class="h-8 px-3 rounded-md shadow text-white bg-blue-500">
@@ -157,8 +179,9 @@
 <script>
 import LangSwitcher from '~/components/LangSwitcher.vue'
 import Avatar from '~/components/Dashboard/Avatar.vue'
+import VueNumeric from 'vue-numeric'
 export default {
-  components: { LangSwitcher, Avatar },
+  components: { LangSwitcher, Avatar, VueNumeric },
   data() {
     return {
       isOpen: false,

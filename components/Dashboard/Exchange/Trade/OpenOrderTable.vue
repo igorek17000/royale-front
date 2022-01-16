@@ -1,15 +1,5 @@
 <template>
-  <div
-    class="
-      w-full
-      flex flex-col flex-no-wrap
-      sm:bg-primary
-      rounded-lg
-      overflow-hidden
-      sm:shadow-lg
-      my-2
-    "
-  >
+  <div class="w-full flex flex-col flex-no-wrap overflow-hidden my-2">
     <div
       class="
         text-white
@@ -27,20 +17,13 @@
       <div class="p-3 text-left w-1/6">Trade Type</div>
       <div class="p-3 text-left w-1/6">Amount</div>
       <div class="p-3 text-left w-1/6">Date</div>
+      <div class="p-3 text-left w-1/6">Live Price</div>
       <div class="p-3 text-left w-1/6">Proffit</div>
       <div class="p-3 text-left w-1/6">Action</div>
     </div>
     <div class="flex-1 sm:flex-none">
       <div
-        class="
-          flex flex-row
-          items-center
-          mb-2
-          sm:mb-0
-          border
-          md:border-none
-          w-100
-        "
+        class="flex flex-row items-center mb-2 w-100"
         v-for="order in orders"
         :key="order.id"
       >

@@ -90,14 +90,9 @@ module.exports = {
     let actual = parseFloat(payment.actual_balance).toFixed(2)
     let totalBalance = parseFloat(proff) + parseFloat(actual)
     let paymentData
-    if (proff < 0) {
-      paymentData = {
-        actual_balance: 0,
-      }
-    } else {
-      paymentData = {
-        actual_balance: totalBalance,
-      }
+
+    paymentData = {
+      actual_balance: totalBalance,
     }
 
     console.log('🚀 ~ closeOrder ~ paymentData', paymentData)

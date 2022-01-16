@@ -110,10 +110,32 @@
         </div>
         <div class="prices flex justify-between align-middle items-center pt-4">
           <p class="font-bold font-roboto">
-            $ {{ parseFloat(negativeCap).toFixed(2) }}
+            <vue-numeric
+              v-if="negativeCap"
+              currency="$"
+              separator=","
+              read-only
+              read-only-class=" flex
+        items-center pr-3
+          w-full"
+              :value="negativeCap"
+              :precision="2"
+              class=""
+            ></vue-numeric>
           </p>
           <p class="font-bold font-roboto">
-            $ {{ parseFloat(positiveCap).toFixed(2) }}
+            <vue-numeric
+              v-if="positiveCap"
+              currency="$"
+              separator=","
+              read-only
+              read-only-class=" flex
+        items-center pr-3
+          w-full"
+              :value="positiveCap"
+              :precision="2"
+              class=""
+            ></vue-numeric>
           </p>
         </div>
       </div>
@@ -125,8 +147,9 @@
 import SearchCoin from './SearchCoin.vue'
 import coins from './coins.json'
 import axios from 'axios'
+import VueNumeric from 'vue-numeric'
 export default {
-  components: { SearchCoin },
+  components: { SearchCoin, VueNumeric },
   name: 'TradeSidebar',
   data() {
     return {

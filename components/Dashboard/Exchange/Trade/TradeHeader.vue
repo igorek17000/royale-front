@@ -15,14 +15,14 @@
       class="
         flex
         items-center
-        md:text-lg
-        text-gray-900 text-sm
+        md:text-base
+        text-sm
         justify-center
         dark:text-white
         capitalize
-        border-r border-gray-200
+        border-r
         dark:border-gray-800
-        px-5
+        px-2
         py-4
         w-1/2
         md:w-1/5
@@ -35,22 +35,35 @@
       ></div>
 
       <div id="coinPrice" class="font-roboto" :class="[colorClass]" v-else>
-        ${{ btc }}
+        <vue-numeric
+          v-if="btc"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-2
+          pr-2"
+          :value="btc"
+          :precision="2"
+          class=""
+        ></vue-numeric>
       </div>
-      <p class="pl-3 text-gray-500 text-lg hidden md:block">Market Price</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">Market Price</p>
     </div>
     <div
       class="
         flex
         items-center
-        md:text-lg
+        md:text-base
         text-gray-900 text-sm
         justify-center
         dark:text-white
         capitalize
         border-r border-gray-200
         dark:border-gray-800
-        px-5
+        px-2
         py-4
         w-1/2
         md:w-1/5
@@ -65,21 +78,21 @@
       <div id="coinPrice" class="font-roboto" v-else>
         {{ coin_change }} {{ coin_change_percentage }}%
       </div>
-      <p class="pl-3 text-gray-500 text-base hidden md:block">24h Change</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">24h Change</p>
     </div>
     <div
       class="
         hidden
         md:flex
         items-center
-        md:text-lg
+        md:text-base
         text-gray-900 text-sm
         justify-center
         dark:text-white
         capitalize
         border-r border-gray-200
         dark:border-gray-800
-        px-5
+        px-2
         py-4
         w-1/2
         md:w-1/5
@@ -92,21 +105,34 @@
       ></div>
 
       <div id="coinPrice" class="font-roboto" v-else>
-        {{ coin_change_high }}
+        <vue-numeric
+          v-if="coin_change_high"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="coin_change_high"
+          :precision="2"
+          class=""
+        ></vue-numeric>
       </div>
-      <p class="pl-3 text-gray-500 text-base hidden md:block">24h High</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">24h High</p>
     </div>
     <div
       class="
         items-center
-        md:text-lg
+        md:text-base
         text-gray-900 text-sm
         justify-center
         dark:text-white
         capitalize
         border-r border-gray-200
         dark:border-gray-800
-        px-5
+        px-2
         py-4
         w-1/2
         md:w-1/5
@@ -121,17 +147,41 @@
       ></div>
 
       <div id="coinPrice" class="font-roboto" v-else>
-        {{ coin_change_low }}
+        <vue-numeric
+          v-if="coin_change_low"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="coin_change_low"
+          :precision="2"
+          class=""
+        ></vue-numeric>
       </div>
-      <p class="pl-3 text-gray-500 text-base hidden md:block">24h Low</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">24h Low</p>
     </div>
     <div class="ml-auto flex items-center justify-end">
       <div class="text-right pr-5 hidden md:block">
-        <div class="text-xs text-gray-400 dark:text-gray-400">
-          {{ $t('account.balance') }}:
-        </div>
-        <div class="text-white font-roboto">
-          ${{ parseFloat(balance).toFixed(2) }} 💰
+        <div class="text-xs text-gray-400 dark:text-gray-400">Free Margin:</div>
+        <div class="text-white font-roboto flex items-center">
+          <vue-numeric
+            v-if="balance"
+            currency="$"
+            separator=","
+            read-only
+            read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+            :value="balance"
+            :precision="2"
+            class=""
+          ></vue-numeric>
         </div>
       </div>
       <div class="text-right pr-5" v-if="proffit > 0">
@@ -146,6 +196,7 @@
 
 <script>
 import axios from 'axios'
+import VueNumeric from 'vue-numeric'
 export default {
   name: 'TradeHeader',
   data() {
@@ -163,6 +214,9 @@ export default {
       coin_change_high: null,
       coin_change_low: null,
     }
+  },
+  components: {
+    VueNumeric,
   },
   mounted() {
     let coin = this.$route.params.coin

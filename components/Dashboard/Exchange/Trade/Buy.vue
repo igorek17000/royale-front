@@ -14,94 +14,38 @@
       >
         <span class="text-gray-500 sm:text-sm">Price</span>
       </div>
-      <input
-        type="number"
-        class="
-          block
-          w-full
-          pl-7
-          pr-14
-          border-gray-300
-          rounded-sm
-          bg-secondary
-          h-11
-          custom-input
-          hover:border-custom-red
-        "
-        v-model="liveCoinPrice"
-        disabled
-      />
-      <div class="absolute inset-y-0 right-0 flex items-center">
-        <label class="py-0 pl-2 pr-3 text-white pointer-events-none">USD</label>
-      </div>
-    </div>
-    <!-- <div class="mt-4 relative rounded-sm mb-4 border border-greenBorder">
-      <div
-        class="
-          absolute
-          inset-y-0
-          left-0
-          pl-3
-          flex
-          items-center
-          pointer-events-none
-        "
-      >
-        <span class="text-gray-500 sm:text-sm">Amount</span>
-      </div>
-      <input
-        type="number"
-        class="
-          block
-          w-full
-          pl-7
-          pr-14
-          border-gray-300
-          rounded-sm
-          bg-secondary
-          h-11
-          custom-input
-          hover:border-custom-red
-        "
-        min="0"
-        v-model="coinBuyAmount"
-      />
-      <div class="absolute inset-y-0 right-0 flex items-center">
-        <label
-          class="py-0 pl-2 pr-3 text-white pointer-events-none uppercase"
-          >{{ coin }}</label
-        >
-      </div>
-    </div> -->
 
-    <div class="loot text-center mb-4">
-      <p>
-        Loot :
-        <input
-          type="number"
-          min="0"
-          step="0.01"
-          class="bg-transparent w-12"
-          v-model="buyLoot"
-        />
-      </p>
-      <input
-        type="range"
-        class="
-          form-range
-          appearance-none
+      <vue-numeric
+        currency="$"
+        separator=","
+        read-only
+        read-only-class=" flex
+        items-center
           w-full
-          h-1
-          my-2
+          pl-4
+          pr-4
+          border-gray-300
+          rounded-sm
           bg-secondary
-          focus:outline-none focus:ring-0 focus:shadow-none
-        "
-        v-model="buyLoot"
-        step="0.01"
-        min="0"
-        max="1"
-      />
+          h-11
+          custom-input
+          hover:border-custom-red"
+        :value="liveCoinPrice"
+        :precision="2"
+        class=""
+      ></vue-numeric>
     </div>
+
+    <div class="loot mb-4">
+      <p>Loot :</p>
+    </div>
+    <number-input
+      @lot-value="updateLotValue"
+      :nrValue.sync="buyLoot"
+      :isbuy="true"
+      :maxLot="maxLot"
+    />
+
     <button
       class="
         flex
@@ -131,17 +75,94 @@
     </button>
     <hr class="border-2 my-6 border-gray-800" />
     <div class="mt-4 relative rounded-sm flex justify-between items-center">
-      <div class="text-xs">Available balance:</div>
-      <div class="uppercase">{{ parseFloat(balance).toFixed(2) }} USD</div>
+      <div class="text-xs">Lot Value:</div>
+      <div class="uppercase">
+        <vue-numeric
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="liveCoinPrice"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
     </div>
-    <!-- <div class="mt-4 relative rounded-sm flex justify-between items-center">
-      <div class="text-xs">Vol:</div>
-      <div class="uppercase">≈ {{ totalBuyAmount }} USD</div>
-    </div> -->
+    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+      <div class="text-xs">Leverage Value:</div>
+      <div class="uppercase">
+        <vue-numeric
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="leverage"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
+    </div>
+    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+      <div class="text-xs">Max Lot:</div>
+      <div class="uppercase">
+        <p class="px-4" v-if="liveCoinPrice">
+          {{ parseFloat(maxLot).toFixed(2) }}
+        </p>
+      </div>
+    </div>
+    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+      <div class="text-xs">Max Volume:</div>
+      <div class="uppercase">
+        <vue-numeric
+          v-if="maxVolume"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="maxVolume"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
+    </div>
+    <div class="mt-4 relative rounded-sm flex justify-between items-center">
+      <div class="text-xs">Free Margin:</div>
+      <div class="uppercase">
+        <vue-numeric
+          v-if="maxVolume"
+          currency="$"
+          separator=","
+          read-only
+          read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+          :value="maxVolume"
+          :precision="2"
+          class=""
+        ></vue-numeric>
+      </div>
+    </div>
   </div>
 </template>
 
+
 <script>
+import VueNumeric from 'vue-numeric'
+import NumberInput from '~/components/NumberInput.vue'
 export default {
   name: 'Buy',
   props: ['coin'],
@@ -149,9 +170,13 @@ export default {
     return {
       isBuyDisabled: true,
       isLoading: false,
-      buyLoot: 0,
+      buyLoot: null,
       totalBuyAmount: 0,
     }
+  },
+  components: {
+    VueNumeric,
+    NumberInput,
   },
   computed: {
     coinPrice() {
@@ -163,31 +188,47 @@ export default {
     liveCoinPrice() {
       return this.$store.state.trade.liveCoinPrice
     },
+    leverage() {
+      return this.$store.state.balance.balance.leverage
+    },
+    maxVolume() {
+      return this.leverage * this.balance
+    },
+    maxLot() {
+      let totalLot = this.maxVolume / this.liveCoinPrice
+      return parseFloat(totalLot).toFixed(2)
+    },
   },
   watch: {
-    totalBuyAmount: function (val) {
-      if (val > this.balance) {
-        this.totalBuyAmount = this.balance
-      } else {
-        // let total = val * this.coinPrice
-        this.isBuyDisabled = false
-        // this.coinBuyAmount = parseFloat(total).toFixed(2)
-      }
-    },
+    // totalBuyAmount: function (val) {
+    //   if (val > this.balance) {
+    //     this.totalBuyAmount = this.balance
+    //   } else {
+    //     // let total = val * this.coinPrice
+    //     this.isBuyDisabled = false
+    //     // this.coinBuyAmount = parseFloat(total).toFixed(2)
+    //   }
+    // },
 
     buyLoot: {
       handler: function (val) {
-        this.totalBuyAmount =
-          parseFloat(this.balance).toFixed(2) * parseFloat(val)
-        if (process.client) {
-          localStorage.setItem('buyLoot', val)
+        if (val > 0.0) {
+          this.isBuyDisabled = false
         }
+        this.totalBuyAmount =
+          parseFloat(this.liveCoinPrice).toFixed(2) * parseFloat(val)
+        // if (process.client) {
+        //   localStorage.setItem('buyLoot', val)
+        // }
       },
       deep: true,
       immediate: true,
     },
   },
   methods: {
+    updateLotValue(val) {
+      this.buyLoot = val
+    },
     async sendBuy() {
       this.isLoading = true
       let payload = {
@@ -210,11 +251,10 @@ export default {
           this.isLoading = false
           this.$emit('reload-footer')
           // this.$store.commit('REFRESH_BALANCE')
-          this.buyLoot = 0
           this.buyLoot = res.data.buyLoot
-          console.log('🚀 ~ .then ~ this.buyLoot', this.buyLoot)
-
-          this.$store.commit('OPEN_NOTIFICATION', true)
+          if (process.client) {
+            localStorage.setItem('buyLoot', this.buyLoot)
+          }
           this.totalBuyAmount = null
         })
         .catch((err) => {
@@ -225,11 +265,8 @@ export default {
   mounted() {
     if (process.client) {
       let buyLoot = localStorage.getItem('buyLoot')
-      if (buyLoot) {
-        this.buyLoot = buyLoot
-      } else {
-        localStorage.setItem('buyLoot', this.buyLoot)
-      }
+      console.log('🚀 ~ mounted ~ buyLoot', buyLoot)
+      this.buyLoot = buyLoot
     }
   },
 }
