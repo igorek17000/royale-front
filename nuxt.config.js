@@ -71,8 +71,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // baseURL: 'https://api.acetrader.co.uk',
-    baseURL: 'http://localhost:1337',
+    baseURL: 'https://api.acetrader.co.uk',
+    // baseURL: 'http://localhost:1337',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -117,15 +117,15 @@ export default {
           login: '/',
           logout: '/logout',
           callback: '/',
-          home: '/casino',
+          home: '/trade',
         },
         watchLoggedIn: true,
       },
     },
   },
   publicRuntimeConfig: {
-    // baseURL: 'https://api.acetrader.co.uk',
-    baseURL: 'http://localhost:1337',
+    baseURL: 'https://api.acetrader.co.uk',
+    // baseURL: 'http://localhost:1337',
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
