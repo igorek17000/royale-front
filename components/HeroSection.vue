@@ -11,13 +11,19 @@
     "
   >
     <div class="w-full md:w-2/5">
-      <h1 class="text-bluish font-semibold pb-4 pr-lg-5 pr-sm-0 text-5xl">
-        Real-time Trading and Exchange
-        <span class="underline-text"> Platform</span>
-      </h1>
+      <h1
+        class="
+          text-bluish
+          font-semibold
+          pb-4
+          pr-lg-5 pr-sm-0
+          text-5xl
+          leading-normal
+        "
+        v-html="$t('home.hero.title')"
+      ></h1>
       <h4 class="text-secondary py-8 text-2xl">
-        Stocks, Forex, Cryptocurrency, Indices ,ETFs and a lot more using latest
-        technologies.
+        {{ $t('home.hero.subtitle') }}
       </h4>
       <div class="buttons flex justify-between py-8">
         <button
@@ -58,7 +64,7 @@
         </button>
       </div>
       <div class="infos text-gray-400 text-2xl">
-        No Fees | No Commission | Transparent Pricing
+        {{ $t('home.hero.info') }}
       </div>
       <div class="mt-8">
         <div class="tech-socials h-10 w-full"></div>

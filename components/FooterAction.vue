@@ -8,15 +8,14 @@
         uppercase
         leading-relaxed
       "
-    >
-      Try
-      <span class="underline-text"> ACETRADER </span>
-      now!
-    </h3>
+      v-html="$t('home.footer-cta.title')"
+    ></h3>
     <p class="text-white text-center mt-6">
-      Claim your bonus and talk with our trading experts with just one click!
+      {{ $t('home.footer-cta.subtitle') }}
     </p>
-    <p class="text-gray-400 text-center">*No Credit Card required!</p>
+    <p class="text-gray-400 text-center">
+      {{ $t('home.footer-cta.cc') }}
+    </p>
     <div class="w-full pt-16 text-center">
       <button
         class="

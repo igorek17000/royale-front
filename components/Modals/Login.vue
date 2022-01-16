@@ -89,15 +89,17 @@
           >
             <div class="w-full h-100">
               <div class="error-server" v-if="error_server">
-                Credentials dont match!
+                {{ $t('home.login.error') }}
               </div>
               <form @submit="onSubmit">
                 <div>
-                  <label class="block text-gray-200">Email Address</label>
+                  <label class="block text-gray-200">{{
+                    $t('home.login.email')
+                  }}</label>
                   <input
                     type="email"
                     v-model="user.identifier"
-                    placeholder="Enter Email Address"
+                    :placeholder="$t('home.login.email_placeholder')"
                     class="
                       w-full
                       px-4
@@ -119,7 +121,7 @@
                   <input
                     type="password"
                     v-model="user.password"
-                    placeholder="Enter Password"
+                    :placeholder="$t('home.login.password_placeholder')"
                     minlength="6"
                     class="
                       w-full

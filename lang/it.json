@@ -101,5 +101,93 @@
   "account": {
     "balance": "Saldo del conto",
     "balance-menu": "Bilancia"
+  },
+  "home": {
+    "login": {
+      "error": "Le credenziali non corrispondono!",
+      "email": "Indirizzo email",
+      "phone": "Numero di telefono",
+      "email_placeholder": "Inserisci il tuo indirizzo email",
+      "password_placeholder": "Inserisci la tua password",
+      "username_placeholder": "Inserisci il tuo nome utente",
+      "phone_placeholder": "Inserisci il tuo numero di telefono"
+    },
+    "hero": {
+      "title": "<span class=\"underline-text\">Piattaforma</span>  di trading e scambio in tempo reale",
+      "subtitle": "Azioni, Forex, Criptovalute, Indici, ETF e molti altri utilizzando le ultime tecnologie.",
+      "info": "Nessun Costo | Nessuna Commissione | Prezzi Trasparenti",
+      "numbers": {
+        "trusted": "Commercianti di fiducia di Ace",
+        "trades": "Scambi / giorno",
+        "open": "Trading aperto",
+        "support": "Supporto online"
+      }
+    },
+    "promo": {
+      "subtitle": "Basta scegliere quelli che vuoi e iniziare a lavorare con loro",
+      "title": "Forniamo qualsiasi tipo di prodotto di cui hai bisogno",
+      "stock": "Dati sulle scorte",
+      "stock_detail": "Dati del mercato statunitense e globale",
+      "forex": "Forex",
+      "forex_detail": "Ampia copertura dei dati Forex",
+      "crypto": "Criptovalute",
+      "crypto_details": "1700+ simboli di criptovaluta",
+      "indicies": "Indici",
+      "indicies_details": "Dati di mercato dell'indice globale",
+      "etf_details": "Global Exchange Traded Fund e dati sui fondi comuni",
+      "fundamentals": "Fondamenti",
+      "fundamentals_details": "Dichiarazioni, calendario e altro",
+      "testimonial": "Nel nostro settore, l'accuratezza dei dati è fondamentale, ma i sistemi robusti per garantire la disponibilità dei dati sono ancora più importanti. Il talentuoso team di AceTrader offre, quindi non perdiamo mai un colpo mentre garantiamo miliardi per i nostri clienti. Facciamo affidamento su AceTrader perché i nostri clienti si affidano a noi."
+    },
+    "whyus": {
+      "title": "La nostra migliore  <span class=\"underline-text\">piattaforma</span>  creata per te 🚀",
+      "subtile": "Piattaforma di trading/scambio",
+      "unleash": "Scatena",
+      "unleash_details": "robusti strumenti grafici su una piattaforma pluripremiata, ottimo per i trader tecnici.",
+      "explore": "Esplorare",
+      "explore_details": "strumenti potenti e precaricati come Real Volume, Market Depth e Trader Sentiment.",
+      "customize": "Personalizza",
+      "customize_details": "la tua esperienza: scarica indicatori, crea watch list e layout personalizzati per adattare la piattaforma alla tua strategia."
+    },
+    "review": {
+      "title": "Le recensioni dei nostri  <span class=\"underline-text\">clienti</span> ",
+      "reviews": "Recensioni",
+      "allison": {
+        "title": "Fantastica piattaforma crittografica",
+        "desc": "Onestamente penso che questa app sia il modo più semplice per fare trading su criptovalute! \nAnche qui c'è una situazione uguale per tutti per guadagnare soldi!"
+      },
+      "justin": {
+        "title": "Do 4 stelle",
+        "desc": "È meraviglioso e facile. \nMa prova a lavorare in demo fino a quando non avrai familiarizzato con questo ambiente. \nPiattaforma molto buona, continua così."
+      },
+      "charlie": {
+        "title": "Ero nuovo nella scena del trading",
+        "desc": "Sono contento di aver trovato questa app, è una buona esperienza per farti migliorare nel trading... incredibile 👏... anche gli strateghi sono molto bravi."
+      }
+    },
+    "support": {
+      "title": "Fai trading con <span class=\"underline-text\">supporto & guida</span>",
+      "trade": "Segnali commerciali FX",
+      "trade_desc": "Amplia il tuo trading con segnali commerciali in tempo reale e strumento di analisi Trading Central.",
+      "market": "Stratega di mercato",
+      "market_desc": "I nostri esperti di strategie di mercato possono collaborare con te allo sviluppo di un piano di trading.",
+      "anylist": "Analisi di mercato",
+      "anylist_desc": "Tieniti informato con approfondimenti di mercato in tempo reale e idee commerciali attuabili dal nostro team di ricerca."
+    },
+    "footer-cta": {
+      "title": "Prova subito <span class=\"underline-text\">ACETRADER!</span>",
+      "subtitle": "Richiedi il tuo bonus e parla con i nostri esperti di trading con un solo clic!",
+      "cc": "*Nessuna carta di credito richiesta!"
+    },
+    "faq": {
+      "bitcoin": "Cos'è Bitcoin?",
+      "bitcoin_desc": "Bitcoin è una valuta digitale decentralizzata, il che significa che manca di una banca centrale o di un unico amministratore. \nI bitcoin possono essere inviati da utente a utente attraverso la rete peer-to-peer senza bisogno di intermediari.",
+      "start_trading": "Posso iniziare a fare trading con solo $ 1?",
+      "start_trading_desc": "AceTrader consente agli utenti di migliorare la loro esperienza pratica attraverso una varietà di prodotti finanziari e di trading a partire da $ 1.",
+      "is_safe": "AceTrader è sicuro?",
+      "is_safe_desc": "AceTrader vanta uno dei team di manutenzione e tecnologia di sicurezza più sofisticati al mondo e aggiorna costantemente i nostri sistemi di sicurezza per garantire la sicurezza delle risorse e degli account degli utenti.",
+      "help": "Posso ottenere aiuto da esperti di strategie di mercato?",
+      "help_desc": "SÌ. \nIl nostro team qualificato sarà a tua disposizione 24 ore su 24, 7 giorni su 7, per consigliarti e aiutarti in tutto per massimizzare il tuo profitto."
+    }
   }
 }

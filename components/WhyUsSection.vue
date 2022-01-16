@@ -1,10 +1,9 @@
 <template>
   <div class="px-4 py-8 w-full container mx-auto mt-16">
-    <h3 class="text-bluish font-semibold text-3xl text-center uppercase">
-      Our Top
-      <span class="underline-text"> Platform, </span>
-      Built For You
-    </h3>
+    <h3
+      class="text-bluish font-semibold text-3xl text-center uppercase"
+      v-html="$t('home.whyus.title')"
+    ></h3>
     <div class="flex items-center mt-16 flex-wrap">
       <div class="w-full md:w-1/2">
         <img
@@ -15,21 +14,26 @@
       </div>
       <div class="w-full md:w-1/2 md:px-10">
         <h4 class="text-2xl font-bold text-custom-red uppercase py-4">
-          Trading/Exchange Platform
+          {{ $t('home.whyus.subtile') }}
         </h4>
         <p class="py-4 text-primary text-base">
-          <span class="text-bluish text-xl font-bold">Unleash </span> robust
-          chart tools on an award-winning platform — great for technical
-          traders.
+          <span class="text-bluish text-xl font-bold">
+            {{ $t('home.whyus.unleash') }}
+          </span>
+          {{ $t('home.whyus.unleash_details') }}
         </p>
         <p class="py-4 text-primary text-base">
-          <span class="text-bluish text-xl font-bold">Explore </span> powerful,
-          preloaded tools like Real Volume, Market Depth, and Trader Sentiment.
+          <span class="text-bluish text-xl font-bold">
+            {{ $t('home.whyus.explore') }}
+          </span>
+
+          {{ $t('home.whyus.explore_details') }}
         </p>
         <p class="py-4 text-primary text-base">
-          <span class="text-bluish text-xl font-bold">Customise </span> your
-          experience: Download indicators, create watch lists and custom layouts
-          to adapt the platform for your strategy.
+          <span class="text-bluish text-xl font-bold">
+            {{ $t('home.whyus.customize') }}
+          </span>
+          {{ $t('home.whyus.customize_details') }}
         </p>
         <div class="buttons flex justify-between py-8">
           <button
