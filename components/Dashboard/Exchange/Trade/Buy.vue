@@ -189,7 +189,7 @@ export default {
     return {
       isBuyDisabled: true,
       isLoading: false,
-      buyLoot: null,
+      buyLoot: 0,
       totalBuyAmount: 0,
       coinName: null,
     }
@@ -216,7 +216,7 @@ export default {
     },
     maxLot() {
       let totalLot = this.maxVolume / this.liveCoinPrice
-      return parseFloat(totalLot).toFixed(2)
+      return totalLot
     },
     totalMargin() {
       return this.$store.state.trade.totalMargin

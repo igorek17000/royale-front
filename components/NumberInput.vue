@@ -74,15 +74,7 @@ export default {
     nrValue: {
       handler: function (val) {
         val = parseFloat(val)
-
-        if (val < 0) {
-          this.newVal = 0
-        }
-        if (val > this.maxLot) {
-          this.newVal = this.maxLot
-        }
         this.newVal = val
-        this.$emit('lot-value', this.newVal)
       },
       deep: true,
       immediate: true,
@@ -103,14 +95,14 @@ export default {
       deep: true,
       immediate: true,
     },
-    // maxLot: {
-    //   handler: function (val) {
-    //     console.log('vall', val)
-    //     return parseFloat(val).toFixed(2)
-    //   },
-    //   deep: true,
-    //   immediate: true,
-    // },
+    maxLot: {
+      handler: function (val) {
+        console.log('vall', val)
+        this.maxLot = val
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   mounted() {},
 }
