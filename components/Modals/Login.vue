@@ -141,7 +141,7 @@
                   type="submit"
                   class="
                     w-full
-                    block
+                    flex
                     bg-custom-red
                     hover:bg-custom-redh
                     focus:bg-custom-redh
@@ -151,8 +151,11 @@
                     px-4
                     py-3
                     mt-6
+                    items-center
+                    justify-center
                   "
                 >
+                  <loading v-if="isLoading" />
                   Log In
                 </button>
               </form>
@@ -165,7 +168,9 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading.vue'
 export default {
+  components: { Loading },
   data() {
     return {
       user: {
@@ -173,18 +178,21 @@ export default {
         password: '',
       },
       error_server: false,
+      isLoading: false,
     }
   },
   methods: {
     async onSubmit(evt) {
       evt.preventDefault()
+      this.isLoading = true
       try {
         await this.$auth.loginWith('local', {
           data: this.user,
         })
-
+        this.isLoading = false
         this.$router.push('/forex')
       } catch (err) {
+        this.isLoading = false
         this.error_server = true
       }
     },
