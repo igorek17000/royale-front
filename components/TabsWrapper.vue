@@ -20,7 +20,7 @@
               'text-white  border-money bg-secondary': openTab === 1,
             }"
           >
-            Open Orders
+            {{ $t('dashboard.exchange.trade.footer.open_orders') }}
           </button>
         </li>
         <li class="text-center">
@@ -41,7 +41,7 @@
               'text-white  border-money bg-secondary': openTab === 2,
             }"
           >
-            Closed Order History
+            {{ $t('dashboard.exchange.trade.footer.orders_history') }}
           </button>
         </li>
         <li class="text-center">
@@ -62,7 +62,7 @@
               'text-white  border-money bg-secondary': openTab === 3,
             }"
           >
-            Deposits
+            {{ $t('dashboard.exchange.trade.footer.deposits') }}
           </button>
         </li>
       </ul>
@@ -81,7 +81,9 @@
               @reload-footer="$emit('reload-footer')"
             />
             <div v-else>
-              <p class="text-lg text-white uppercase">No Open Orders</p>
+              <p class="text-lg text-white uppercase">
+                {{ $t('dashboard.exchange.trade.footer.no_open_orders') }}
+              </p>
             </div>
           </div>
         </div>
@@ -95,7 +97,9 @@
           <div class="flex items-center justify-center">
             <order-table :orders="orders" v-if="orders.length !== 0" />
             <div v-else class="h-full">
-              <p class="text-lg text-white uppercase">No Orders</p>
+              <p class="text-lg text-white uppercase">
+                {{ $t('dashboard.exchange.trade.footer.no_orders') }}
+              </p>
             </div>
           </div>
         </div>
@@ -108,7 +112,9 @@
         >
           <deposits-table :deposits="deposits" v-if="deposits.length !== 0" />
           <div v-else class="h-full">
-            <p class="text-lg text-white uppercase">No Deposits</p>
+            <p class="text-lg text-white uppercase">
+              {{ $t('dashboard.exchange.trade.footer.no_deposits') }}
+            </p>
           </div>
         </div>
       </div>

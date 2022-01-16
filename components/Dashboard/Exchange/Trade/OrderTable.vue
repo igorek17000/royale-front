@@ -11,12 +11,24 @@
           sm:mb-0
         "
       >
-        <th class="p-3 text-left">Order ID</th>
-        <th class="p-3 text-left">Coin Price</th>
-        <th class="p-3 text-left">Trade Type</th>
-        <th class="p-3 text-left">Amount</th>
-        <th class="p-3 text-left">Proffit</th>
-        <th class="p-3 text-left">Date</th>
+        <th class="p-3 text-left">
+          {{ $t('dashboard.exchange.trade.footer.order.id') }}
+        </th>
+        <th class="p-3 text-left">
+          {{ $t('dashboard.exchange.trade.footer.order.coin_price') }}
+        </th>
+        <th class="p-3 text-left">
+          {{ $t('dashboard.exchange.trade.footer.order.trade_type') }}
+        </th>
+        <th class="p-3 text-left">
+          {{ $t('dashboard.exchange.trade.footer.order.amount') }}
+        </th>
+        <th class="p-3 text-left">
+          {{ $t('dashboard.exchange.trade.footer.order.proffit') }}
+        </th>
+        <th class="p-3 text-left">
+          {{ $t('dashboard.exchange.trade.footer.order.date') }}
+        </th>
       </tr>
     </thead>
     <tbody class="flex-1 sm:flex-none">
@@ -34,14 +46,19 @@
         :key="order.id"
       >
         <td class="uppercase p-3 relative">
-          <span class="px-2 md:hidden">Order ID:</span>{{ order.id }}
+          <span class="px-2 md:hidden"
+            >{{ $t('dashboard.exchange.trade.footer.order.id') }}:</span
+          >{{ order.id }}
         </td>
         <td class="uppercase p-3 relative">
-          <span class="px-2 md:hidden">Coin Price:</span
+          <span class="px-2 md:hidden"
+            >{{ $t('dashboard.exchange.trade.footer.order.coin_price') }}:</span
           >{{ order.coin_price }} USD
         </td>
         <td class="p-3 truncate uppercase relative">
-          <span class="px-2 md:hidden">Trade Type:</span>
+          <span class="px-2 md:hidden"
+            >{{ $t('dashboard.exchange.trade.footer.order.trade_type') }}:</span
+          >
           <span
             :class="[
               order.trade_type === 'sell'
@@ -53,18 +70,24 @@
           </span>
         </td>
         <td class="uppercase p-3 cursor-pointer relative">
-          <span class="px-2 md:hidden">Amount:</span>
+          <span class="px-2 md:hidden">
+            {{ $t('dashboard.exchange.trade.footer.order.amount') }}:</span
+          >
           {{ parseFloat(order.amount).toFixed(2) }}
           USD
         </td>
 
         <td class="uppercase p-3 cursor-pointer relative">
-          <span class="px-2 md:hidden">Proffit:</span>
+          <span class="px-2 md:hidden"
+            >{{ $t('dashboard.exchange.trade.footer.order.proffit') }}:</span
+          >
           {{ parseFloat(order.proffit).toFixed(2) }}
           USD
         </td>
         <td class="uppercase p-3 relative">
-          <span class="px-2 md:hidden">Date:</span>
+          <span class="px-2 md:hidden"
+            >{{ $t('dashboard.exchange.trade.footer.order.date') }}:</span
+          >
           {{ formatTime(order.created_at) }}
         </td>
       </tr>

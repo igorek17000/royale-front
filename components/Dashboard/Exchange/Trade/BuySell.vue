@@ -28,7 +28,7 @@
               'text-white bg-pink-600': openTab === 1,
             }"
           >
-            Sell
+            {{ $t('dashboard.exchange.trade.buysell.sell') }}
           </button>
         </li>
         <li class="text-center w-full flex h-10">
@@ -48,7 +48,7 @@
               'text-black bg-money': openTab === 2,
             }"
           >
-            Buy
+            {{ $t('dashboard.exchange.trade.buysell.buy') }}
           </button>
         </li>
       </ul>

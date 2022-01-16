@@ -53,7 +53,9 @@
           class=""
         ></vue-numeric>
       </div>
-      <p class="pl-3 text-gray-500 text-sm hidden md:block">Market Price</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">
+        {{ $t('dashboard.exchange.trade.header.market_price') }}
+      </p>
     </div>
     <div
       class="
@@ -81,7 +83,9 @@
       <div id="coinPrice" class="font-roboto" v-else>
         {{ coin_change }} {{ coin_change_percentage }}%
       </div>
-      <p class="pl-3 text-gray-500 text-sm hidden md:block">24h Change</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">
+        {{ $t('dashboard.exchange.trade.header.24h_change') }}
+      </p>
     </div>
     <div
       class="
@@ -123,7 +127,9 @@
           class=""
         ></vue-numeric>
       </div>
-      <p class="pl-3 text-gray-500 text-sm hidden md:block">24h High</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">
+        {{ $t('dashboard.exchange.trade.header.24h_high') }}
+      </p>
     </div>
     <div
       class="
@@ -165,7 +171,9 @@
           class=""
         ></vue-numeric>
       </div>
-      <p class="pl-3 text-gray-500 text-sm hidden md:block">24h Low</p>
+      <p class="pl-3 text-gray-500 text-sm hidden md:block">
+        {{ $t('dashboard.exchange.trade.header.24h_low') }}
+      </p>
     </div>
     <div
       class="
@@ -186,7 +194,7 @@
       "
     >
       <div class="text-xs text-gray-400 dark:text-gray-400">
-        Leverage Value:
+        {{ $t('dashboard.exchange.trade.header.leverage') }}
       </div>
       <div class="text-white font-roboto flex items-center">
         <vue-numeric
@@ -204,12 +212,27 @@
           class=""
         ></vue-numeric>
       </div>
-      <div class="text-right pr-5 hidden md:block" v-if="proffit > 0">
-        <div class="text-xs text-gray-400 dark:text-gray-400">Proffit:</div>
-        <div class="text-lg font-roboto" :class="[profitClass]">
-          {{ proffit }}$
+      <!-- <div class="text-right pr-5 hidden md:block" v-if="proffit > 0">
+        <div class="text-xs text-gray-400 dark:text-gray-400">
+          {{ $t('dashboard.exchange.trade.header.proffit') }}
         </div>
-      </div>
+        <div class="text-lg font-roboto" :class="[profitClass]">
+          <vue-numeric
+            v-if="proffit"
+            currency="$"
+            separator=","
+            read-only
+            read-only-class=" flex
+        items-center
+          w-full
+          pl-4
+          pr-4"
+            :value="proffit"
+            :precision="2"
+            class=""
+          ></vue-numeric>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>

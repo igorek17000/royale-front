@@ -18,10 +18,10 @@
       "casino": "Casino",
       "poker": "Poker",
       "bet": "Bet",
-      "exchange": "Exchange",
+      "exchange": "Crypto",
       "profile": "Profilo",
       "forex": "Forex",
-      "news": "Notizia"
+      "news": "Notizie"
     },
     "user-menu": {
       "profile": "Profilo",
@@ -31,7 +31,56 @@
     "exchange": {
       "trade": {
         "name": "trading",
-        "coins_daily": "💰 Le <span class=\"text-money underline capitalize\">monete</span> più scambiate della giornata. 🚀"
+        "coins_daily": "💰 Le <span class=\"text-money underline capitalize\">monete</span> più scambiate della giornata. 🚀",
+        "header": {
+          "market_price": "Prezzo di mercato",
+          "24h_change": "Cambio 24 ore",
+          "24h_high": "Alta 24 ore",
+          "24h_low": "Basso 24 ore",
+          "leverage": "Valore della leva:",
+          "proffit": "Profitto:"
+        },
+        "buysell": {
+          "sell": "Vendi",
+          "buy": "Acquista",
+          "price": "Prezzo",
+          "leverage": "Lotto:",
+          "lot_value": "Valore del lotto:",
+          "max_lot": "Lotto massimo:",
+          "max_volume": "Volume massimo:",
+          "used_margin": "Margine utilizzato:",
+          "free_margin": "Margine libero:",
+          "order_saved": "Ordine salvato con successo con id",
+          "order_error": "Errore durante il salvataggio dell'ordine. \nSi prega di aggiornare"
+        },
+        "sidebar": {
+          "search": "Ricerca per moneta.. Es: (BTC)",
+          "market_trades": "Scambi di mercato (ultima ora)",
+          "coin_size": "Moneta",
+          "price": "Prezzo",
+          "time": "Volta"
+        },
+        "footer": {
+          "open_orders": "Ordini aperti",
+          "orders_history": "Cronologia degli ordini",
+          "deposits": "Depositi",
+          "no_open_orders": "Nessun ordine aperto",
+          "no_orders": "Nessun ordine",
+          "order": {
+            "id": "ID ordine",
+            "coin_price": "Prezzo",
+            "trade_type": "Tipo di commercio",
+            "amount": "Quantità",
+            "proffit": "Profitto",
+            "date": "Data",
+            "margin": "Margine",
+            "close_trade": "Chiudi Trade"
+          },
+          "deposit": {
+            "amount": "Quantità",
+            "date": "Data"
+          }
+        }
       },
       "news": "notizie"
     },

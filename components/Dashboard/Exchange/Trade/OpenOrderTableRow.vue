@@ -23,12 +23,16 @@
         md:border-none md:text-gray-400
       "
     >
-      <span class="px-2 md:hidden">Order ID:</span>{{ order.id }}
+      <span class="px-2 md:hidden">
+        {{ $t('dashboard.exchange.trade.footer.order.id') }}:</span
+      >{{ order.id }}
     </div>
     <div
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
     >
-      <span class="px-2 md:hidden">Price:</span>
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.coin_price') }}:</span
+      >
       <vue-numeric
         currency="$"
         separator=","
@@ -53,7 +57,9 @@
         md:border-none
       "
     >
-      <span class="px-2 md:hidden">Trade Type:</span>
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.trade_type') }}:</span
+      >
       <span
         :class="[
           order.trade_type === 'sell' ? 'text-pinkMoney' : 'text-greenMoney',
@@ -65,7 +71,9 @@
     <div
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
     >
-      <span class="px-2 md:hidden">Amount:</span>
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.amount') }}:</span
+      >
       <vue-numeric
         currency="$"
         separator=","
@@ -80,7 +88,9 @@
     <div
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
     >
-      <span class="px-2 md:hidden">Margin:</span>
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.margin') }}:</span
+      >
       <vue-numeric
         currency="$"
         separator=","
@@ -105,7 +115,9 @@
         md:border-none md:text-gray-400
       "
     >
-      <span class="px-2 md:hidden">Date:</span>
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.date') }}:</span
+      >
       {{ formatTime(order.created_at) }}
     </div>
 
@@ -113,7 +125,9 @@
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
       :class="isPositive ? 'text-greenMoney' : 'text-pinkMoney'"
     >
-      <span class="px-2 md:hidden">Proffit:</span>
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.proffit') }}:</span
+      >
 
       <vue-numeric
         v-if="proffit"
@@ -144,7 +158,7 @@
         @click="closeTrade(order)"
         :disabled="isDisabled"
       >
-        Close Trade
+        {{ $t('dashboard.exchange.trade.footer.order.close_trade') }}
       </button>
     </div>
   </div>

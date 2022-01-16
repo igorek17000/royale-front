@@ -30,7 +30,7 @@
           rounded-md
           text-sm
         "
-        placeholder="Search by coin (ex: BTC)"
+        :placeholder="$t('dashboard.exchange.trade.sidebar.search')"
       />
       <svg
         viewBox="0 0 24 24"
@@ -66,12 +66,18 @@
         "
         v-if="!showSearch"
       >
-        Market Trades (last hour)
+        {{ $t('dashboard.exchange.trade.sidebar.market_trades') }}
       </div>
       <div v-if="!showSearch" class="flex justify-between">
-        <p class="w-16 text-gray-400 text-sm">Coin Size</p>
-        <p class="w-16 text-gray-400 text-sm">Price</p>
-        <p class="w-16 text-gray-400 text-sm">Time</p>
+        <p class="w-16 text-gray-400 text-sm">
+          {{ $t('dashboard.exchange.trade.sidebar.coin_size') }}
+        </p>
+        <p class="w-16 text-gray-400 text-sm">
+          {{ $t('dashboard.exchange.trade.sidebar.price') }}
+        </p>
+        <p class="w-16 text-gray-400 text-sm">
+          {{ $t('dashboard.exchange.trade.sidebar.time') }}
+        </p>
       </div>
       <div v-if="!showSearch" class="coin-trades overflow-y-auto">
         <div

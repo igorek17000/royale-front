@@ -12,7 +12,9 @@
           pointer-events-none
         "
       >
-        <span class="text-gray-500 sm:text-sm">Price</span>
+        <span class="text-gray-500 sm:text-sm">
+          {{ $t('dashboard.exchange.trade.buysell.price') }}</span
+        >
       </div>
 
       <vue-numeric
@@ -37,7 +39,7 @@
     </div>
 
     <div class="loot mb-4">
-      <p>Loot :</p>
+      <p>{{ $t('dashboard.exchange.trade.buysell.leverage') }}</p>
     </div>
     <number-input
       @lot-value="updateLotValue"
@@ -71,11 +73,13 @@
       :disabled="isBuyDisabled"
     >
       <loading v-if="isLoading" />
-      Buy
+      {{ $t('dashboard.exchange.trade.buysell.buy') }}
     </button>
     <hr class="border-2 my-6 border-gray-800" />
     <div class="mt-4 relative rounded-sm flex justify-between items-center">
-      <div class="text-xs">Lot Value:</div>
+      <div class="text-xs">
+        {{ $t('dashboard.exchange.trade.buysell.lot_value') }}
+      </div>
       <div class="uppercase">
         <vue-numeric
           currency="$"
@@ -111,7 +115,9 @@
       </div>
     </div> -->
     <div class="mt-4 relative rounded-sm flex justify-between items-center">
-      <div class="text-xs">Max Lot:</div>
+      <div class="text-xs">
+        {{ $t('dashboard.exchange.trade.buysell.max_lot') }}
+      </div>
       <div class="uppercase">
         <p class="px-4" v-if="liveCoinPrice">
           {{ parseFloat(maxLot).toFixed(2) }}
@@ -119,7 +125,9 @@
       </div>
     </div>
     <div class="mt-4 relative rounded-sm flex justify-between items-center">
-      <div class="text-xs">Max Volume:</div>
+      <div class="text-xs">
+        {{ $t('dashboard.exchange.trade.buysell.max_volume') }}
+      </div>
       <div class="uppercase">
         <vue-numeric
           v-if="maxVolume"
@@ -138,7 +146,9 @@
       </div>
     </div>
     <div class="mt-4 relative rounded-sm flex justify-between items-center">
-      <div class="text-xs">Used Margin:</div>
+      <div class="text-xs">
+        {{ $t('dashboard.exchange.trade.buysell.used_margin') }}
+      </div>
       <div class="uppercase">
         <vue-numeric
           v-if="totalMargin"
@@ -154,10 +164,13 @@
           :precision="2"
           class=""
         ></vue-numeric>
+        <p v-else class="font-roboto px-4">0</p>
       </div>
     </div>
     <div class="mt-4 relative rounded-sm flex justify-between items-center">
-      <div class="text-xs">Free Margin:</div>
+      <div class="text-xs">
+        {{ $t('dashboard.exchange.trade.buysell.free_margin') }}
+      </div>
       <div class="uppercase">
         <vue-numeric
           v-if="freeMargin"
@@ -266,19 +279,27 @@ export default {
           if (process.client) {
             localStorage.setItem('buyLoot', this.buyLoot)
           }
-          this.$toasted.show(`Order succesfully saved with id ${res.data.id}`, {
-            type: 'success',
-            position: 'bottom-right',
-            duration: 2500,
-          })
+          this.$toasted.show(
+            `${this.$t('dashboard.exchange.trade.buysell.order_saved')} ${
+              res.data.id
+            }`,
+            {
+              type: 'success',
+              position: 'bottom-right',
+              duration: 2500,
+            }
+          )
         })
         .catch((err) => {
           console.log('err', err)
-          this.$toasted.show('Error saving order. Please Refresh', {
-            type: 'error',
-            position: 'bottom-right',
-            duration: 2500,
-          })
+          this.$toasted.show(
+            `${this.$t('dashboard.exchange.trade.buysell.order_error')}`,
+            {
+              type: 'error',
+              position: 'bottom-right',
+              duration: 2500,
+            }
+          )
         })
     },
   },

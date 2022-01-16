@@ -18,7 +18,7 @@
       "casino": "Casino",
       "poker": "Poker",
       "bet": "Bet",
-      "exchange": "Exchange",
+      "exchange": "Crypto",
       "profile": "Profile",
       "forex": "Forex",
       "news": "News"
@@ -31,7 +31,57 @@
     "exchange": {
       "trade": {
         "name": "trade",
-        "coins_daily": "💰 Most traded <span class=\"text-money underline capitalize\">coins</span> of the day. 🚀"
+        "coins_daily": "💰 Most traded <span class=\"text-money underline capitalize\">coins</span> of the day. 🚀",
+        "header": {
+          "market_price": "Market Price",
+          "24h_change": "24h Change",
+          "24h_high": "24h High",
+          "24h_low": "24h Low",
+          "leverage": "Leverage Value:",
+          "proffit": "Proffit:"
+        },
+        "buysell": {
+          "sell": "Sell",
+          "buy": "Buy",
+          "price": "Price",
+          "leverage": "Lot:",
+          "lot_value": "Lot Value:",
+          "max_lot": "Max Lot:",
+          "max_volume": "Max Volume:",
+          "used_margin": "Used margin:",
+          "free_margin": "Free margin:",
+          "order_saved": "Order succesfully saved with id",
+          "order_error": "Error saving order. Please Refresh"
+        },
+        "sidebar": {
+          "search": "Search by coin.. Ex: (BTC)",
+          "market_trades": " Market Trades (last hour)",
+          "coin_size": "Coin size",
+          "price": "Price",
+          "time": "Time"
+        },
+        "footer": {
+          "open_orders": "  Open Orders",
+          "orders_history": "Orders History",
+          "deposits": "Deposits",
+          "no_open_orders": "No open orders",
+          "no_orders": "No orders",
+          "no_deposits": "No deposits",
+          "order": {
+            "id": "Order ID",
+            "coin_price": "Coin Price",
+            "trade_type": "Trade Type",
+            "amount": "Amount",
+            "proffit": "Proffit",
+            "date": "Date",
+            "margin": "Margin",
+            "close_trade": "Close Trade"
+          },
+          "deposit": {
+            "amount": "Amount",
+            "date": "Date"
+          }
+        }
       },
       "news": "news"
     },
