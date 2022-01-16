@@ -80,7 +80,8 @@
           "deposit": {
             "amount": "Quantità",
             "date": "Data"
-          }
+          },
+          "no_deposits": "Nessun deposito"
         }
       },
       "news": "notizie"

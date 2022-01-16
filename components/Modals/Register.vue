@@ -199,7 +199,7 @@
                   type="submit"
                   class="
                     w-full
-                    block
+                    flex
                     bg-custom-red
                     hover:bg-custom-redh
                     focus:bg-custom-redh
@@ -209,8 +209,11 @@
                     px-4
                     py-3
                     mt-6
+                    items-center
+                    justify-center
                   "
                 >
+                  <loading v-if="isLoading" />
                   {{ $t('register.submit') }}
                 </button>
               </form>
@@ -223,7 +226,9 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading.vue'
 export default {
+  components: { Loading },
   data() {
     return {
       user: {
@@ -234,11 +239,13 @@ export default {
         phone_number: '',
       },
       error_server: false,
+      isLoading: false,
     }
   },
   methods: {
     async onSubmit(evt) {
       evt.preventDefault()
+      this.isLoading = true
       try {
         let payload = {
           username: this.user.username,
@@ -262,9 +269,11 @@ export default {
               .then(() => {
                 this.$router.push('/casino')
                 // this.createDeposit(user.id)
+                this.isLoading = false
               })
           })
       } catch (err) {
+        this.isLoading = false
         this.error_server = true
       }
     },
