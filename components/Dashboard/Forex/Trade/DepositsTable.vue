@@ -2,8 +2,8 @@
   <table class="table-fixed w-full my-2 p-2">
     <thead>
       <tr class="text-left text-base pb-4">
-        <th>Amount</th>
-        <th>Date</th>
+        <th>{{ $t('dashboard.exchange.trade.footer.deposit.amount') }}</th>
+        <th>{{ $t('dashboard.exchange.trade.footer.deposit.date') }}</th>
       </tr>
     </thead>
     <tbody class="">

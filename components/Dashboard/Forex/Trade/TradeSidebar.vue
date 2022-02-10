@@ -1,17 +1,6 @@
 <template>
   <div
-    class="
-      xl:w-72
-      w-48
-      flex-shrink-0
-      border-r border-gray-200
-      dark:border-gray-800
-      h-full
-      overflow-y-auto
-      lg:block
-      hidden
-      p-5
-    "
+    class="xl:w-72 w-48 flex-shrink-0 border-r border-gray-200 dark:border-gray-800 h-full overflow-y-auto lg:block hidden p-5"
   >
     <div class="text-xs text-gray-400 tracking-wider uppercase">
       {{ title }}
@@ -20,30 +9,12 @@
       <input
         v-model="searchInput"
         type="text"
-        class="
-          pl-8
-          h-9
-          bg-transparent
-          border border-gray-300
-          dark:border-gray-700 dark:text-white
-          w-full
-          rounded-md
-          text-sm
-        "
-        placeholder="Search by coin (ex: BTC)"
+        class="pl-8 h-9 bg-transparent border border-gray-300 dark:border-gray-700 dark:text-white w-full rounded-md text-sm"
+        :placeholder="$t('dashboard.exchange.trade.sidebar.search')"
       />
       <svg
         viewBox="0 0 24 24"
-        class="
-          w-4
-          absolute
-          text-gray-400
-          top-1/2
-          transform
-          translate-x-0.5
-          -translate-y-1/2
-          left-2
-        "
+        class="w-4 absolute text-gray-400 top-1/2 transform translate-x-0.5 -translate-y-1/2 left-2"
         stroke="currentColor"
         stroke-width="2"
         fill="none"
@@ -57,21 +28,21 @@
     <div class="space-y-4 mt-3 relative">
       <search-coin :filterCoins="filterCoins" v-if="showSearch" />
       <div
-        class="
-          text-sm text-gray-400
-          tracking-wider
-          border-t border-gray-800
-          pt-2
-          mt-2
-        "
+        class="text-sm text-gray-400 tracking-wider border-t border-gray-800 pt-2 mt-2"
         v-if="!showSearch"
       >
-        Market Trades (last hour)
+        {{ $t('dashboard.exchange.trade.sidebar.market_trades') }}
       </div>
       <div v-if="!showSearch" class="flex justify-between">
-        <p class="w-16 text-gray-400 text-sm">Coin Size</p>
-        <p class="w-16 text-gray-400 text-sm">Price</p>
-        <p class="w-16 text-gray-400 text-sm">Time</p>
+        <p class="w-16 text-gray-400 text-sm">
+          {{ $t('dashboard.exchange.trade.sidebar.coin_size') }}
+        </p>
+        <p class="w-16 text-gray-400 text-sm">
+          {{ $t('dashboard.exchange.trade.sidebar.price') }}
+        </p>
+        <p class="w-16 text-gray-400 text-sm">
+          {{ $t('dashboard.exchange.trade.sidebar.time') }}
+        </p>
       </div>
       <div v-if="!showSearch" class="coin-trades overflow-y-auto">
         <div
@@ -110,10 +81,32 @@
         </div>
         <div class="prices flex justify-between align-middle items-center pt-4">
           <p class="font-bold font-roboto">
-            $ {{ parseFloat(negativeCap).toFixed(2) }}
+            <vue-numeric
+              v-if="negativeCap"
+              currency="$"
+              separator=","
+              read-only
+              read-only-class=" flex
+        items-center pr-3
+          w-full"
+              :value="negativeCap"
+              :precision="2"
+              class=""
+            ></vue-numeric>
           </p>
           <p class="font-bold font-roboto">
-            $ {{ parseFloat(positiveCap).toFixed(2) }}
+            <vue-numeric
+              v-if="positiveCap"
+              currency="$"
+              separator=","
+              read-only
+              read-only-class=" flex
+        items-center pr-3
+          w-full"
+              :value="positiveCap"
+              :precision="2"
+              class=""
+            ></vue-numeric>
           </p>
         </div>
       </div>
@@ -125,8 +118,9 @@
 import SearchCoin from './SearchCoin.vue'
 import coins from './coins.json'
 import axios from 'axios'
+import VueNumeric from 'vue-numeric'
 export default {
-  components: { SearchCoin },
+  components: { SearchCoin, VueNumeric },
   name: 'TradeSidebar',
   data() {
     return {
@@ -153,7 +147,7 @@ export default {
   },
   mounted() {
     let coin = this.$route.params.coin
-    // this.getTradeBook(coin)
+    this.getTradeBook(coin)
   },
   methods: {
     timeDone(val) {
@@ -174,28 +168,28 @@ export default {
 
       return formattedTime
     },
-    // async getTradeBook(val) {
-    //   await axios
-    //     .get(
-    //       `https://api.binance.com/api/v3/trades?symbol=${val.toUpperCase()}&limit=100`
-    //     )
-    //     .then((res) => {
-    //       let data = res.data.map((item) => {
-    //         return {
-    //           time: item.time,
-    //           qty: item.qty,
-    //           price: item.qty * item.price,
-    //           isBuyerMaker: item.isBuyerMaker,
-    //         }
-    //       })
+    async getTradeBook(val) {
+      await axios
+        .get(
+          `https://api.binance.com/api/v3/trades?symbol=${val.toUpperCase()}&limit=100`
+        )
+        .then((res) => {
+          let data = res.data.map((item) => {
+            return {
+              time: item.time,
+              qty: item.qty,
+              price: item.qty * item.price,
+              isBuyerMaker: item.isBuyerMaker,
+            }
+          })
 
-    //       let tradebook = data.reverse()
-    //       this.$store.commit('trade/SET_TRADEBOOK', tradebook)
-    //     })
-    //     .catch((err) => {
-    //       console.log('err getCoin', err)
-    //     })
-    // },
+          let tradebook = data.reverse()
+          this.$store.commit('trade/SET_TRADEBOOK', tradebook)
+        })
+        .catch((err) => {
+          console.log('err getCoin', err)
+        })
+    },
     checkFooterTotal(val) {
       this.positiveCap = val.reduce(function (sum, record) {
         if (record.isBuyerMaker === false) return sum + record.price

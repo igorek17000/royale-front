@@ -1,15 +1,5 @@
 <template>
-  <div
-    class="
-      w-full
-      flex flex-col flex-no-wrap
-      sm:bg-primary
-      rounded-lg
-      overflow-hidden
-      sm:shadow-lg
-      my-2
-    "
-  >
+  <div class="w-full flex flex-col my-2 relative">
     <div
       class="
         text-white
@@ -22,25 +12,32 @@
         top-0
       "
     >
-      <div class="p-3 text-left w-1/6">Order Id</div>
-      <div class="p-3 text-left w-1/6">Coin Price</div>
-      <div class="p-3 text-left w-1/6">Trade Type</div>
-      <div class="p-3 text-left w-1/6">Amount</div>
-      <div class="p-3 text-left w-1/6">Date</div>
-      <div class="p-3 text-left w-1/6">Proffit</div>
-      <div class="p-3 text-left w-1/6">Action</div>
+      <div class="px-3 py-1 text-left w-1/6">
+        {{ $t('dashboard.exchange.trade.footer.order.id') }}
+      </div>
+      <div class="px-3 py-1 text-left w-1/6">
+        {{ $t('dashboard.exchange.trade.footer.order.coin_price') }}
+      </div>
+      <div class="px-3 py-1 text-left w-1/6">
+        {{ $t('dashboard.exchange.trade.footer.order.trade_type') }}
+      </div>
+      <div class="px-3 py-1 text-left w-1/6">
+        {{ $t('dashboard.exchange.trade.footer.order.amount') }}
+      </div>
+      <div class="px-3 py-1 text-left w-1/6">
+        {{ $t('dashboard.exchange.trade.footer.order.margin') }}
+      </div>
+      <div class="px-3 py-1 text-left w-1/6">
+        {{ $t('dashboard.exchange.trade.footer.order.date') }}
+      </div>
+      <div class="px-3 py-1 text-left w-1/6">
+        {{ $t('dashboard.exchange.trade.footer.order.proffit') }}
+      </div>
+      <div class="px-3 py-1 text-left w-1/6">Action</div>
     </div>
-    <div class="flex-1 sm:flex-none">
+    <div class="flex-1 sm:flex-none h-auto md:h-52 overflow-y-auto">
       <div
-        class="
-          flex flex-row
-          items-center
-          mb-2
-          sm:mb-0
-          border
-          md:border-none
-          w-100
-        "
+        class="flex flex-row items-center mb-2 w-full"
         v-for="order in orders"
         :key="order.id"
       >

@@ -1,14 +1,48 @@
 <template>
-  <div class="flex w-full flex-wrap md:flex-nowrap">
+  <div
+    class="
+      flex
+      w-full
+      flex-wrap
+      md:flex-nowrap
+      border-gray-500
+      md:border-b
+      mb-4
+      md:mb-2
+    "
+  >
     <div
-      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+      class="
+        uppercase
+        p-1
+        md:p-3
+        relative
+        w-1/2
+        md:w-1/6
+        border
+        md:border-none md:text-gray-400
+      "
     >
-      <span class="px-2 md:hidden">Order ID:</span>{{ order.id }}
+      <span class="px-2 md:hidden">
+        {{ $t('dashboard.exchange.trade.footer.order.id') }}:</span
+      >{{ order.id }}
     </div>
     <div
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
     >
-      <span class="px-2 md:hidden">Price:</span>{{ order.coin_price }} USD
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.coin_price') }}:</span
+      >
+      <vue-numeric
+        currency="$"
+        separator=","
+        read-only
+        read-only-class=" flex
+        items-center
+          w-full"
+        :value="order.coin_price"
+        :precision="2"
+      ></vue-numeric>
     </div>
     <div
       class="
@@ -23,7 +57,9 @@
         md:border-none
       "
     >
-      <span class="px-2 md:hidden">Trade Type:</span>
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.trade_type') }}:</span
+      >
       <span
         :class="[
           order.trade_type === 'sell' ? 'text-pinkMoney' : 'text-greenMoney',
@@ -35,34 +71,79 @@
     <div
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
     >
-      <span class="px-2 md:hidden">Amount:</span>
-      {{ parseFloat(order.amount).toFixed(2) }}
-      USD
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.amount') }}:</span
+      >
+      <vue-numeric
+        currency="$"
+        separator=","
+        read-only
+        read-only-class=" flex
+        items-center
+          w-full"
+        :value="order.amount"
+        :precision="2"
+      ></vue-numeric>
+    </div>
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+    >
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.margin') }}:</span
+      >
+      <vue-numeric
+        currency="$"
+        separator=","
+        read-only
+        read-only-class=" flex
+        items-center
+          w-full"
+        :value="order.margin"
+        :precision="2"
+      ></vue-numeric>
     </div>
 
-    <div
-      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
-    >
-      <span class="px-2 md:hidden">Date:</span>
-      {{ formatTime(order.created_at) }}
-    </div>
-    <div
-      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
-    >
-      <span class="px-2 md:hidden">Proffit:</span>
-      {{ proffit }} USD
-    </div>
     <div
       class="
         uppercase
         p-1
         md:p-3
         relative
-        w-full
+        w-1/2
         md:w-1/6
         border
-        md:border-none
+        md:border-none md:text-gray-400
       "
+    >
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.date') }}:</span
+      >
+      {{ formatTime(order.created_at) }}
+    </div>
+
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+      :class="isPositive ? 'text-greenMoney' : 'text-pinkMoney'"
+    >
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.proffit') }}:</span
+      >
+
+      <vue-numeric
+        v-if="proffit"
+        currency="$"
+        separator=","
+        read-only
+        read-only-class=" flex
+        items-center
+          w-full"
+        :value="proffit"
+        :precision="2"
+      ></vue-numeric>
+      <loading v-else />
+    </div>
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
     >
       <span class="px-2 md:hidden">Action:</span>
       <button
@@ -75,39 +156,97 @@
           hover:bg-custom-red
         "
         @click="closeTrade(order)"
+        :disabled="isDisabled"
       >
-        Close Trade
+        {{ $t('dashboard.exchange.trade.footer.order.close_trade') }}
       </button>
     </div>
   </div>
 </template>
 
 <script>
+import VueNumeric from 'vue-numeric'
+import Loading from '@/components/Loading.vue'
 export default {
   name: 'OpenOrderTableRow',
   props: ['order'],
+  components: {
+    VueNumeric,
+    Loading,
+  },
+  data() {
+    return {
+      isPositive: true,
+      ws: '',
+      liveCoinPrice: null,
+      isDisabled: true,
+    }
+  },
+  mounted() {
+    const coin = this.order.coin
+    if (coin) {
+      this.ws = new WebSocket(
+        `wss://stream.binance.com/stream?streams=${coin}@trade`
+      )
+      let vm = this
+      this.ws.addEventListener('message', function (event) {
+        let ev = JSON.parse(event.data)
+        if (ev.stream === `${coin}@trade`) {
+          let price = parseFloat(ev.data.p).toFixed(2)
+          vm.liveCoinPrice = price
+        }
+      })
+    }
+  },
+  beforeDestroy() {
+    // this.$store.commit('trade/SET_COIN_BALANCE', null)
+    this.ws.close()
+  },
+  watch: {
+    proffit: {
+      handler: function (val) {
+        val > 0 ? (this.isPositive = true) : (this.isPositive = false)
+      },
+      deep: true,
+      immediate: true,
+    },
+    'order.margin': {
+      handler: function (val) {
+        this.$store.commit('trade/ADD_MARGIN', val)
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
   computed: {
+    leverage() {
+      return this.$store.state.balance.balance.leverage
+    },
+
     proffit() {
+      if (!this.liveCoinPrice) {
+        return 0
+      } else {
+        this.isDisabled = false
+      }
       if (this.order.trade_type === 'buy') {
         let diff =
           this.liveCoinPrice - parseFloat(this.order.coin_price).toFixed(2)
-        if (diff > 0) {
-        }
+
         let total =
-          parseFloat(this.order.amount).toFixed(2) * parseFloat(diff).toFixed(2)
+          parseFloat(this.order.buyLoot).toFixed(2) *
+          parseFloat(diff).toFixed(2)
 
         return parseFloat(total).toFixed(2)
       } else {
         let diff =
           parseFloat(this.order.coin_price).toFixed(2) - this.liveCoinPrice
         let total =
-          parseFloat(this.order.amount).toFixed(2) * parseFloat(diff).toFixed(2)
+          parseFloat(this.order.buyLoot).toFixed(2) *
+          parseFloat(diff).toFixed(2)
 
         return parseFloat(total).toFixed(2)
       }
-    },
-    liveCoinPrice() {
-      return this.$store.state.trade.liveCoinPrice
     },
   },
   methods: {

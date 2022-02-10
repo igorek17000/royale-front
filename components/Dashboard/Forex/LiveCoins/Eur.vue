@@ -1,18 +1,6 @@
 <template>
   <div
-    class="
-      px-4
-      py-3
-      border
-      rounded-xl
-      flex flex-row
-      justify-items-center
-      items-center
-      gap-2
-      cursor-pointer
-      border-gray-500
-      shadow-md
-    "
+    class="px-4 py-3 border rounded-xl flex flex-row justify-items-center items-center gap-2 cursor-pointer border-gray-500 shadow-md"
     v-if="isLoading"
   >
     <div class="w-12 h-12">
@@ -33,20 +21,7 @@
     </div>
   </div>
   <div
-    class="
-      px-4
-      py-3
-      border
-      rounded-xl
-      flex flex-row
-      justify-items-center
-      items-center
-      gap-2
-      cursor-pointer
-      border-gray-500
-      shadow-md
-      bg-secondary
-    "
+    class="px-4 py-3 border rounded-xl flex flex-row justify-items-center items-center gap-2 cursor-pointer border-gray-500 shadow-md bg-secondary"
     @click="
       $router.push({ name: 'forex-trade-coin', params: { coin: 'EUR/USD' } })
     "
@@ -66,43 +41,26 @@
 </template>
 
 <script>
-import axios from 'axios'
+import alphavantage from 'alphavantage'
 export default {
   name: 'EurCard',
   data() {
     return {
       ws: null,
       coin: null,
-      lastPrice: null,
-      colorClass: 'text-green-500',
       isLoading: true,
     }
   },
 
   mounted() {
-    this.getPrice()
-  },
+    const alpha = alphavantage({ key: 'G5INQFCVT5G2J7RN' })
+    alpha.forex.rate('eur', 'usd').then((data) => {
+      let eur = data['Realtime Currency Exchange Rate']['5. Exchange Rate']
 
-  methods: {
-    async getPrice() {
-      await axios
-        .get('https://api.twelvedata.com/exchange_rate', {
-          params: {
-            apikey: 'bbeaa82a1aa842f1ab6d68680b8428c9',
-            symbol: 'EUR/USD',
-          },
-        })
-        .then((res) => {
-          let payload = res.data
-          console.log('🚀 ~ .then ~ payload', payload)
-          this.coin = parseFloat(payload.rate).toFixed(6)
-
-          this.isLoading = false
-        })
-        .catch((err) => {
-          console.log('err', err)
-        })
-    },
+      this.coin = parseFloat(eur).toFixed(6)
+      console.log('🚀 ~ alpha.forex.rate ~ eur.coin', this.coin)
+      this.isLoading = false
+    })
   },
 }
 </script>

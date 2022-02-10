@@ -41,7 +41,7 @@ export default {
   created() {},
   mounted() {
     let coin = this.$route.params.coin
-    // this.getCoin(coin)
+    this.getCoin(coin)
     this.width = this.$refs.tradeChart.clientWidth
     this.height = this.$refs.tradeChart.clientHeight
   },
@@ -108,19 +108,19 @@ export default {
     height: 350px;
   }
 }
-@media only screen and (min-width: 1336px) {
+@media only screen and (min-width: 1280px) {
   .h-trade {
     height: 350px;
   }
 }
-@media only screen and (min-width: 1600px) {
+@media only screen and (min-width: 1336px) {
   .h-trade {
     height: 400px;
   }
 }
 @media only screen and (min-width: 1600px) {
   .h-trade {
-    height: 500px;
+    height: 540px;
   }
 }
 </style>
