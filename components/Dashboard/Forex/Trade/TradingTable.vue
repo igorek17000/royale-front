@@ -10,7 +10,6 @@
   </div>
 </template>
 
-
 <script>
 import axios from 'axios'
 
@@ -18,6 +17,7 @@ export default {
   data() {
     return {
       klines: [],
+      dateNow: new Date(),
       width: 300,
       height: 300,
       tradingVue: this.$DataCube
@@ -49,32 +49,32 @@ export default {
   methods: {
     async getCoin(val) {
       let vm = this
+      let klineData = new Date(
+        this.dateNow.getFullYear(),
+        this.dateNow.getMonth(),
+        this.dateNow.getDate() - 7
+      )
       await axios
-        .get(
-          `https://api.binance.com/api/v3/klines?symbol=${val.toUpperCase()}&interval=1m`
-          // {
-          //   params: {
-          //     adjusted: false,
-          //     sort: 'asc',
-          //   },
-          //   headers: {
-          //     Authorization: 'Bearer OmrU2lqAJQSMeKMI0XdPRBx2REfKzhHn',
-          //   },
-          // }
-        )
-        .then(function (response) {
+        .get(`http://localhost:3000/forex/prices/${val}`, {
+          params: {
+            resampleFreq: '1min',
+            startDate: this.$dayjs(klineData).format('YYYY-MM-DD'),
+          },
+        })
+        .then((response) => {
           let { data } = response
-
+          console.log('🚀 ~ .then ~ data', data)
+          if (!data) return
           vm.klines = data.map((item) => {
             return [
-              item[0],
-              parseFloat(item[1]),
-              parseFloat(item[2]),
-              parseFloat(item[3]),
-              parseFloat(item[4]),
-              parseFloat(item[5]),
+              this.$dayjs(item.date).valueOf(),
+              parseFloat(item.open),
+              parseFloat(item.high),
+              parseFloat(item.low),
+              parseFloat(item.close),
             ]
           })
+          console.log('🚀 ~ vm.klines=data.map ~ vm.klines', vm.klines)
           vm.tradingVue.set('chart.data', vm.klines)
           // console.log('vm tradingvue', vm.tradingVue)
         })
@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     kline() {
-      return this.$store.state.trade.kline
+      return this.$store.state.forex.kline
     },
   },
   watch: {

@@ -4,7 +4,7 @@
   >
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <div class="flex-grow flex overflow-x-hidden">
-        <TradeSidebar title="Crypto" />
+        <TradeSidebar title="Forex" />
         <div class="w-full h-full">
           <trade-header @set-head-meta="setMeta" />
           <div class="trade-table block md:flex relative">

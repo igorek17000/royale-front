@@ -1,35 +1,12 @@
 <template>
   <div
-    class="
-      flex
-      w-full
-      items-center
-      border-b border-gray-200
-      dark:border-gray-800
-      bg-primary
-      flex-wrap
-      md:flex-nowrap
-    "
+    class="flex w-full items-center border-b border-gray-200 dark:border-gray-800 bg-primary flex-wrap md:flex-nowrap"
   >
     <div class="mobile block md:hidden w-full px-4 py-4">
       <search-mobile />
     </div>
     <div
-      class="
-        flex
-        items-center
-        md:text-base
-        text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-      "
+      class="flex items-center md:text-base text-sm justify-center dark:text-white capitalize border-r dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5"
     >
       <div
         data-placeholder
@@ -58,21 +35,7 @@
       </p>
     </div>
     <div
-      class="
-        flex
-        items-center
-        md:text-base
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-      "
+      class="flex items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-r border-gray-200 dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5"
     >
       <div
         data-placeholder
@@ -88,22 +51,7 @@
       </p>
     </div>
     <div
-      class="
-        hidden
-        md:flex
-        items-center
-        md:text-base
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-      "
+      class="hidden md:flex items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-r border-gray-200 dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5"
     >
       <div
         data-placeholder
@@ -132,22 +80,7 @@
       </p>
     </div>
     <div
-      class="
-        items-center
-        md:text-base
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-        hidden
-        md:flex
-      "
+      class="items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-r border-gray-200 dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5 hidden md:flex"
     >
       <div
         data-placeholder
@@ -176,22 +109,7 @@
       </p>
     </div>
     <div
-      class="
-        items-center
-        md:text-base
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-        hidden
-        md:flex
-      "
+      class="items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-r border-gray-200 dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5 hidden md:flex"
     >
       <div class="text-xs text-gray-400 dark:text-gray-400">
         {{ $t('dashboard.exchange.trade.header.leverage') }}
@@ -212,27 +130,6 @@
           class=""
         ></vue-numeric>
       </div>
-      <!-- <div class="text-right pr-5 hidden md:block" v-if="proffit > 0">
-        <div class="text-xs text-gray-400 dark:text-gray-400">
-          {{ $t('dashboard.exchange.trade.header.proffit') }}
-        </div>
-        <div class="text-lg font-roboto" :class="[profitClass]">
-          <vue-numeric
-            v-if="proffit"
-            currency="$"
-            separator=","
-            read-only
-            read-only-class=" flex
-        items-center
-          w-full
-          pl-4
-          pr-4"
-            :value="proffit"
-            :precision="2"
-            class=""
-          ></vue-numeric>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -266,63 +163,40 @@ export default {
   mounted() {
     let coin = this.$route.params.coin
     this.coin = coin.replace('usdt', '')
+    console.log('🚀 ~ mounted ~ this.coinss', this.coin)
     this.getSinglePrice(coin)
-    this.ws = new WebSocket(
-      `wss://stream.binance.com/stream?streams=${coin}@trade/${coin}@ticker/${coin}@kline_1m`
-    )
-    let vm = this
-    this.ws.addEventListener('message', function (event) {
-      let ev = JSON.parse(event.data)
-      if (ev.stream === `${coin}@trade`) {
-        let newPush = {
-          time: ev.data.T,
-          qty: ev.data.q,
-          price: ev.data.q * ev.data.p,
-          isBuyerMaker: ev.data.m,
-        }
-        vm.$store.commit('trade/NEW_TRADE', newPush)
+    // this.ws = new WebSocket('wss://api.tiingo.com/iex')
+    // let that = this
 
-        let price = parseFloat(ev.data.p).toFixed(2)
-        vm.btc = price
-        vm.$store.commit('trade/LIVE_COIN_PRICE', vm.btc)
-        if (!vm.lastPrice || vm.lastPrice === price) {
-          vm.colorClass = 'text-white'
-        } else if (price > vm.lastPrice) {
-          vm.colorClass = 'text-money'
-        } else {
-          vm.colorClass = 'text-custom-red'
-        }
-        vm.lastPrice = price
-      }
-      if (ev.stream === `${coin}@ticker`) {
-        // console.log('evennt', ev)
-        vm.isLoading_change = false
-        vm.coin_change = parseFloat(ev.data.p).toFixed(2)
-        vm.coin_change_percentage = ev.data.P
-        vm.coin_change_high = parseFloat(ev.data.h).toFixed(2)
-        vm.coin_change_low = parseFloat(ev.data.l).toFixed(2)
-      }
-      if (ev.stream === `${coin}@kline_1m`) {
-        let kline = {
-          time: ev.data.k.t,
-          open: parseFloat(ev.data.k.o),
-          high: parseFloat(ev.data.k.h),
-          low: parseFloat(ev.data.k.l),
-          close: parseFloat(ev.data.k.c),
-          volume: parseFloat(ev.data.k.v),
-        }
-        const klineValues = Object.values(kline)
-        vm.$store.commit('trade/NEW_KLINE', klineValues)
-      }
-    })
+    // let subscribe = {
+    //   eventName: 'subscribe',
+    //   authorization: '8dcfa1491f01d4804a588845685ad28fd2b8d2ef',
+    //   eventData: {
+    //     thresholdLevel: 5,
+    //   },
+    // }
+
+    // this.ws.addEventListener('open', function (event) {
+    //   that.ws.send(JSON.stringify(subscribe))
+    // })
+    // this.ws.addEventListener('message', function (event) {
+    //   console.log(event)
+    // })
   },
   methods: {
     async getSinglePrice(val) {
       await axios
-        .get(
-          `https://api.binance.com/api/v3/ticker/price?symbol=${val.toUpperCase()}`
-        )
+        .get(`https://www.alphavantage.co/query`, {
+          params: {
+            function: 'CURRENCY_EXCHANGE_RATE',
+            from_currency: 'EUR',
+            to_currency: 'USD',
+            apikey: '47K5Z7GECFZY32ZQ',
+          },
+        })
         .then((res) => {
+          console.log('🚀 ~ .then ~ res', res.data)
+          let price = res.data
           this.isLoading = false
           this.btc = parseFloat(res.data.price).toFixed(2)
         })
@@ -330,40 +204,18 @@ export default {
           console.log('err getCoin', err)
         })
     },
-    // async getCoinBalance(val) {
-    //   await this.$axios
-    //     .get(`/coins`, {
-    //       params: {
-    //         name: val,
-    //         'user.id': this.$auth.user.id,
-    //       },
-    //       headers: {
-    //         Authorization: `Bearer ${this.$auth.strategy.token.get()}`,
-    //         'Content-Type': 'application/json',
-    //       },
-    //     })
-    //     .then((res) => {
-    //       let response = res.data
-    //       if (response.length !== 0) {
-    //         this.$store.commit('trade/SET_COIN_BALANCE', response)
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log('err SET_COIN_BALANCE', err)
-    //     })
-    // },
   },
   beforeDestroy() {
-    // this.$store.commit('trade/SET_COIN_BALANCE', null)
-    this.ws.close()
+    let unsubscribe = {
+      eventName: 'unsubscribe',
+      authorization: '8dcfa1491f01d4804a588845685ad28fd2b8d2ef',
+    }
+    // this.ws.send(JSON.stringify(unsubscribe))
   },
   watch: {
     btc: function (val) {
       this.$emit('set-head-meta', val)
     },
-    // coinRefresh: function (val) {
-    //   this.getCoinBalance(this.coin)
-    // },
   },
   computed: {
     balance() {

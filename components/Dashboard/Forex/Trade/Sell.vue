@@ -2,15 +2,7 @@
   <div class="sell buttons">
     <div class="mt-4 relative rounded-sm border border-pinkBorder mb-4">
       <div
-        class="
-          absolute
-          inset-y-0
-          left-0
-          pl-3
-          flex
-          items-center
-          pointer-events-none
-        "
+        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
       >
         <span class="text-gray-500 sm:text-sm">
           {{ $t('dashboard.exchange.trade.buysell.price') }}</span
@@ -47,25 +39,7 @@
       :isbuy="false"
     />
     <button
-      class="
-        flex
-        items-center
-        justify-center
-        px-4
-        py-2
-        w-full
-        text-base
-        font-bold
-        uppercase
-        rounded-md
-        text-white
-        bg-pink-600
-        hover:bg-pink-800
-        transition
-        ease-in-out
-        duration-150
-        focus:outline-none
-      "
+      class="flex items-center justify-center px-4 py-2 w-full text-base font-bold uppercase rounded-md text-white bg-pink-600 hover:bg-pink-800 transition ease-in-out duration-150 focus:outline-none"
       @click="sendSell"
       :disabled="isDisabled"
     >
@@ -208,13 +182,13 @@ export default {
   },
   computed: {
     coinPrice() {
-      return this.$store.state.trade.coinPrice
+      return this.$store.state.forex.coinPrice
     },
     balance() {
       return this.$store.state.balance.balance.actual_balance
     },
     liveCoinPrice() {
-      return this.$store.state.trade.liveCoinPrice
+      return this.$store.state.forex.liveCoinPrice
     },
     leverage() {
       return this.$store.state.balance.balance.leverage
@@ -227,7 +201,7 @@ export default {
       return parseFloat(totalLot).toFixed(2)
     },
     totalMargin() {
-      return this.$store.state.trade.totalMargin
+      return this.$store.state.forex.totalMargin
     },
     freeMargin() {
       return this.balance - this.totalMargin

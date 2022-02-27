@@ -88,7 +88,10 @@
     },
     "forex": {
       "trade": {
-        "coins_daily": "💰 Le <span class=\"text-money underline capitalize\">pari</span> più scambiate della giornata. 🚀"
+        "coins_daily": "💰 Le <span class=\"text-money underline capitalize\">pari</span> più scambiate della giornata. 🚀",
+        "sidebar": {
+          "search": "Cerca per valuta"
+        }
       }
     }
   },

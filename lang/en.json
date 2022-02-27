@@ -22,7 +22,7 @@
       "profile": "Profile",
       "forex": "Forex",
       "news": "News",
-      "stocks": "Stocks"
+      "stocks": "Stocks (IEX)"
     },
     "user-menu": {
       "profile": "Profile",
@@ -88,7 +88,10 @@
     },
     "forex": {
       "trade": {
-        "coins_daily": "💰 Most traded <span class=\"text-money underline capitalize\">pairs</span> of the day. 🚀"
+        "coins_daily": "💰 Most traded <span class=\"text-money underline capitalize\">pairs</span> of the day. 🚀",
+        "sidebar": {
+          "search": "Search by currency"
+        }
       }
     }
   },

@@ -23,7 +23,7 @@
   <div
     class="px-4 py-3 border rounded-xl flex flex-row justify-items-center items-center gap-2 cursor-pointer border-gray-500 shadow-md bg-secondary"
     @click="
-      $router.push({ name: 'forex-trade-coin', params: { coin: 'EUR/USD' } })
+      $router.push({ name: 'forex-trade-coin', params: { coin: 'eurusd' } })
     "
     v-else
   >
