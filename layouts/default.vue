@@ -1,15 +1,7 @@
 <template>
   <div class="dark:bg-primary relative font-sans">
     <div
-      class="
-        bg-gray-100
-        dark:bg-primary dark:text-white
-        text-gray-600
-        h-full
-        md:h-screen
-        flex
-        md:overflow-hidden
-      "
+      class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex md:overflow-hidden"
     >
       <div class="flex-grow overflow-hidden h-full flex flex-col min-h-screen">
         <Menu />
@@ -56,6 +48,11 @@ export default {
           disabled: false,
         },
         {
+          name: `${this.$t('dashboard.menu.stocks')}`,
+          url: '/stocks',
+          disabled: false,
+        },
+        {
           name: `${this.$t('dashboard.menu.exchange')}`,
           url: '/exchange',
           disabled: false,
@@ -88,6 +85,11 @@ export default {
         {
           name: `${this.$t('dashboard.menu.forex')}`,
           url: '/forex',
+          disabled: false,
+        },
+        {
+          name: `${this.$t('dashboard.menu.stocks')}`,
+          url: '/stocks',
           disabled: false,
         },
         {

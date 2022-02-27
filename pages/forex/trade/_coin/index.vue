@@ -2,7 +2,6 @@
   <div
     class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex overflow-hidden text-sm mb-20 md:mb-0"
   >
-    <Sidebar />
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <div class="flex-grow flex overflow-x-hidden">
         <TradeSidebar title="Crypto" />
@@ -29,7 +28,6 @@
 </template>
 
 <script>
-import Sidebar from '~/components/Dashboard/Forex/Sidebar.vue'
 import TradingTable from '~/components/Dashboard/Forex/Trade/TradingTable.vue'
 import TradeSidebar from '~/components/Dashboard/Forex/Trade/TradeSidebar.vue'
 import TradeHeader from '~/components/Dashboard/Forex/Trade/TradeHeader.vue'
@@ -38,7 +36,6 @@ import TabsWrapper from '~/components/TabsWrapper.vue'
 
 export default {
   components: {
-    Sidebar,
     TabsWrapper,
     TradingTable,
     TradeSidebar,

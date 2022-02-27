@@ -29,14 +29,14 @@
 
 <script>
 import Player from '~/components/Dashboard/Player.vue'
-import EurCard from '~/components/Dashboard/Forex/LiveCoins/Eur.vue'
+import EurCard from '~/components/Dashboard/Stocks/LiveCoins/Eur.vue'
 export default {
   components: {
     Player,
     EurCard,
   },
   middleware: 'auth',
-  name: 'Forex',
+  name: 'Stocks',
   computed: {
     balance() {
       return this.$store.state.balance.balance

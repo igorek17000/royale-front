@@ -21,7 +21,8 @@
       "exchange": "Crypto",
       "profile": "Profile",
       "forex": "Forex",
-      "news": "News"
+      "news": "News",
+      "stocks": "Stocks"
     },
     "user-menu": {
       "profile": "Profile",

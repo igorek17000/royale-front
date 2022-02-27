@@ -28,11 +28,10 @@
 </template>
 
 <script>
-import axios from 'axios'
-import TradingTable from '~/components/Dashboard/Exchange/Trade/TradingTable.vue'
-import TradeSidebar from '~/components/Dashboard/Exchange/Trade/TradeSidebar.vue'
-import TradeHeader from '~/components/Dashboard/Exchange/Trade/TradeHeader.vue'
-import BuySell from '~/components/Dashboard/Exchange/Trade/BuySell.vue'
+import TradingTable from '~/components/Dashboard/Stocks/Trade/TradingTable.vue'
+import TradeSidebar from '~/components/Dashboard/Stocks/Trade/TradeSidebar.vue'
+import TradeHeader from '~/components/Dashboard/Stocks/Trade/TradeHeader.vue'
+import BuySell from '~/components/Dashboard/Stocks/Trade/BuySell.vue'
 import TabsWrapper from '~/components/TabsWrapper.vue'
 
 export default {
@@ -46,13 +45,14 @@ export default {
   middleware: 'auth',
   name: 'coin',
   head: {
-    title: 'Trade | Ace Trading Platform',
+    title: 'Stocks | Ace Trading Platform',
   },
   data() {
     return {
       coinPrice: null,
       interval: null,
       reloadF: false,
+      ws: null,
     }
   },
   methods: {
@@ -61,26 +61,27 @@ export default {
       this.$options.head.title = `${val} | ${this.$route.params.coin} | Ace Trading Platform`
       this.$meta().refresh()
     },
-    async getCoinPrice(val) {
-      let vm = this
-      await axios
-        .get(
-          `https://api.binance.com/api/v3/avgPrice?symbol=${val.toUpperCase()}`
-        )
-        .then((res) => {
-          let price = parseFloat(res.data.price).toFixed(2)
-          vm.$store.commit('trade/SET_COIN_PRICE', price)
-        })
-        .catch((err) => {
-          console.log('err getCoin', err)
-        })
-    },
   },
   mounted() {
     let coin = this.$route.params.coin
+    console.log('🚀 ~ mounted ~ coin', coin)
     this.$options.head.title = `${coin} | Ace Trading Platform`
     this.$meta().refresh()
-    this.getCoinPrice(coin)
+
+    // const root = protobuf.loadSync('./YPricingData.proto')
+    // this.ws = new WebSocket(`wss://streamer.finance.yahoo.com`)
+    // let vm = this
+    // this.ws.addEventListener('open', (event) => {
+    //   console.log('connected socket')
+    //   vm.ws.send(
+    //     JSON.stringify({
+    //       subscribe: ['MSFT'],
+    //     })
+    //   )
+    // })
+    // this.ws.addEventListener('message', function (event) {
+    //   console.log('event', event.data)
+    // })
   },
   beforeDestroy() {
     this.$store.commit('trade/SET_COIN_PRICE', null)
