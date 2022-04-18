@@ -24,7 +24,7 @@
           h-11
           custom-input
           hover:border-custom-red"
-        :value="liveCoinPrice"
+        :value="price"
         :precision="2"
         class=""
       ></vue-numeric>
@@ -61,7 +61,7 @@
           w-full
           pl-4
           pr-4"
-          :value="liveCoinPrice"
+          :value="price"
           :precision="2"
           class=""
         ></vue-numeric>
@@ -90,7 +90,7 @@
         {{ $t('dashboard.exchange.trade.buysell.max_lot') }}
       </div>
       <div class="uppercase">
-        <p class="px-4" v-if="liveCoinPrice">
+        <p class="px-4" v-if="price">
           {{ parseFloat(maxLot).toFixed(2) }}
         </p>
       </div>
@@ -182,13 +182,13 @@ export default {
   },
   computed: {
     coinPrice() {
-      return this.$store.state.forex.coinPrice
+      return this.$store.state.trade.coinPrice
     },
     balance() {
       return this.$store.state.balance.balance.actual_balance
     },
-    liveCoinPrice() {
-      return this.$store.state.forex.liveCoinPrice
+    price() {
+      return this.$store.state.trade.coin.price
     },
     leverage() {
       return this.$store.state.balance.balance.leverage
@@ -197,11 +197,11 @@ export default {
       return this.leverage * this.freeMargin
     },
     maxLot() {
-      let totalLot = this.maxVolume / this.liveCoinPrice
+      let totalLot = this.maxVolume / this.price
       return parseFloat(totalLot).toFixed(2)
     },
     totalMargin() {
-      return this.$store.state.forex.totalMargin
+      return this.$store.state.trade.totalMargin
     },
     freeMargin() {
       return this.balance - this.totalMargin
@@ -227,13 +227,14 @@ export default {
       if (!this.buyLoot) return
       this.isLoading = true
       let payload = {
-        coin_price: this.liveCoinPrice,
+        coin_price: this.price,
         trade_type: 'sell',
         user: this.$auth.user.id,
         coin: this.coinName,
         isOpen: true,
         buyLoot: this.buyLoot,
         leverage: this.leverage,
+        type: 'forex',
       }
       await this.$axios
         .post('/orders/new', payload, {
@@ -281,7 +282,6 @@ export default {
     if (process.client) {
       let buyLoot = localStorage.getItem('buyLoot')
       this.buyLoot = parseFloat(buyLoot)
-      console.log('🚀 ~ mounted ~ this.buyLoot', this.buyLoot)
     }
   },
 }

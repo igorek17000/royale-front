@@ -20,6 +20,8 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/custom.css'],
 
+  ssr: false,
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/trading-vue.client.js', mode: 'client' },
@@ -146,5 +148,4 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-  serverMiddleware: ['~/api/getPrices.js', '~/api/getSearch.js'],
 }

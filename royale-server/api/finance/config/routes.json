@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/finance/forex",
+      "handler": "finance.forex",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/finance/quote",
+      "handler": "finance.quote",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/finance/search",
+      "handler": "finance.search",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

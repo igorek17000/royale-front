@@ -4,16 +4,7 @@
       <ul class="flex mb-0 list-none gap-4">
         <li class="text-center">
           <button
-            class="
-              tracking-wider
-              uppercase
-              focus:outline-none
-              text-xs
-              md:text-sm
-              border-b border-transparent
-              px-2
-              py-2
-            "
+            class="tracking-wider uppercase focus:outline-none text-xs md:text-sm border-b border-transparent px-2 py-2"
             @click="toggleTabs(1)"
             :class="{
               'text-gray-500 bg-primary': openTab !== 1,
@@ -25,16 +16,7 @@
         </li>
         <li class="text-center">
           <button
-            class="
-              tracking-wider
-              uppercase
-              focus:outline-none
-              text-xs
-              md:text-sm
-              border-b border-transparent
-              px-2
-              py-2
-            "
+            class="tracking-wider uppercase focus:outline-none text-xs md:text-sm border-b border-transparent px-2 py-2"
             @click="toggleTabs(2)"
             :class="{
               'text-gray-500 ': openTab !== 2,
@@ -46,16 +28,7 @@
         </li>
         <li class="text-center">
           <button
-            class="
-              tracking-wider
-              uppercase
-              focus:outline-none
-              text-xs
-              md:text-sm
-              border-b border-transparent
-              px-2
-              py-2
-            "
+            class="tracking-wider uppercase focus:outline-none text-xs md:text-sm border-b border-transparent px-2 py-2"
             @click="toggleTabs(3)"
             :class="{
               'text-gray-500 ': openTab !== 3,
@@ -123,9 +96,9 @@
 </template>
 
 <script>
-import OpenOrderTable from '@/components/Dashboard/Exchange/Trade/OpenOrderTable.vue'
-import OrderTable from '@/components/Dashboard/Exchange/Trade/OrderTable.vue'
-import DepositsTable from '@/components/Dashboard/Exchange/Trade/DepositsTable.vue'
+import OpenOrderTable from '~/components/Dashboard/OpenOrderTable.vue'
+import OrderTable from '~/components/Dashboard/OrderTable.vue'
+import DepositsTable from '~/components/Dashboard/DepositsTable.vue'
 export default {
   name: 'TabsWrapper',
   components: { OrderTable, DepositsTable, OpenOrderTable },

@@ -1,16 +1,7 @@
 <template>
   <div class="w-full flex flex-col my-2 relative">
     <div
-      class="
-        text-white
-        hidden
-        md:flex
-        w-100
-        justify-start
-        items-center
-        sticky
-        top-0
-      "
+      class="text-white hidden md:flex w-100 justify-start items-center sticky top-0"
     >
       <div class="px-3 py-1 text-left w-1/6">
         {{ $t('dashboard.exchange.trade.footer.order.id') }}
@@ -60,5 +51,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

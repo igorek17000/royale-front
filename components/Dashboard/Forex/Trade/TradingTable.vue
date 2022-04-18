@@ -1,17 +1,16 @@
 <template>
   <div ref="tradeChart" class="w-full md:w-4/5 h-trade bg-primary">
-    <trading-vue
-      :data="tradingVue"
-      :titleTxt="$route.params.coin.toUpperCase()"
-      :toolbar="true"
-      :width="this.width"
-      :height="this.height"
-    />
+    <div class="three-line-legend">
+      <h4 class="text-lg">{{ shortName }}</h4>
+      <p class="">{{ legendPrice }}</p>
+      <p class="">{{ legendDate }}</p>
+    </div>
+    <div ref="tradeView" />
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import { createChart, CrosshairMode } from 'lightweight-charts'
 
 export default {
   data() {
@@ -20,81 +19,139 @@ export default {
       dateNow: new Date(),
       width: 300,
       height: 300,
-      tradingVue: this.$DataCube
-        ? new this.$DataCube({
-            chart: {
-              type: 'Candles',
-              data: [
-                [
-                  [1551128400000, 33, 37.1, 14, 14, 196],
-                  [1551132000000, 13.7, 30, 6.6, 30, 206],
-                  [1551135600000, 29.9, 33, 21.3, 21.8, 74],
-                  [1551139200000, 21.7, 25.9, 18, 24, 140],
-                  [1551142800000, 24.1, 24.1, 24, 24.1, 29],
-                ],
-              ],
-            },
-          })
-        : {},
+      coin: null,
+      lineSeries: [],
+      legendPrice: null,
+      legendDate: null,
     }
   },
-  created() {},
   mounted() {
-    let coin = this.$route.params.coin
-    this.getCoin(coin)
-    this.width = this.$refs.tradeChart.clientWidth
-    this.height = this.$refs.tradeChart.clientHeight
+    this.coin = this.$route.params.coin
+    let vm = this
+    let widthClient = this.$refs.tradeChart.clientWidth
+    let heightClient = this.$refs.tradeChart.clientHeight
+
+    let tradeView = this.$refs.tradeView
+    const chart = createChart(tradeView, {
+      width: widthClient,
+      height: heightClient,
+      layout: {
+        backgroundColor: '#131722',
+        textColor: '#d1d4dc',
+      },
+      grid: {
+        vertLines: {
+          color: '#334158',
+        },
+        horzLines: {
+          color: '#334158',
+        },
+      },
+      crosshair: {
+        mode: CrosshairMode.Normal,
+      },
+      priceScale: {
+        borderColor: '#485c7b',
+      },
+      timeScale: {
+        borderColor: '#485c7b',
+        timeVisible: true,
+        secondsVisible: false,
+      },
+    })
+    this.lineSeries = chart.addAreaSeries({
+      topColor: 'rgba(19, 68, 193, 0.4)',
+      bottomColor: 'rgba(0, 120, 255, 0.0)',
+      lineColor: '#40e094',
+      lineWidth: 3,
+    })
+    window.addEventListener('resize', resize, false)
+    this.lineSeries.applyOptions({
+      priceFormat: {
+        type: 'price',
+        precision: 4,
+        minMove: 0.0001,
+      },
+    })
+
+    function resize() {
+      chart.applyOptions({
+        width: widthClient,
+        height: heightClient,
+      })
+
+      setTimeout(() => chart.timeScale().fitContent(), 0)
+    }
+    this.getDailyQuotes(this.coin).then((res) => {
+      this.lineSeries.setData(res)
+    })
+    chart.subscribeCrosshairMove((param) => {
+      if (param.time !== undefined) {
+        this.legendDate = new Date(param.time * 1000).toLocaleDateString()
+        this.legendPrice = param.seriesPrices.get(this.lineSeries)
+      }
+    })
   },
 
   methods: {
-    async getCoin(val) {
-      let vm = this
-      let klineData = new Date(
-        this.dateNow.getFullYear(),
-        this.dateNow.getMonth(),
-        this.dateNow.getDate() - 7
-      )
-      await axios
-        .get(`http://localhost:3000/forex/prices/${val}`, {
-          params: {
-            resampleFreq: '1min',
-            startDate: this.$dayjs(klineData).format('YYYY-MM-DD'),
+    setLastBarText(val) {
+      this.legendDate = new Date(val.time * 1000).toLocaleDateString()
+      this.legendPrice = val.value
+    },
+    async getDailyQuotes(val) {
+      try {
+        let payload = {
+          symbol: val,
+        }
+        const { data } = await this.$axios.post('/finance/forex', payload, {
+          headers: {
+            Authorization: `Bearer ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
           },
         })
-        .then((response) => {
-          let { data } = response
-          console.log('🚀 ~ .then ~ data', data)
-          if (!data) return
-          vm.klines = data.map((item) => {
-            return [
-              this.$dayjs(item.date).valueOf(),
-              parseFloat(item.open),
-              parseFloat(item.high),
-              parseFloat(item.low),
-              parseFloat(item.close),
-            ]
-          })
-          console.log('🚀 ~ vm.klines=data.map ~ vm.klines', vm.klines)
-          vm.tradingVue.set('chart.data', vm.klines)
-          // console.log('vm tradingvue', vm.tradingVue)
-        })
-        .catch(function (error) {
-          console.error(error)
-        })
+
+        let timestamp = data.timestamp
+        let close = data.indicators.quote[0].close
+
+        for (let i = 0; i < timestamp.length; i++) {
+          let time = timestamp[i]
+          let price = close[i]
+          let obj = {
+            time: time,
+            value: Number(parseFloat(price).toFixed(4)),
+          }
+          this.klines.push(obj)
+        }
+
+        let lastItem = this.klines[this.klines.length - 1]
+
+        this.setLastBarText(lastItem)
+
+        return this.klines
+      } catch (error) {
+        console.error('error run getDailyQuotes', error)
+        return error
+      }
     },
   },
   computed: {
-    kline() {
-      return this.$store.state.forex.kline
+    shortName() {
+      return this.$store.state.trade.coinMeta.name
+    },
+    coinData() {
+      return this.$store.state.trade.coin
     },
   },
   watch: {
-    kline: function (val) {
-      if (val) {
-        this.tradingVue.update({
-          candle: val,
-        })
-      }
+    coinData: {
+      handler: function (val) {
+        const payload = {
+          time: Number(val.timestamp / 1000),
+          value: parseFloat(val.price).toFixed(4),
+        }
+        this.lineSeries.update(payload)
+      },
+      deep: true,
     },
   },
 }
@@ -102,6 +159,12 @@ export default {
 <style scoped>
 .h-trade {
   height: 550px;
+}
+.three-line-legend {
+  position: absolute;
+  z-index: 999;
+  color: #fff;
+  padding: 15px;
 }
 @media only screen and (min-width: 768px) {
   .h-trade {

@@ -11,7 +11,7 @@
       <div
         data-placeholder
         class="livecoin h-9 overflow-hidden relative bg-secondary"
-        v-if="isLoading"
+        v-if="isLoadingCoin"
       ></div>
 
       <div id="coinPrice" class="font-roboto" :class="[colorClass]" v-else>
@@ -26,7 +26,7 @@
           pl-2
           pr-2"
           :value="btc"
-          :precision="2"
+          :precision="4"
           class=""
         ></vue-numeric>
       </div>
@@ -40,11 +40,14 @@
       <div
         data-placeholder
         class="livecoin h-9 overflow-hidden relative bg-secondary"
-        v-if="isLoading_change"
+        v-if="isLoadingCoin"
       ></div>
 
       <div id="coinPrice" class="font-roboto" v-else>
-        {{ coin_change }} {{ coin_change_percentage }}%
+        <span :class="profitClass">{{ coin_change }}</span>
+        <span :class="profitClassPercentage"
+          >{{ coin_change_percentage }}%</span
+        >
       </div>
       <p class="pl-3 text-gray-500 text-sm hidden md:block">
         {{ $t('dashboard.exchange.trade.header.24h_change') }}
@@ -56,12 +59,12 @@
       <div
         data-placeholder
         class="livecoin h-9 overflow-hidden relative bg-secondary"
-        v-if="isLoading_change"
+        v-if="isLoadingCoin"
       ></div>
 
       <div id="coinPrice" class="font-roboto" v-else>
         <vue-numeric
-          v-if="coin_change_high"
+          v-if="dailyHigh"
           currency="$"
           separator=","
           read-only
@@ -70,8 +73,8 @@
           w-full
           pl-4
           pr-4"
-          :value="coin_change_high"
-          :precision="2"
+          :value="dailyHigh"
+          :precision="4"
           class=""
         ></vue-numeric>
       </div>
@@ -85,12 +88,12 @@
       <div
         data-placeholder
         class="livecoin h-9 overflow-hidden relative bg-secondary"
-        v-if="isLoading_change"
+        v-if="isLoadingCoin"
       ></div>
 
       <div id="coinPrice" class="font-roboto" v-else>
         <vue-numeric
-          v-if="coin_change_low"
+          v-if="dailyLow"
           currency="$"
           separator=","
           read-only
@@ -99,8 +102,8 @@
           w-full
           pl-4
           pr-4"
-          :value="coin_change_low"
-          :precision="2"
+          :value="dailyLow"
+          :precision="4"
           class=""
         ></vue-numeric>
       </div>
@@ -109,7 +112,7 @@
       </p>
     </div>
     <div
-      class="items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-r border-gray-200 dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5 hidden md:flex"
+      class="items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-l dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5 hidden md:flex ml-auto"
     >
       <div class="text-xs text-gray-400 dark:text-gray-400">
         {{ $t('dashboard.exchange.trade.header.leverage') }}
@@ -135,7 +138,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import VueNumeric from 'vue-numeric'
 import SearchMobile from './SearchMobile.vue'
 export default {
@@ -143,81 +145,53 @@ export default {
   data() {
     return {
       ws: null,
-      btc: null,
       lastPrice: null,
       colorClass: 'text-white',
       isLoading: true,
       profitClass: 'text-white',
+      profitClassPercentage: 'text-white',
       coin: null,
-      isLoading_change: true,
-      coin_change: null,
-      coin_change_percentage: null,
-      coin_change_high: null,
-      coin_change_low: null,
     }
   },
   components: {
     VueNumeric,
     SearchMobile,
   },
-  mounted() {
-    let coin = this.$route.params.coin
-    this.coin = coin.replace('usdt', '')
-    console.log('🚀 ~ mounted ~ this.coinss', this.coin)
-    this.getSinglePrice(coin)
-    // this.ws = new WebSocket('wss://api.tiingo.com/iex')
-    // let that = this
-
-    // let subscribe = {
-    //   eventName: 'subscribe',
-    //   authorization: '8dcfa1491f01d4804a588845685ad28fd2b8d2ef',
-    //   eventData: {
-    //     thresholdLevel: 5,
-    //   },
-    // }
-
-    // this.ws.addEventListener('open', function (event) {
-    //   that.ws.send(JSON.stringify(subscribe))
-    // })
-    // this.ws.addEventListener('message', function (event) {
-    //   console.log(event)
-    // })
-  },
-  methods: {
-    async getSinglePrice(val) {
-      await axios
-        .get(`https://www.alphavantage.co/query`, {
-          params: {
-            function: 'CURRENCY_EXCHANGE_RATE',
-            from_currency: 'EUR',
-            to_currency: 'USD',
-            apikey: '47K5Z7GECFZY32ZQ',
-          },
-        })
-        .then((res) => {
-          console.log('🚀 ~ .then ~ res', res.data)
-          let price = res.data
-          this.isLoading = false
-          this.btc = parseFloat(res.data.price).toFixed(2)
-        })
-        .catch((err) => {
-          console.log('err getCoin', err)
-        })
-    },
-  },
-  beforeDestroy() {
-    let unsubscribe = {
-      eventName: 'unsubscribe',
-      authorization: '8dcfa1491f01d4804a588845685ad28fd2b8d2ef',
-    }
-    // this.ws.send(JSON.stringify(unsubscribe))
-  },
   watch: {
     btc: function (val) {
       this.$emit('set-head-meta', val)
     },
+    coin_change: function (val) {
+      if (val > 0) {
+        this.profitClass = 'text-green-500'
+      } else if (val < 0) {
+        this.profitClass = 'text-red-500'
+      }
+    },
+    coin_change_percentage: function (val) {
+      if (val > 0) {
+        this.profitClassPercentage = 'text-green-500'
+      } else if (val < 0) {
+        this.profitClassPercentage = 'text-red-500'
+      }
+    },
   },
   computed: {
+    btc() {
+      return parseFloat(this.$store.state.trade.coin.price).toFixed(4)
+    },
+    coin_change() {
+      return parseFloat(this.$store.state.trade.coin.change).toFixed(4)
+    },
+    coin_change_percentage() {
+      return parseFloat(this.$store.state.trade.coin.changePercent).toFixed(4)
+    },
+    dailyHigh() {
+      return parseFloat(this.$store.state.trade.coinMeta.high).toFixed(4)
+    },
+    dailyLow() {
+      return parseFloat(this.$store.state.trade.coinMeta.low).toFixed(4)
+    },
     balance() {
       return this.$store.state.balance.balance.actual_balance
     },
@@ -237,6 +211,9 @@ export default {
         this.profitClass = 'text-money'
       }
       return proffit
+    },
+    isLoadingCoin() {
+      return this.$store.state.trade.isLoadingCoin
     },
   },
 }

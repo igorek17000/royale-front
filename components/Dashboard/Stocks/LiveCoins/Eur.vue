@@ -58,7 +58,6 @@ export default {
       let eur = data['Realtime Currency Exchange Rate']['5. Exchange Rate']
 
       this.coin = parseFloat(eur).toFixed(6)
-      console.log('🚀 ~ alpha.forex.rate ~ eur.coin', this.coin)
       this.isLoading = false
     })
   },

@@ -23,7 +23,7 @@
   <div
     class="px-4 py-3 border rounded-xl flex flex-row justify-items-center items-center gap-2 cursor-pointer border-gray-500 shadow-md bg-secondary"
     @click="
-      $router.push({ name: 'forex-trade-coin', params: { coin: 'eurusd' } })
+      $router.push({ name: 'forex-trade-coin', params: { coin: 'EURUSD=X' } })
     "
     v-else
   >
@@ -56,9 +56,7 @@ export default {
     const alpha = alphavantage({ key: 'G5INQFCVT5G2J7RN' })
     alpha.forex.rate('eur', 'usd').then((data) => {
       let eur = data['Realtime Currency Exchange Rate']['5. Exchange Rate']
-
       this.coin = parseFloat(eur).toFixed(6)
-      console.log('🚀 ~ alpha.forex.rate ~ eur.coin', this.coin)
       this.isLoading = false
     })
   },

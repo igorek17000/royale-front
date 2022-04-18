@@ -6,6 +6,12 @@
       <div class="flex-grow flex overflow-x-hidden">
         <TradeSidebar title="Forex" />
         <div class="w-full h-full">
+          <div
+            class="market w-full bg-custom-redh bg-opacity-50 text-center px-4 py-2"
+            v-if="marketOpen"
+          >
+            <p class="text-lg uppercase">Market is closed !</p>
+          </div>
           <trade-header @set-head-meta="setMeta" />
           <div class="trade-table block md:flex relative">
             <client-only>
@@ -33,7 +39,7 @@ import TradeSidebar from '~/components/Dashboard/Forex/Trade/TradeSidebar.vue'
 import TradeHeader from '~/components/Dashboard/Forex/Trade/TradeHeader.vue'
 import BuySell from '~/components/Dashboard/Forex/Trade/BuySell.vue'
 import TabsWrapper from '~/components/TabsWrapper.vue'
-
+var { YFinanceLive } = require('yfinance-live')
 export default {
   components: {
     TabsWrapper,
@@ -53,6 +59,8 @@ export default {
       interval: null,
       reloadF: false,
       ws: null,
+      yfinace: null,
+      marketOpen: false,
     }
   },
   methods: {
@@ -61,30 +69,64 @@ export default {
       this.$options.head.title = `${val} | ${this.$route.params.coin} | Ace Trading Platform`
       this.$meta().refresh()
     },
+    coinChange(data) {
+      if (data) {
+        let payload = {
+          price: data.price,
+          change: data.change,
+          changePercent: data.changePercent,
+          timestamp: data.time,
+        }
+        this.$store.commit('trade/SET_COIN', payload)
+      }
+    },
+    async getCoinMeta(coin) {
+      try {
+        let payload = {
+          symbol: coin,
+        }
+        const { data } = await this.$axios.post('/finance/quote', payload, {
+          headers: {
+            Authorization: `Bearer ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        const { price } = data
+
+        if (price.marketState === 'CLOSED') this.marketOpen = true
+
+        let coinSet = {
+          symbol: price.symbol,
+          price: price.regularMarketPrice,
+          change: price.regularMarketChange,
+          changePercent: price.regularMarketChangePercent,
+          marketCap: price.marketCap,
+          volume: price.volume,
+          high: price.regularMarketDayHigh,
+          low: price.regularMarketDayLow,
+          open: price.regularMarketOpen,
+          close: price.regularMarketPreviousClose,
+          name: price.shortName,
+          marketState: price.marketState,
+        }
+        this.$store.commit('trade/SET_COIN', coinSet)
+        this.$store.commit('trade/SET_COIN_META', coinSet)
+      } catch (error) {
+        console.log(error)
+      }
+    },
   },
   mounted() {
     let coin = this.$route.params.coin
-    console.log('🚀 ~ mounted ~ coin', coin)
     this.$options.head.title = `${coin} | Ace Trading Platform`
     this.$meta().refresh()
-
-    // const root = protobuf.loadSync('./YPricingData.proto')
-    // this.ws = new WebSocket(`wss://streamer.finance.yahoo.com`)
-    // let vm = this
-    // this.ws.addEventListener('open', (event) => {
-    //   console.log('connected socket')
-    //   vm.ws.send(
-    //     JSON.stringify({
-    //       subscribe: ['MSFT'],
-    //     })
-    //   )
-    // })
-    // this.ws.addEventListener('message', function (event) {
-    //   console.log('event', event.data)
-    // })
+    this.getCoinMeta(coin)
+    let vm = this
+    this.yfinace = new YFinanceLive([coin], vm.coinChange)
   },
   beforeDestroy() {
     this.$store.commit('trade/SET_COIN_PRICE', null)
+    this.yfinace.stop()
   },
 }
 </script>

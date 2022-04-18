@@ -1,27 +1,9 @@
 <template>
   <div
-    class="
-      flex
-      w-full
-      flex-wrap
-      md:flex-nowrap
-      border-gray-500
-      md:border-b
-      mb-4
-      md:mb-2
-    "
+    class="flex w-full flex-wrap md:flex-nowrap border-gray-500 md:border-b mb-4 md:mb-2"
   >
     <div
-      class="
-        uppercase
-        p-1
-        md:p-3
-        relative
-        w-1/2
-        md:w-1/6
-        border
-        md:border-none md:text-gray-400
-      "
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none md:text-gray-400"
     >
       <span class="px-2 md:hidden">
         {{ $t('dashboard.exchange.trade.footer.order.id') }}:</span
@@ -45,17 +27,7 @@
       ></vue-numeric>
     </div>
     <div
-      class="
-        p-1
-        md:p-3
-        truncate
-        uppercase
-        relative
-        w-1/2
-        md:w-1/6
-        border
-        md:border-none
-      "
+      class="p-1 md:p-3 truncate uppercase relative w-1/2 md:w-1/6 border md:border-none"
     >
       <span class="px-2 md:hidden"
         >{{ $t('dashboard.exchange.trade.footer.order.trade_type') }}:</span
@@ -104,16 +76,7 @@
     </div>
 
     <div
-      class="
-        uppercase
-        p-1
-        md:p-3
-        relative
-        w-1/2
-        md:w-1/6
-        border
-        md:border-none md:text-gray-400
-      "
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none md:text-gray-400"
     >
       <span class="px-2 md:hidden"
         >{{ $t('dashboard.exchange.trade.footer.order.date') }}:</span
@@ -147,14 +110,7 @@
     >
       <span class="px-2 md:hidden">Action:</span>
       <button
-        class="
-          bg-pinkMoney
-          px-2
-          py-1
-          rounded-sm
-          focus:outline-none
-          hover:bg-custom-red
-        "
+        class="bg-pinkMoney px-2 py-1 rounded-sm focus:outline-none hover:bg-custom-red"
         @click="closeTrade(order)"
         :disabled="isDisabled"
       >
@@ -167,6 +123,7 @@
 <script>
 import VueNumeric from 'vue-numeric'
 import Loading from '@/components/Loading.vue'
+var { YFinanceLive } = require('yfinance-live')
 export default {
   name: 'OpenOrderTableRow',
   props: ['order'],
@@ -177,14 +134,14 @@ export default {
   data() {
     return {
       isPositive: true,
-      ws: '',
+      ws: null,
       liveCoinPrice: null,
       isDisabled: true,
     }
   },
   mounted() {
     const coin = this.order.coin
-    if (coin) {
+    if (coin && this.order.type === 'exchange') {
       this.ws = new WebSocket(
         `wss://stream.binance.com/stream?streams=${coin}@trade`
       )
@@ -196,11 +153,15 @@ export default {
           vm.liveCoinPrice = price
         }
       })
+    } else {
+      this.liveCoinPrice = this.$store.state.trade.coin.price
     }
   },
   beforeDestroy() {
     // this.$store.commit('trade/SET_COIN_BALANCE', null)
-    this.ws.close()
+    if (this.ws) {
+      this.ws.close()
+    }
   },
   watch: {
     proffit: {
@@ -285,5 +246,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

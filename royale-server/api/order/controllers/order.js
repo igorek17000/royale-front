@@ -14,6 +14,7 @@ module.exports = {
       coin,
       trade_type,
       leverage,
+      type,
     } = ctx.request.body
     let entity
     if (!user) return
@@ -37,6 +38,7 @@ module.exports = {
       margin: totalMargin,
       user: user,
       leverage: leverage,
+      type,
     }
 
     entity = await strapi.services.order.create(payload)

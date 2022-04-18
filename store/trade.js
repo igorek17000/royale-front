@@ -7,6 +7,9 @@ const state = () => ({
   liveCoinPrice: 0,
   leverage: 100,
   totalMargin: 0,
+  coin: {},
+  coinMeta: {},
+  isLoadingCoin: true,
 })
 
 const getters = {}
@@ -21,6 +24,14 @@ const mutations = {
   },
   NEW_KLINE(state, data) {
     state.kline = data
+  },
+  SET_COIN(state, data) {
+    state.coin = data
+    state.isLoadingCoin = false
+  },
+  SET_COIN_META(state, data) {
+    state.coinMeta = data
+    state.isLoadingCoin = false
   },
   SET_COIN_PRICE(state, data) {
     state.coinPrice = data
