@@ -10,7 +10,7 @@
         v-model="searchInput"
         type="text"
         class="pl-8 h-9 bg-transparent border border-gray-300 dark:border-gray-700 dark:text-white w-full rounded-md text-sm"
-        :placeholder="$t('dashboard.forex.trade.sidebar.search')"
+        :placeholder="$t('dashboard.forex.trade.sidebar.search-placeholder')"
       />
       <svg
         viewBox="0 0 24 24"
@@ -28,41 +28,50 @@
     <div class="space-y-4 mt-3 relative">
       <search-coin :filterCoins="filterCoins" v-if="showSearch" />
     </div>
+    <div class="space-y-4 mt-3">
+      <trending-trades />
+    </div>
   </div>
 </template>
 
 <script>
 import SearchCoin from './SearchCoin.vue'
-import coins from './coins.json'
 import VueNumeric from 'vue-numeric'
+import TrendingTrades from './TrendingTrades.vue'
 export default {
-  components: { SearchCoin, VueNumeric },
+  components: { SearchCoin, VueNumeric, TrendingTrades },
   name: 'TradeSidebar',
   data() {
     return {
       baseURL: this.$config.baseURL,
       searchInput: '',
-      coins: coins,
       showSearch: false,
+      filterCoins: [],
     }
   },
-  computed: {
-    filterCoins() {
-      let games = this.coins.filter((game) => {
-        return game.toLowerCase().indexOf(this.searchInput.toLowerCase()) != -1
-      })
-      return games
+  methods: {
+    async handleSearch(val) {
+      const payload = {
+        searchString: val,
+      }
+      this.$axios
+        .post('/finance/search', payload, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.$store.state.auth.token}`,
+          },
+        })
+        .then((res) => {
+          this.filterCoins = res.data.quotes
+        })
     },
   },
-  mounted() {
-    let coin = this.$route.params.coin
-  },
-  methods: {},
   watch: {
     searchInput: function (val) {
       if (val.length === 0) {
         this.showSearch = false
-      } else {
+      } else if (val.length > 2) {
+        this.handleSearch(val)
         this.showSearch = true
       }
     },

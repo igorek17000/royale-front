@@ -23,6 +23,7 @@ export default {
       lineSeries: [],
       legendPrice: null,
       legendDate: null,
+      lastItem: {},
     }
   },
   mounted() {
@@ -123,9 +124,9 @@ export default {
           this.klines.push(obj)
         }
 
-        let lastItem = this.klines[this.klines.length - 1]
+        this.lastItem = this.klines[this.klines.length - 1]
 
-        this.setLastBarText(lastItem)
+        this.setLastBarText(this.lastItem)
 
         return this.klines
       } catch (error) {
@@ -145,11 +146,18 @@ export default {
   watch: {
     coinData: {
       handler: function (val) {
-        const payload = {
-          time: Number(val.timestamp / 1000),
-          value: parseFloat(val.price).toFixed(4),
+        if (val) {
+          const payload = {
+            time: Number(val.timestamp / 1000),
+            value: parseFloat(val.price).toFixed(4),
+          }
+          if (this.lastItem.time < payload.time) {
+            // this.lineSeries.appendData(payload)
+            this.lineSeries.update(payload)
+          }
+          this.lastItem = payload
+          this.setLastBarText(this.lastItem)
         }
-        this.lineSeries.update(payload)
       },
       deep: true,
     },

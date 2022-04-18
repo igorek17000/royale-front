@@ -5,12 +5,13 @@
         class="cursor-pointer px-3 py-2 hover:bg-secondary"
         @click="
           $router.push({
-            name: 'exchange-trade-coin',
-            params: { coin: `${coin.toLowerCase()}usdt` },
+            name: 'forex-trade-coin',
+            params: { coin: coin.symbol },
           })
         "
       >
-        {{ coin }}/USDT
+        <span class="shortname"> Name : {{ coin.shortname }} </span>
+        <span class="shortname"> Type : {{ coin.quoteType }} </span>
       </p>
     </div>
   </div>
@@ -19,8 +20,10 @@
 <script>
 export default {
   props: ['filterCoins'],
+  mounted() {
+    console.log('filtercoins', this.filterCoins)
+  },
 }
 </script>
 
-<style>
-</style>
+<style></style>

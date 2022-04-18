@@ -48,11 +48,6 @@ export default {
           disabled: false,
         },
         {
-          name: `${this.$t('dashboard.menu.stocks')}`,
-          url: '/stocks',
-          disabled: false,
-        },
-        {
           name: `${this.$t('dashboard.menu.exchange')}`,
           url: '/exchange',
           disabled: false,
@@ -85,11 +80,6 @@ export default {
         {
           name: `${this.$t('dashboard.menu.forex')}`,
           url: '/forex',
-          disabled: false,
-        },
-        {
-          name: `${this.$t('dashboard.menu.stocks')}`,
-          url: '/stocks',
           disabled: false,
         },
         {
