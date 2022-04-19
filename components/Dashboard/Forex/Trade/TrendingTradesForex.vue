@@ -1,9 +1,9 @@
 <template>
-  <div class="trade-cards flex flex-col gap-4">
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <div
       v-for="(coin, index) in tradingCoins"
       :key="index"
-      class="cursor-pointer bg-greenMoney bg-opacity-5 p-4 rounded-lg mt-4 flex items-center justify-center flex-col"
+      class="cursor-pointer bg-greenMoney bg-opacity-5 p-8 rounded-lg mt-4 flex items-center justify-center flex-col"
       @click="
         $router.push({
           name: 'forex-trade-coin',
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'TrendingTrades',
+  name: 'TrendingTradesForex',
   data() {
     return {
       tradingCoins: [

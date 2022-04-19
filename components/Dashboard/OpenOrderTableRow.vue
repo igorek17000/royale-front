@@ -13,6 +13,14 @@
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
     >
       <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.stock') }}:</span
+      >
+      {{ order.coin }}
+    </div>
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+    >
+      <span class="px-2 md:hidden"
         >{{ $t('dashboard.exchange.trade.footer.order.coin_price') }}:</span
       >
       <vue-numeric
@@ -123,7 +131,6 @@
 <script>
 import VueNumeric from 'vue-numeric'
 import Loading from '@/components/Loading.vue'
-var { YFinanceLive } = require('yfinance-live')
 export default {
   name: 'OpenOrderTableRow',
   props: ['order'],
@@ -137,6 +144,7 @@ export default {
       ws: null,
       liveCoinPrice: null,
       isDisabled: true,
+      yfinace: null,
     }
   },
   mounted() {
@@ -154,7 +162,12 @@ export default {
         }
       })
     } else {
-      this.liveCoinPrice = this.$store.state.trade.coin.price
+      // this.liveCoinPrice = this.$store.state.trade.coin.price
+      if (process.browser) {
+        let vm = this
+        let coin = this.order.coin
+        this.yfinace = new this.$YFinanceLive([coin], vm.coinChange)
+      }
     }
   },
   beforeDestroy() {
@@ -211,6 +224,9 @@ export default {
     },
   },
   methods: {
+    coinChange(data) {
+      this.liveCoinPrice = data.price
+    },
     async closeTrade(order) {
       let proff = parseFloat(this.proffit).toFixed(2)
       let payload = {

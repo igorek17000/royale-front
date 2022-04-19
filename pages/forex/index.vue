@@ -16,8 +16,8 @@
                 class="text-lg md:text-4xl leading-relaxed text-center py-8 font-bold"
                 v-html="$t('dashboard.forex.trade.coins_daily')"
               ></h3>
-              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <EurCard />
+              <div class="">
+                <trending-trades-forex />
               </div>
             </div>
           </div>
@@ -29,11 +29,11 @@
 
 <script>
 import Player from '~/components/Dashboard/Player.vue'
-import EurCard from '~/components/Dashboard/Forex/LiveCoins/Eur.vue'
+import TrendingTradesForex from '~/components/Dashboard/Forex/Trade/TrendingTradesForex.vue'
 export default {
   components: {
     Player,
-    EurCard,
+    TrendingTradesForex,
   },
   middleware: 'auth',
   name: 'Forex',

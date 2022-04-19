@@ -7,6 +7,9 @@
         {{ $t('dashboard.exchange.trade.footer.order.id') }}
       </div>
       <div class="px-3 py-1 text-left w-1/6">
+        {{ $t('dashboard.exchange.trade.footer.order.stock') }}
+      </div>
+      <div class="px-3 py-1 text-left w-1/6">
         {{ $t('dashboard.exchange.trade.footer.order.coin_price') }}
       </div>
       <div class="px-3 py-1 text-left w-1/6">

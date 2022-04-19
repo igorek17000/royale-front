@@ -39,7 +39,6 @@ import TradeSidebar from '~/components/Dashboard/Forex/Trade/TradeSidebar.vue'
 import TradeHeader from '~/components/Dashboard/Forex/Trade/TradeHeader.vue'
 import BuySell from '~/components/Dashboard/Forex/Trade/BuySell.vue'
 import TabsWrapper from '~/components/TabsWrapper.vue'
-var { YFinanceLive } = require('yfinance-live')
 export default {
   components: {
     TabsWrapper,
@@ -122,7 +121,9 @@ export default {
     this.$meta().refresh()
     this.getCoinMeta(coin)
     let vm = this
-    this.yfinace = new YFinanceLive([coin], vm.coinChange)
+    if (process.browser) {
+      this.yfinace = new this.$YFinanceLive([coin], vm.coinChange)
+    }
   },
   beforeDestroy() {
     this.$store.commit('trade/SET_COIN_PRICE', null)

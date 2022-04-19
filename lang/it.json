@@ -75,7 +75,8 @@
             "proffit": "Profitto",
             "date": "Data",
             "margin": "Margine",
-            "close_trade": "Chiudi Trade"
+            "close_trade": "Chiudi Trade",
+            "stock": "Nome"
           },
           "deposit": {
             "amount": "Quantità",

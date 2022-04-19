@@ -20,7 +20,7 @@ module.exports = {
   async forex(ctx) {
     const { symbol } = ctx.request.body
     const { data } = await axios.get(
-      `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=1d&interval=1m`
+      `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=2d&interval=1m`
     )
     return data.chart.result[0]
   },

@@ -76,7 +76,8 @@
             "proffit": "Proffit",
             "date": "Date",
             "margin": "Margin",
-            "close_trade": "Close Trade"
+            "close_trade": "Close Trade",
+            "stock": "Name"
           },
           "deposit": {
             "amount": "Amount",

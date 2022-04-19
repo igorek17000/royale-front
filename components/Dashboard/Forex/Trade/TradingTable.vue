@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { createChart, CrosshairMode } from 'lightweight-charts'
+// import { createChart, CrosshairMode } from 'lightweight-charts'
 
 export default {
   data() {
@@ -33,7 +33,7 @@ export default {
     let heightClient = this.$refs.tradeChart.clientHeight
 
     let tradeView = this.$refs.tradeView
-    const chart = createChart(tradeView, {
+    const chart = this.$createChart(tradeView, {
       width: widthClient,
       height: heightClient,
       layout: {
@@ -49,7 +49,7 @@ export default {
         },
       },
       crosshair: {
-        mode: CrosshairMode.Normal,
+        mode: this.$CrosshairMode.Normal,
       },
       priceScale: {
         borderColor: '#485c7b',

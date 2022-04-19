@@ -1,4 +1,7 @@
 {
   "i18n-ally.localesPaths": ["lang"],
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.keystyle": "nested",
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
+  "appService.defaultWebAppToDeploy": "/subscriptions/362f6dcb-ac39-4f4e-ab9c-caccf9b37fb5/resourceGroups/acetrader/providers/Microsoft.Web/sites/acetrader",
+  "appService.deploySubpath": "."
 }

@@ -29,6 +29,9 @@
       <search-coin :filterCoins="filterCoins" v-if="showSearch" />
     </div>
     <div class="space-y-4 mt-3">
+      <h4 class="text-base text-gray-400 tracking-wider uppercase mt-4">
+        Most trending trades
+      </h4>
       <trending-trades />
     </div>
   </div>
