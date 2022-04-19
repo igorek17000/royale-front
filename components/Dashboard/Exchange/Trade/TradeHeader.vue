@@ -1,35 +1,12 @@
 <template>
   <div
-    class="
-      flex
-      w-full
-      items-center
-      border-b border-gray-200
-      dark:border-gray-800
-      bg-primary
-      flex-wrap
-      md:flex-nowrap
-    "
+    class="flex w-full items-center border-b border-gray-200 dark:border-gray-800 bg-primary flex-wrap md:flex-nowrap"
   >
     <div class="mobile block md:hidden w-full px-4 py-4">
       <search-mobile />
     </div>
     <div
-      class="
-        flex
-        items-center
-        md:text-base
-        text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-      "
+      class="flex items-center md:text-base text-sm justify-center dark:text-white capitalize border-r dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5"
     >
       <div
         data-placeholder
@@ -58,21 +35,7 @@
       </p>
     </div>
     <div
-      class="
-        flex
-        items-center
-        md:text-base
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-      "
+      class="flex items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-r border-gray-200 dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5"
     >
       <div
         data-placeholder
@@ -88,22 +51,7 @@
       </p>
     </div>
     <div
-      class="
-        hidden
-        md:flex
-        items-center
-        md:text-base
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-      "
+      class="hidden md:flex items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-r border-gray-200 dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5"
     >
       <div
         data-placeholder
@@ -132,22 +80,7 @@
       </p>
     </div>
     <div
-      class="
-        items-center
-        md:text-base
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-        hidden
-        md:flex
-      "
+      class="items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-r border-gray-200 dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5 hidden md:flex"
     >
       <div
         data-placeholder
@@ -176,22 +109,7 @@
       </p>
     </div>
     <div
-      class="
-        items-center
-        md:text-base
-        text-gray-900 text-sm
-        justify-center
-        dark:text-white
-        capitalize
-        border-r border-gray-200
-        dark:border-gray-800
-        px-2
-        py-4
-        w-1/2
-        md:w-1/5
-        hidden
-        md:flex
-      "
+      class="items-center md:text-base text-gray-900 text-sm justify-center dark:text-white capitalize border-r border-gray-200 dark:border-gray-800 px-2 py-4 w-1/2 md:w-1/5 hidden md:flex"
     >
       <div class="text-xs text-gray-400 dark:text-gray-400">
         {{ $t('dashboard.exchange.trade.header.leverage') }}
@@ -295,7 +213,6 @@ export default {
         vm.lastPrice = price
       }
       if (ev.stream === `${coin}@ticker`) {
-        // console.log('evennt', ev)
         vm.isLoading_change = false
         vm.coin_change = parseFloat(ev.data.p).toFixed(2)
         vm.coin_change_percentage = ev.data.P
@@ -373,7 +290,7 @@ export default {
       return this.$store.state.balance.balance.started_balance
     },
     leverage() {
-      return this.$store.state.balance.balance.leverage
+      return this.$store.state.leverage.crypto_leverage
     },
     proffit() {
       let proffit = this.balance - this.started_balance

@@ -2,15 +2,7 @@
   <div class="buy buttons">
     <div class="mt-4 relative rounded-sm border border-greenBorder mb-4">
       <div
-        class="
-          absolute
-          inset-y-0
-          left-0
-          pl-3
-          flex
-          items-center
-          pointer-events-none
-        "
+        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
       >
         <span class="text-gray-500 sm:text-sm">
           {{ $t('dashboard.exchange.trade.buysell.price') }}</span
@@ -49,26 +41,7 @@
     />
 
     <button
-      class="
-        flex
-        items-center
-        justify-center
-        px-4
-        py-2
-        w-full
-        text-base
-        font-bold
-        uppercase
-        rounded-md
-        text-black
-        bg-greenMoney
-        hover:bg-money
-        transition
-        ease-in-out
-        duration-150
-        focus:outline-none
-        mb-4
-      "
+      class="flex items-center justify-center px-4 py-2 w-full text-base font-bold uppercase rounded-md text-black bg-greenMoney hover:bg-money transition ease-in-out duration-150 focus:outline-none mb-4"
       @click="sendBuy"
       :disabled="isBuyDisabled"
     >
@@ -191,7 +164,6 @@
   </div>
 </template>
 
-
 <script>
 import VueNumeric from 'vue-numeric'
 import NumberInput from '~/components/NumberInput.vue'
@@ -263,6 +235,7 @@ export default {
         isOpen: true,
         buyLoot: this.buyLoot,
         leverage: this.leverage,
+        type: 'exchange',
       }
       await this.$axios
         .post('/orders/new', payload, {

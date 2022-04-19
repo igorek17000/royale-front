@@ -21,7 +21,8 @@
       "exchange": "Crypto",
       "profile": "Profilo",
       "forex": "Forex",
-      "news": "Notizie"
+      "news": "Notizie",
+      "stocks": "Azioni"
     },
     "user-menu": {
       "profile": "Profilo",
@@ -75,7 +76,8 @@
             "proffit": "Profitto",
             "date": "Data",
             "margin": "Margine",
-            "close_trade": "Chiudi Trade"
+            "close_trade": "Chiudi Trade",
+            "stock": "Nome"
           },
           "deposit": {
             "amount": "Quantità",
@@ -88,7 +90,11 @@
     },
     "forex": {
       "trade": {
-        "coins_daily": "💰 Le <span class=\"text-money underline capitalize\">pari</span> più scambiate della giornata. 🚀"
+        "coins_daily": "💰 Le <span class=\"text-money underline capitalize\">pari</span> più scambiate della giornata. 🚀",
+        "sidebar": {
+          "search": "Cerca per valuta",
+          "search-placeholder": "Es: APPL o EUR"
+        }
       }
     }
   },

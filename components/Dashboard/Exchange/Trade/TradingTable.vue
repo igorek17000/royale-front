@@ -10,7 +10,6 @@
   </div>
 </template>
 
-
 <script>
 import axios from 'axios'
 
@@ -101,7 +100,7 @@ export default {
 </script>
 <style scoped>
 .h-trade {
-  height: 550px;
+  height: 350px;
 }
 @media only screen and (min-width: 768px) {
   .h-trade {

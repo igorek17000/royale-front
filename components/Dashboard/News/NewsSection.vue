@@ -5,27 +5,12 @@
         <div class="h-1 bg-gray-200 rounded overflow-hidden"></div>
         <div class="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
           <h1
-            class="
-              sm:w-2/5
-              text-white
-              font-medium
-              title-font
-              text-2xl
-              mb-2
-              sm:mb-0
-            "
+            class="sm:w-2/5 text-white font-medium title-font text-2xl mb-2 sm:mb-0"
           >
             Latest news..
           </h1>
           <p
-            class="
-              sm:w-3/5
-              leading-relaxed
-              text-base
-              sm:pl-10
-              pl-0
-              text-gray-300
-            "
+            class="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0 text-gray-300"
           >
             Check out the latest news regarding on crypto / exchange and dont
             hesitate to contact us about anything!
@@ -89,7 +74,6 @@ export default {
         .get('/blogs')
         .then((res) => {
           this.blogs = res.data
-          console.log('🚀 ~ .then ~ this.blogs', this.blogs)
         })
         .catch((err) => {
           console.log('err', err)
@@ -102,5 +86,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

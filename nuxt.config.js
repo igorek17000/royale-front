@@ -20,11 +20,15 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/custom.css'],
 
+  // ssr: false,
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/trading-vue.client.js', mode: 'client' },
     { src: '~/plugins/vue-numeric.js', mode: 'client' },
     { src: '~/plugins/vue-toasted.js', mode: 'client' },
+    { src: '~/plugins/y-finance.js', mode: 'client' },
+    { src: '~/plugins/lightweight-chart.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

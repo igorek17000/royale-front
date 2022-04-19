@@ -1,31 +1,21 @@
 <template>
   <div
-    class="
-      flex
-      w-full
-      flex-wrap
-      md:flex-nowrap
-      border-gray-500
-      md:border-b
-      mb-4
-      md:mb-2
-    "
+    class="flex w-full flex-wrap md:flex-nowrap border-gray-500 md:border-b mb-4 md:mb-2"
   >
     <div
-      class="
-        uppercase
-        p-1
-        md:p-3
-        relative
-        w-1/2
-        md:w-1/6
-        border
-        md:border-none md:text-gray-400
-      "
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none md:text-gray-400"
     >
       <span class="px-2 md:hidden">
         {{ $t('dashboard.exchange.trade.footer.order.id') }}:</span
       >{{ order.id }}
+    </div>
+    <div
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
+    >
+      <span class="px-2 md:hidden"
+        >{{ $t('dashboard.exchange.trade.footer.order.stock') }}:</span
+      >
+      {{ order.coin }}
     </div>
     <div
       class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none"
@@ -45,17 +35,7 @@
       ></vue-numeric>
     </div>
     <div
-      class="
-        p-1
-        md:p-3
-        truncate
-        uppercase
-        relative
-        w-1/2
-        md:w-1/6
-        border
-        md:border-none
-      "
+      class="p-1 md:p-3 truncate uppercase relative w-1/2 md:w-1/6 border md:border-none"
     >
       <span class="px-2 md:hidden"
         >{{ $t('dashboard.exchange.trade.footer.order.trade_type') }}:</span
@@ -104,16 +84,7 @@
     </div>
 
     <div
-      class="
-        uppercase
-        p-1
-        md:p-3
-        relative
-        w-1/2
-        md:w-1/6
-        border
-        md:border-none md:text-gray-400
-      "
+      class="uppercase p-1 md:p-3 relative w-1/2 md:w-1/6 border md:border-none md:text-gray-400"
     >
       <span class="px-2 md:hidden"
         >{{ $t('dashboard.exchange.trade.footer.order.date') }}:</span
@@ -147,14 +118,7 @@
     >
       <span class="px-2 md:hidden">Action:</span>
       <button
-        class="
-          bg-pinkMoney
-          px-2
-          py-1
-          rounded-sm
-          focus:outline-none
-          hover:bg-custom-red
-        "
+        class="bg-pinkMoney px-2 py-1 rounded-sm focus:outline-none hover:bg-custom-red"
         @click="closeTrade(order)"
         :disabled="isDisabled"
       >
@@ -177,14 +141,15 @@ export default {
   data() {
     return {
       isPositive: true,
-      ws: '',
+      ws: null,
       liveCoinPrice: null,
       isDisabled: true,
+      yfinace: null,
     }
   },
   mounted() {
     const coin = this.order.coin
-    if (coin) {
+    if (coin && this.order.type === 'exchange') {
       this.ws = new WebSocket(
         `wss://stream.binance.com/stream?streams=${coin}@trade`
       )
@@ -196,11 +161,20 @@ export default {
           vm.liveCoinPrice = price
         }
       })
+    } else {
+      // this.liveCoinPrice = this.$store.state.trade.coin.price
+      if (process.browser) {
+        let vm = this
+        let coin = this.order.coin
+        this.yfinace = new this.$YFinanceLive([coin], vm.coinChange)
+      }
     }
   },
   beforeDestroy() {
     // this.$store.commit('trade/SET_COIN_BALANCE', null)
-    this.ws.close()
+    if (this.ws) {
+      this.ws.close()
+    }
   },
   watch: {
     proffit: {
@@ -250,6 +224,9 @@ export default {
     },
   },
   methods: {
+    coinChange(data) {
+      this.liveCoinPrice = data.price
+    },
     async closeTrade(order) {
       let proff = parseFloat(this.proffit).toFixed(2)
       let payload = {
@@ -285,5 +262,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

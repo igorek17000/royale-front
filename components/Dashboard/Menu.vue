@@ -1,55 +1,19 @@
 <template>
   <div
-    class="
-      h-16
-      flex
-      w-full
-      border-b border-gray-200
-      dark:border-gray-800
-      pr-2
-      md:pr-10
-    "
+    class="h-16 flex w-full border-b border-gray-200 dark:border-gray-800 pr-2 md:pr-10"
   >
     <div
-      class="
-        h-auto
-        w-20
-        flex
-        items-center
-        justify-center
-        mr-3
-        md:mr-5 md:border-r md:border-secondary
-        bg-primary
-        md:bg-secondary
-        sticky
-        top-0
-      "
+      class="h-auto w-20 flex items-center justify-center mr-3 md:mr-5 md:border-r md:border-secondary sticky top-0"
     >
       <nuxt-link :to="localePath({ name: 'exchange' })">
         <img class="h-auto w-14 py-2" src="~/assets/Logo.png" alt="Logo" />
       </nuxt-link>
     </div>
     <div
-      class="
-        hidden
-        md:flex
-        h-full
-        text-gray-600
-        dark:text-gray-400
-        dashboard-menu
-      "
+      class="hidden md:flex h-full text-gray-600 dark:text-gray-400 dashboard-menu"
     >
       <nuxt-link
-        class="
-          cursor-pointer
-          h-full
-          border-b-2 border-transparent
-          inline-flex
-          items-center
-          mr-3
-          md:mr-4
-          lg:mr-8
-        "
+        class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-3 md:mr-4 lg:mr-8"
         v-for="menu in menus.data"
         :key="menu.name"
         :event="menu.disabled ? '' : 'click'"
@@ -63,15 +27,7 @@
           >{{ $t('account.balance-menu') }}:
         </span>
         <p
-          class="
-            balance
-            rounded-md
-            text-money
-            shadow
-            font-bold font-roboto
-            flex
-            items-center
-          "
+          class="balance rounded-md text-money shadow font-bold font-roboto flex items-center"
         >
           <vue-numeric
             v-if="balance"
@@ -126,17 +82,7 @@
         >
           <div
             v-show="openProfile"
-            class="
-              origin-top-right
-              absolute
-              right-0
-              mt-2
-              w-32
-              rounded-md
-              shadow-lg
-              z-50
-              top-8
-            "
+            class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg z-50 top-8"
           >
             <div
               class="py-1 rounded-md bg-white shadow-xs"
@@ -145,15 +91,7 @@
               aria-labelledby="user-menu"
             >
               <nuxt-link
-                class="
-                  flex
-                  px-3
-                  py-2
-                  text-sm text-gray-700
-                  hover:bg-gray-100
-                  capitalize
-                  items-center
-                "
+                class="flex px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 capitalize items-center"
                 v-for="(menu, index) in userMenu.data"
                 :key="index"
                 :to="localePath(`${menu.url}`)"
@@ -212,5 +150,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

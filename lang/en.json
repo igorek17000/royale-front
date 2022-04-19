@@ -21,7 +21,8 @@
       "exchange": "Crypto",
       "profile": "Profile",
       "forex": "Forex",
-      "news": "News"
+      "news": "News",
+      "stocks": "Stocks (IEX)"
     },
     "user-menu": {
       "profile": "Profile",
@@ -75,7 +76,8 @@
             "proffit": "Proffit",
             "date": "Date",
             "margin": "Margin",
-            "close_trade": "Close Trade"
+            "close_trade": "Close Trade",
+            "stock": "Name"
           },
           "deposit": {
             "amount": "Amount",
@@ -87,7 +89,11 @@
     },
     "forex": {
       "trade": {
-        "coins_daily": "💰 Most traded <span class=\"text-money underline capitalize\">pairs</span> of the day. 🚀"
+        "coins_daily": "💰 Most traded <span class=\"text-money underline capitalize\">pairs</span> of the day. 🚀",
+        "sidebar": {
+          "search": "Search by currency",
+          "search-placeholder": "Ex: APPL or EUR"
+        }
       }
     }
   },

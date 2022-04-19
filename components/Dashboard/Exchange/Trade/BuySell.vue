@@ -2,26 +2,11 @@
   <div class="flex flex-wrap">
     <div class="w-full">
       <ul
-        class="
-          flex
-          list-none
-          justify-between
-          border border-gray-800
-          rounded-md
-          p-2
-        "
+        class="flex list-none justify-between border border-gray-800 rounded-md p-2"
       >
         <li class="text-center w-full flex">
           <button
-            class="
-              font-bold
-              uppercase
-              rounded
-              block
-              leading-normal
-              w-full
-              focus:outline-none
-            "
+            class="font-bold uppercase rounded block leading-normal w-full focus:outline-none"
             @click="toggleTabs(1)"
             :class="{
               'text-gray-500': openTab !== 1,
@@ -33,15 +18,7 @@
         </li>
         <li class="text-center w-full flex h-10">
           <button
-            class="
-              font-bold
-              uppercase
-              rounded
-              block
-              leading-normal
-              w-full
-              focus:outline-none
-            "
+            class="font-bold uppercase rounded block leading-normal w-full focus:outline-none"
             @click="toggleTabs(2)"
             :class="{
               'text-gray-500': openTab !== 2,
@@ -56,7 +33,7 @@
         <div class="tab-content tab-space">
           <div
             :class="{ hidden: openTab !== 1, block: openTab === 1 }"
-            class="py-4"
+            class="pt-4"
           >
             <Sell
               :coin="coin"
@@ -66,7 +43,7 @@
           </div>
           <div
             :class="{ hidden: openTab !== 2, block: openTab === 2 }"
-            class="py-4"
+            class="pt-4"
           >
             <Buy
               :coin="coin"
@@ -103,5 +80,4 @@ export default {
   },
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>

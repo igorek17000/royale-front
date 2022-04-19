@@ -10,19 +10,7 @@
       Order placed succesfully!
     </span>
     <button
-      class="
-        absolute
-        bg-transparent
-        text-2xl
-        font-semibold
-        leading-none
-        right-0
-        top-0
-        mt-4
-        mr-6
-        outline-none
-        focus:outline-none
-      "
+      class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
       v-on:click="closeAlert()"
     >
       <span>×</span>
@@ -42,7 +30,6 @@ export default {
       }, 1000)
     },
     closeAlert() {
-      console.log('closeee')
       this.$store.commit('OPEN_NOTIFICATION', false)
     },
   },

@@ -5,6 +5,7 @@ const state = () => ({
   userMenu: [],
   refreshBalance: false,
   notification: null,
+  leverage: {},
 })
 
 const getters = {}
@@ -21,6 +22,9 @@ const mutations = {
   },
   SET_USER(state, getData) {
     state.userMenu = getData
+  },
+  SET_LEVERAGE(state, data) {
+    state.leverage = data
   },
   REFRESH_BALANCE(state) {
     state.refreshBalance = !state.refreshBalance

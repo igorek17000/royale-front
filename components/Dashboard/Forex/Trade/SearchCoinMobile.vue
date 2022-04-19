@@ -1,17 +1,16 @@
 <template>
-  <div class="">
+  <div class="bg-secondary">
     <div v-for="(coin, index) in filterCoins" :key="index">
       <p
         class="cursor-pointer px-3 py-2 hover:bg-secondary"
         @click="
           $router.push({
-            name: 'forex-trade-coin',
-            params: { coin: coin.symbol },
+            name: 'exchange-trade-coin',
+            params: { coin: `${coin.toLowerCase()}usdt` },
           })
         "
       >
-        <span class="shortname"> Name : {{ coin.shortname }} </span>
-        <span class="shortname"> Type : {{ coin.quoteType }} </span>
+        {{ coin }}/USDT
       </p>
     </div>
   </div>
@@ -19,11 +18,10 @@
 
 <script>
 export default {
+  name: 'SearchCoinMobile',
   props: ['filterCoins'],
-  mounted() {
-    console.log('filtercoins', this.filterCoins)
-  },
 }
 </script>
 
-<style></style>
+<style>
+</style>

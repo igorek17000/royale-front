@@ -53,6 +53,13 @@
     "leverage": {
       "type": "integer",
       "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "exchange",
+        "forex"
+      ]
     }
   }
 }

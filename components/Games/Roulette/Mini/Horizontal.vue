@@ -69,7 +69,6 @@ export default {
       var order = [0, 11, 5, 10, 6, 9, 7, 8, 1, 14, 2, 13, 3, 12, 4]
       // number output
       const roll = order[Math.floor(Math.random() * order.length)]
-      console.log(roll)
       var position = order.indexOf(roll)
 
       //determine position where to land
@@ -108,6 +107,6 @@ export default {
 }
 </script>
 
-<style >
+<style>
 @import url('~/assets/css/games/roulette/horizontal.css');
 </style>

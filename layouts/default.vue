@@ -1,15 +1,7 @@
 <template>
   <div class="dark:bg-primary relative font-sans">
     <div
-      class="
-        bg-gray-100
-        dark:bg-primary dark:text-white
-        text-gray-600
-        h-full
-        md:h-screen
-        flex
-        md:overflow-hidden
-      "
+      class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex md:overflow-hidden"
     >
       <div class="flex-grow overflow-hidden h-full flex flex-col min-h-screen">
         <Menu />
@@ -35,21 +27,6 @@ export default {
   created() {
     let getMenu = {
       data: [
-        // {
-        //   name: `${this.$t('dashboard.menu.casino')}`,
-        //   url: '/casino',
-        //   disabled: false,
-        // },
-        // {
-        //   name: `${this.$t('dashboard.menu.poker')}`,
-        //   url: '/poker',
-        //   disabled: false,
-        // },
-        // {
-        //   name: `${this.$t('dashboard.menu.bet')}`,
-        //   url: '/bet',
-        //   disabled: true,
-        // },
         {
           name: `${this.$t('dashboard.menu.forex')}`,
           url: '/forex',
@@ -70,21 +47,6 @@ export default {
     this.$store.dispatch('loadMenu', getMenu)
     let FooterMenu = {
       data: [
-        // {
-        //   name: `${this.$t('dashboard.menu.casino')}`,
-        //   url: '/casino',
-        //   disabled: false,
-        // },
-        // {
-        //   name: `${this.$t('dashboard.menu.poker')}`,
-        //   url: '/poker',
-        //   disabled: false,
-        // },
-        // {
-        //   name: `${this.$t('dashboard.menu.bet')}`,
-        //   url: '/bet',
-        //   disabled: true,
-        // },
         {
           name: `${this.$t('dashboard.menu.forex')}`,
           url: '/forex',
@@ -141,6 +103,9 @@ export default {
       this.getUserBalance()
     },
   },
+  mounted() {
+    this.getSystemLeverages()
+  },
   methods: {
     async getUserBalance() {
       let payload = {
@@ -155,6 +120,21 @@ export default {
         })
         .then((res) => {
           this.$store.commit('balance/SET_BALANCE', res.data)
+        })
+        .catch((err) => {
+          console.log('err', err)
+        })
+    },
+    async getSystemLeverages() {
+      await this.$axios
+        .get('/general', {
+          headers: {
+            Authorization: `Bearer ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((res) => {
+          this.$store.commit('SET_LEVERAGE', res.data)
         })
         .catch((err) => {
           console.log('err', err)
