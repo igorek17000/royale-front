@@ -166,7 +166,7 @@ export default {
 </script>
 <style scoped>
 .h-trade {
-  height: 550px;
+  height: 350px;
 }
 .three-line-legend {
   position: absolute;

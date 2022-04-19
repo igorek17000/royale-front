@@ -2,17 +2,21 @@
   "kind": "singleType",
   "collectionName": "generals",
   "info": {
-    "name": "general"
+    "name": "general",
+    "description": ""
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "is_forex_open": {
-      "type": "boolean"
+    "forex_leverage": {
+      "type": "biginteger"
+    },
+    "crypto_leverage": {
+      "type": "biginteger"
     }
   }
 }

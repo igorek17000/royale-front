@@ -199,7 +199,7 @@ export default {
       return this.$store.state.balance.balance.started_balance
     },
     leverage() {
-      return this.$store.state.balance.balance.leverage
+      return this.$store.state.leverage.forex_leverage
     },
     proffit() {
       let proffit = this.balance - this.started_balance
