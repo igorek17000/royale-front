@@ -3,20 +3,13 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <a href="/" class="flex-shrink-0 flex items-center">
-          <img
-            class="h-12 w-12"
-            src="~/assets/Logo.png"
-            alt="Ace Trader Platform"
-          />
-          <span class="pl-2 text-sm font-bold uppercase text-primary"
-            >Ace Trading</span
-          >
+          <img class="h-12 w-12" src="~/assets/Logo.png" alt="Royale Trader Platform" />
+          <span class="pl-2 text-sm font-bold uppercase text-primary">Royale Trader</span>
         </a>
         <div class="flex items-center">
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline">
-              <nuxt-link
-                class="
+              <nuxt-link class="
                   ml-4
                   px-3
                   py-4
@@ -24,18 +17,13 @@
                   hover:text-custom-red
                   focus:outline-none
                   font-bold
-                "
-                v-for="menus in menu.data"
-                :key="menus.name"
-                :to="localePath(`${menus.url}`)"
-                >{{ menus.name }}</nuxt-link
-              >
+                " v-for="menus in menu.data" :key="menus.name" :to="localePath(`${menus.url}`)">{{ menus.name }}
+              </nuxt-link>
             </div>
           </div>
         </div>
         <div class="ml-10 hidden md:flex items-center">
-          <button
-            class="
+          <button class="
               rounded-lg
               bg-custom-red
               text-white
@@ -47,13 +35,10 @@
               shadow-md
               hover:bg-custom-redh
               ml-4
-            "
-            @click="openRegister"
-          >
+            " @click="openRegister">
             {{ $t('menu.buttons.register') }}
           </button>
-          <button
-            class="
+          <button class="
               rounded-lg
               bg-transparent
               text-custom-red
@@ -66,9 +51,7 @@
               hover:bg-white
               ml-4
               border border-custom-red
-            "
-            @click="openLogin"
-          >
+            " @click="openLogin">
             {{ $t('menu.buttons.login') }}
           </button>
 
@@ -78,9 +61,7 @@
         </div>
         <div class="-mr-2 flex md:hidden">
           <!-- Mobile menu button -->
-          <button
-            @click="toggle"
-            class="
+          <button @click="toggle" class="
               inline-flex
               items-center
               justify-center
@@ -89,33 +70,14 @@
               text-gray-400
               hover:text-white hover:bg-gray-700
               focus:outline-none focus:bg-gray-700 focus:text-white
-            "
-          >
-            <svg
-              :class="[isOpen ? 'hidden' : 'block', 'h-6 w-6']"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
+            ">
+            <svg :class="[isOpen ? 'hidden' : 'block', 'h-6 w-6']" stroke="currentColor" fill="none"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
-            <svg
-              :class="[isOpen ? 'block' : 'hidden', 'h-6 w-6']"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
+            <svg :class="[isOpen ? 'block' : 'hidden', 'h-6 w-6']" stroke="currentColor" fill="none"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
         </div>

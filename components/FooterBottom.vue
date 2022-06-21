@@ -4,16 +4,9 @@
       <div class="sm:flex sm:mt-8">
         <div class="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row">
           <div class="flex flex-col w-full md:w-1/2">
-            <a href="/" class="flex-shrink-0 flex items-center mb-3"
-              ><img
-                src="~assets/Logo.png"
-                alt="Ace Trader Platform"
-                class="h-12 w-12"
-              />
-              <span class="pl-2 text-sm font-bold uppercase text-primary"
-                >Ace Trading</span
-              ></a
-            >
+            <a href="/" class="flex-shrink-0 flex items-center mb-3"><img src="~assets/Logo.png"
+                alt="Royale Trader Platform" class="h-12 w-12" />
+              <span class="pl-2 text-sm font-bold uppercase text-primary">Royale Trader</span></a>
             <h4 class="text-gray-700 text-xl max-w-sm mb-3">
               Real-time Trading and Exchange Platform
             </h4>
@@ -27,23 +20,16 @@
             </p>
           </div>
           <div class="flex flex-col w-full md:w-1/2">
-            <span class="font-bold text-gray-700 uppercase mt-4 md:mt-0 mb-2"
-              >Menu</span
-            >
+            <span class="font-bold text-gray-700 uppercase mt-4 md:mt-0 mb-2">Menu</span>
 
-            <nuxt-link
-              class="
+            <nuxt-link class="
                 py-2
                 text-sm text-primary
                 hover:text-custom-red
                 focus:outline-none
                 font-bold
-              "
-              v-for="menus in menu.data"
-              :key="menus.name"
-              :to="localePath(`${menus.url}`)"
-              >{{ menus.name }}</nuxt-link
-            >
+              " v-for="menus in menu.data" :key="menus.name" :to="localePath(`${menus.url}`)">{{ menus.name }}
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -52,7 +38,7 @@
       <div class="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
         <div class="sm:w-2/3 text-center py-6">
           <p class="text-sm text-custom-red font-bold mb-2">
-            © 2021 ACE TRADING PLATFORM
+            © 2021 Royale Trader PLATFORM
           </p>
         </div>
       </div>

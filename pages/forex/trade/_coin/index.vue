@@ -1,15 +1,11 @@
 <template>
   <div
-    class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex overflow-hidden text-sm mb-20 md:mb-0"
-  >
+    class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex overflow-hidden text-sm mb-20 md:mb-0">
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <div class="flex-grow flex overflow-x-hidden">
         <TradeSidebar title="Forex" />
         <div class="w-full h-full">
-          <div
-            class="market w-full bg-custom-redh bg-opacity-50 text-center px-4 py-2"
-            v-if="marketOpen"
-          >
+          <div class="market w-full bg-custom-redh bg-opacity-50 text-center px-4 py-2" v-if="marketOpen">
             <p class="text-lg uppercase">Market is closed !</p>
           </div>
           <trade-header @set-head-meta="setMeta" />
@@ -22,10 +18,7 @@
             </div>
           </div>
           <div class="footer-order w-full md:w-4/5">
-            <tabs-wrapper
-              :reloadFoot="reloadF"
-              @reload-footer="reloadF = !reloadF"
-            />
+            <tabs-wrapper :reloadFoot="reloadF" @reload-footer="reloadF = !reloadF" />
           </div>
         </div>
       </div>
@@ -50,7 +43,7 @@ export default {
   middleware: 'auth',
   name: 'coin',
   head: {
-    title: 'Forex | Ace Trading Platform',
+    title: 'Forex | Royale Trader Platform',
   },
   data() {
     return {
@@ -65,7 +58,7 @@ export default {
   methods: {
     setMeta(val) {
       this.coinPrice = val
-      this.$options.head.title = `${val} | ${this.$route.params.coin} | Ace Trading Platform`
+      this.$options.head.title = `${val} | ${this.$route.params.coin} | Royale Trader Platform`
       this.$meta().refresh()
     },
     coinChange(data) {
@@ -117,7 +110,7 @@ export default {
   },
   mounted() {
     let coin = this.$route.params.coin
-    this.$options.head.title = `${coin} | Ace Trading Platform`
+    this.$options.head.title = `${coin} | Royale Trader Platform`
     this.$meta().refresh()
     this.getCoinMeta(coin)
     let vm = this

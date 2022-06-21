@@ -1,7 +1,6 @@
 <template>
   <div
-    class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex overflow-hidden text-sm mb-20 md:mb-0"
-  >
+    class="bg-gray-100 dark:bg-primary dark:text-white text-gray-600 h-full md:h-screen flex overflow-hidden text-sm mb-20 md:mb-0">
     <div class="flex-grow overflow-hidden h-full flex flex-col">
       <div class="flex-grow flex overflow-x-hidden">
         <TradeSidebar title="Crypto" />
@@ -16,10 +15,7 @@
             </div>
           </div>
           <div class="footer-order w-full md:w-4/5">
-            <tabs-wrapper
-              :reloadFoot="reloadF"
-              @reload-footer="reloadF = !reloadF"
-            />
+            <tabs-wrapper :reloadFoot="reloadF" @reload-footer="reloadF = !reloadF" />
           </div>
         </div>
       </div>
@@ -46,7 +42,7 @@ export default {
   middleware: 'auth',
   name: 'coin',
   head: {
-    title: 'Trade | Ace Trading Platform',
+    title: 'Trade | Royale Trader Platform',
   },
   data() {
     return {
@@ -58,7 +54,7 @@ export default {
   methods: {
     setMeta(val) {
       this.coinPrice = val
-      this.$options.head.title = `${val} | ${this.$route.params.coin} | Ace Trading Platform`
+      this.$options.head.title = `${val} | ${this.$route.params.coin} | Royale Trader Platform`
       this.$meta().refresh()
     },
     async getCoinPrice(val) {
@@ -78,7 +74,7 @@ export default {
   },
   mounted() {
     let coin = this.$route.params.coin
-    this.$options.head.title = `${coin} | Ace Trading Platform`
+    this.$options.head.title = `${coin} | Royale Trader Platform`
     this.$meta().refresh()
     this.getCoinPrice(coin)
   },

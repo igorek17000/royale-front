@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Ace Trading Platform | All-in-One Trade Platform',
+    title: 'Royale Trader Platform | All-in-One Trade Platform',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -87,7 +87,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://api.acetrader.co.uk',
+    baseURL: 'https://api.royaletrader.com',
     // baseURL: 'http://localhost:1337',
   },
   dayjs: {
@@ -99,7 +99,7 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      name: 'Ace Trader',
+      name: 'Royale Trader',
       short_name: 'Ace',
       description: 'Real-time Trading and Exchange Platform',
       lang: 'en',
@@ -145,7 +145,7 @@ export default {
     },
   },
   publicRuntimeConfig: {
-    baseURL: 'https://api.acetrader.co.uk',
+    baseURL: 'https://api.royaletrader.com',
     // baseURL: 'http://localhost:1337',
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build

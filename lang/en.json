@@ -98,7 +98,7 @@
     }
   },
   "login": {
-    "title": "Ace Trading Platform",
+    "title": "Royale Trader Platform",
     "login": "Log in to your account"
   },
   "register": {
@@ -125,7 +125,7 @@
       "subtitle": "Stocks, Forex, Cryptocurrency, Indices ,ETFs and a lot more using latest technologies.",
       "info": "No Fees | No Commission | Transparent Pricing",
       "numbers": {
-        "trusted": "Trusted Ace Traders",
+        "trusted": "Trusted Royale Traders",
         "trades": " Trades / Day",
         "open": "Open Trading",
         "support": "Online Support"
